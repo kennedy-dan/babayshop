@@ -1,20 +1,35 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Link from 'next/link';
 
 import { Form, Input, notification } from 'antd';
 import { useRouter } from 'next/navigation';
+import { useSelector, useDispatch } from 'react-redux';
+import { _loginUser } from '~/redux/features/authSlice';
 
 export default function Login() {
-    const Router = useRouter();
-
-    function handleFeatureWillUpdate(e) {
-        e.preventDefault();
-        notification.open({
-            message: 'Opp! Something went wrong.',
-            description: 'This feature has been updated later!',
-            duration: 500,
-        });
+    const dispatch = useDispatch()
+    const router = useRouter()
+    const [email, setEmail] = useState('')
+    const [pWord, setPword] = useState('')
+  
+    //reduc useselector
+    const { token } = useSelector((state) => state.auth);
+  
+    const login = () => {
+      const data= {
+        email: email,
+        password: pWord
+      }
+      console.log('jnjnj')
+      dispatch(_loginUser(data))
     }
+  
+    useEffect(() => {
+     if(token) {
+      router.push('/')
+     }
+    }, [token])
+    
 
     return (
         <div className="ps-my-account">
@@ -46,6 +61,8 @@ export default function Login() {
                                         className="form-control"
                                         type="text"
                                         placeholder="Username or email address"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </Form.Item>
                             </div>
@@ -62,6 +79,8 @@ export default function Login() {
                                     <Input
                                         className="form-control"
                                         type="password"
+                                        onChange={(e) => setPword(e.target.value)}
+                                        value={pWord}
                                         placeholder="Password..."
                                     />
                                 </Form.Item>
@@ -82,6 +101,7 @@ export default function Login() {
                             <div className="form-group submit">
                                 <button
                                     type="submit"
+                                    onClick={login}
                                     className="ps-btn ps-btn--fullwidth">
                                     Login
                                 </button>

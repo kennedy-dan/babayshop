@@ -1,15 +1,20 @@
 import React, { useEffect, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import useEcomerce from '~/hooks/useEcomerce';
 import CartProduct from '~/components/elements/products/CartProduct';
 import useGetProducts from '~/hooks/useGetProducts';
+import { ClipLoader } from 'react-spinners';
+import { addtocart } from '~/redux/features/productSlice';
 
 export default function Wishlist() {
+    const dispatch = useDispatch()
     const ecomerce = useSelector(({ ecomerce }) => ecomerce);
     const { addItem, removeItem } = useEcomerce();
+    const {getfav} = useSelector(state => state.product)
 
     const wishlistItems = useSelector(({ ecomerce }) => ecomerce.wishlistItems);
     const { loading, getStrapiProducts, products } = useGetProducts();
+    const fav = getfav?.results?.data?.data
 
     function getProducts() {
         if (wishlistItems.length > 0) {
@@ -24,44 +29,40 @@ export default function Wishlist() {
         }
     }
 
-    useEffect(() => {
-        getProducts();
-    }, [wishlistItems]);
+    // useEffect(() => {
+    //     getProducts();
+    // }, [wishlistItems]);
 
-    function handleAddItemToCart(e, product) {
-        e.preventDefault();
-        addItem({ id: product.id, quantity: 1 }, ecomerce.cartItems, 'cart');
-    }
+    const addToCart = (id) => {
+        const data = {
+            product_id: id,
+            quantity: 1,
+        };
+        dispatch(addtocart(data));
+    };
 
-    function handleRemoveWishlistItem(e, product) {
-        e.preventDefault();
-        removeItem(product, ecomerce.wishlistItems, 'wishlist');
-    }
-    // views
-    const wishlistContent = useMemo(() => {
-        if (loading) return <div>Loading...</div>;
-        if (products.length === 0) {
-            return (
-                <div className="alert alert-danger" role="alert">
-                    Wishlist list is empty!
+
+
+
+    return (
+        <div className="ps-section--shopping ps-whishlist">
+            <div className="container">
+                <div className="ps-section__header">
+                    <h1>Wishlist</h1>
                 </div>
-            );
-        }
-        return (
-            <div className="table-responsive">
-                <table className="table ps-table--whishlist">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Product name</th>
-                            <th>Unit Price</th>
-                            <th>Vendor</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products.map((product) => (
-                            <tr key={product.id}>
+                <div className="ps-section__content">     <>
+            {getfav?.isLoading && <div className='flex w-screen h-[70vh] items-center justify-center' ><ClipLoader size={20} /></div>  }
+           {!getfav?.isLoading &&   <div className="">
+                        <div className='grid grid-cols-4 w-full px-3 bg-gray-400 ' >
+                            <td></td>
+                            <td>Product name</td>
+                            <td>Unit Price</td>
+                            {/* <td>Vendor</td> */}
+                            <td>Action</td>
+                        </div>
+                    <div className='mt-4' >
+                        {fav?.map((product) => (
+                            <div className='grid grid-cols-4'  key={product?.product?.id}>
                                 <td>
                                     <a
                                         href="#"
@@ -74,33 +75,23 @@ export default function Wishlist() {
                                 <td>
                                     <CartProduct product={product} />
                                 </td>
-                                <td className="price">${product.price}</td>
-                                <td>{product.vendor}</td>
+                                <td className="">${product?.product?.price}</td>
+                                {/* <td>ygjhhj</td> */}
                                 <td>
                                     <a
                                         className="ps-btn"
-                                        href=""
-                                        onClick={(e) =>
-                                            handleAddItemToCart(e, product)
+                                        // href=""
+                                        onClick={() =>
+                                            addToCart(product?.product?.id)
                                         }>
                                         Add to cart
                                     </a>
                                 </td>
-                            </tr>
+                            </div>
                         ))}
-                    </tbody>
-                </table>
-            </div>
-        );
-    }, [products]);
-
-    return (
-        <div className="ps-section--shopping ps-whishlist">
-            <div className="container">
-                <div className="ps-section__header">
-                    <h1>Wishlist</h1>
-                </div>
-                <div className="ps-section__content">{wishlistContent}</div>
+                    </div>
+            </div>}
+           </></div>
             </div>
         </div>
     );

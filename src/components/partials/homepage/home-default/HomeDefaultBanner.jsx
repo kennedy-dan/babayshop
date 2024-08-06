@@ -30,18 +30,12 @@ const HomeDefaultBanner = () => {
             : [];
     }, [loading, banners]);
 
-    const secondBannerItems = useMemo(() => {
-        if (loading || !banners) return [];
-        const secondBanner = banners.find(
-            (item) => item.attributes.slug === 'home-right-banner'
-        );
+    const secondBannerItems = [
+        '/static/slide2.jpg',
+        '/static/slide3.jpg',
+    ]
 
-        return secondBanner
-            ? secondBanner.attributes.images.map((item) =>
-                  getStrapiImageURL(item?.image)
-              )
-            : [];
-    }, [loading, banners]);
+
 
     const carouselSetting = {
         dots: false,
@@ -55,21 +49,18 @@ const HomeDefaultBanner = () => {
     };
 
     const mainCarouselItems = useMemo(() => {
-        if (loading || primaryBannerItems.length === 0) return null;
         return (
-            <Slider {...carouselSetting} className="ps-carousel">
-                {primaryBannerItems.map((item, index) => (
-                    <div className="slide-item" key={item.id} key={index}>
+            <div className="ps-carousel">
+                    <div className="slide-item" >
                         <Link
                             href={'/shop'}
                             className="ps-banner-item--default bg--cover"
                             style={{
-                                backgroundImage: `url(${item})`,
+                                backgroundImage: "url(`/static/slide1.jpg`)",
                             }}
                         />
                     </div>
-                ))}
-            </Slider>
+            </div>
         );
     }, [loading, primaryBannerItems]);
 
@@ -78,17 +69,28 @@ const HomeDefaultBanner = () => {
     return (
         <div className="ps-home-banner ps-home-banner--1">
             <div className="ps-container">
-                <div className="ps-section__left">{mainCarouselItems}</div>
+                <div className="ps-section__left">   <div className="">
+                    <div className="slide-item" >
+                        <div
+                            // href={'/shop'}
+                            className=""
+                            // style={{
+                            //     backgroundImage: "url(`/static/slide1.jpg`)",
+                            // }}
+                        >
+                            <img src='/static/slide3.jpg' />
+                        </div>
+                    </div>
+            </div></div>
                 <div className="ps-section__right">
-                    {secondBannerItems.length > 0
-                        ? secondBannerItems.map((item, index) => (
+                    { secondBannerItems.map((item, index) => (
                               <Promotion
                                   key={index}
                                   link="/shop"
                                   image={item}
                               />
                           ))
-                        : null}
+                        }
                 </div>
             </div>
         </div>

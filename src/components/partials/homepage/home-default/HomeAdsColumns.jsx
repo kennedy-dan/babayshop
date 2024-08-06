@@ -7,6 +7,7 @@ const BANNER_SLUGS = ['home-ads'];
 
 const HomeAdsColumns = () => {
     const { loading, banners, getBannersBySlugs } = useBanner();
+    const bann = ['/static/slide1.jpg','/static/slide2.jpg','/static/slide3.jpg',]
 
     useEffect(() => {
         getBannersBySlugs(BANNER_SLUGS);
@@ -30,7 +31,7 @@ const HomeAdsColumns = () => {
         <div className="ps-home-ads">
             <div className="ps-container">
                 <div className="row">
-                    {bannerItems.map((item, index) => (
+                    {bann.map((item, index) => (
                         <div
                             className="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12"
                             key={index}>

@@ -1,33 +1,52 @@
 import React, { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import MiniCart from '~/components/shared/headers/modules/MiniCart';
 import AccountQuickLinks from '~/components/shared/headers/modules/AccountQuickLinks';
+import { logOutCustomer } from '~/redux/features/authSlice';
 
 const HeaderActions = () => {
-    const compareItems = useSelector(({ ecomerce }) => ecomerce.compareItems);
-    const wishlistItems = useSelector(({ ecomerce }) => ecomerce.wishlistItems);
-    const isLoggedIn = useSelector(({ user }) => user.isLoggedIn);
+    const dispatch = useDispatch()
+    // const compareItems = useSelector(({ ecomerce }) => ecomerce.compareItems);
+    // const wishlistItems = useSelector(({ ecomerce }) => ecomerce.wishlistItems);
+    // const isLoggedIn = useSelector(({ user }) => user.isLoggedIn);
+    const {token} = useSelector(state => state.auth)
+    const {getfav} = useSelector(state => state.product)
+
+    const fav = getfav?.results?.data?.data
 
     const headerAuthContent = useMemo(() => {
         return <AccountQuickLinks isLoggedIn={true} />;
-    }, [isLoggedIn]);
+    }, []);
+    const logOut = () => {
+        dispatch(logOutCustomer())
+    }
+
+    console.log(token)
 
     return (
         <div className="header__actions">
-            <Link href="/account/compare" className="header__extra">
-                <i className="icon-chart-bars" />
-                <span>
-                    <i>{compareItems ? compareItems.length : 0}</i>
-                </span>
-            </Link>
-            <Link href="/account/wishlist" className="header__extra">
+          {token &&<>   <Link href="/account/wishlist" className="header__extra">
                 <i className="icon-heart" />
                 <span>
-                    <i>{wishlistItems ? wishlistItems.length : 0}</i>
+                    <i>{getfav ? fav?.length : 0}</i>
                 </span>
             </Link>
             <MiniCart />
+            <div>
+                <button onClick={logOut} >Logout</button>
+            </div></> }
+
+            {!token &&   <div className="ps-block--user-header">
+                <div className="ps-block__left">
+                     <i className="icon-user" />
+                 </div>
+                 <div className="ps-block__right">
+                     <Link href="/account/login">Login</Link>
+                     <Link href="/account/register">Register</Link>
+                 </div>
+             </div>}
+         
             {headerAuthContent}
         </div>
     );

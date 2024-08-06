@@ -21,7 +21,7 @@ const SearchHeader = () => {
 
     function handleSubmit(e) {
         e.preventDefault();
-        Router.push(`/search?keyword=${keyword}`);
+        Router.push(`/search/${keyword}`);
     }
 
     const searchQuery = useMemo(() => {
@@ -83,15 +83,7 @@ const SearchHeader = () => {
             className="ps-form--quick-search"
             method="get"
             onSubmit={handleSubmit}>
-            <div className="ps-form__categories">
-                <select className="form-control">
-                    {EXAMPLE_CATEGORY.map((option) => (
-                        <option value={option} key={option}>
-                            {option}
-                        </option>
-                    ))}
-                </select>
-            </div>
+        
             <div className="ps-form__input">
                 <input
                     ref={inputEl}

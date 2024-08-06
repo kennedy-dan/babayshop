@@ -15,22 +15,13 @@ export default function DefaultHomeContent() {
     return (
         <main id="homepage-1">
             <HomeDefaultBanner />
+            {/* <HomeAdsColumns /> */}
+
             <SiteFeatures />
-            <HomeDefaultDealOfDay collectionSlug="deals-of-the-day" />
-            <HomeAdsColumns />
+            {/* <HomeDefaultDealOfDay collectionSlug="deals-of-the-day" /> */}
+
             <HomeDefaultTopCategories />
-            <HomeDefaultProductListing
-                categorySlug="consumer-electronics"
-                title="Consumer Electronics"
-            />
-            <HomeDefaultProductListing
-                categorySlug="clothings"
-                title="Clothings"
-            />
-            <HomeDefaultProductListing
-                categorySlug="garden-and-kitchen"
-                title="Garden & Kitchen"
-            />
+           
             <HomeAds />
             <DownLoadApp />
             <NewArrivals collectionSlug="hot-new-arrivals" />

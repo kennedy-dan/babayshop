@@ -37,7 +37,7 @@ const AccountQuickLinks = (props) => {
         dispatch(userChangeIsLoggedIn(false));
     };
 
-    const isLoggedIn = useSelector(({ user }) => user.isLoggedIn);
+    // const isLoggedIn = useSelector(({ user }) => user.isLoggedIn);
 
     const linksView = accountLinks.map((item) => (
         <li key={item.text}>
@@ -45,35 +45,35 @@ const AccountQuickLinks = (props) => {
         </li>
     ));
 
-    if (isLoggedIn === true) {
-        return (
-            <div className="ps-block--user-account">
-                <i className="icon-user" />
-                <div className="ps-block__content">
-                    <ul className="ps-list--arrow">
-                        {linksView}
-                        <li className="ps-block__footer">
-                            <a href="#" onClick={(e) => handleLogout(e)}>
-                                Logout
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        );
-    } else {
-        return (
-            <div className="ps-block--user-header">
-                <div className="ps-block__left">
-                    <i className="icon-user" />
-                </div>
-                <div className="ps-block__right">
-                    <Link href="/account/login">Login</Link>
-                    <Link href="/account/register">Register</Link>
-                </div>
-            </div>
-        );
-    }
+    // if (isLoggedIn === true) {
+    //     return (
+    //         <div className="ps-block--user-account">
+    //             <i className="icon-user" />
+    //             <div className="ps-block__content">
+    //                 <ul className="ps-list--arrow">
+    //                     {linksView}
+    //                     <li className="ps-block__footer">
+    //                         <a href="#" onClick={(e) => handleLogout(e)}>
+    //                             Logout
+    //                         </a>
+    //                     </li>
+    //                 </ul>
+    //             </div>
+    //         </div>
+    //     );
+    // } else {
+    //     return (
+    //         <div className="ps-block--user-header">
+    //             <div className="ps-block__left">
+    //                 <i className="icon-user" />
+    //             </div>
+    //             <div className="ps-block__right">
+    //                 <Link href="/account/login">Login</Link>
+    //                 <Link href="/account/register">Register</Link>
+    //             </div>
+    //         </div>
+    //     );
+    // }
 };
 
 export default AccountQuickLinks;

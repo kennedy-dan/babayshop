@@ -25,7 +25,7 @@ export default function Page() {
                     <BreadCrumb breacrumb={breadCrumb} />
                     <Register />
                 </div>
-                <Newletters layout="container" />
+                {/* <Newletters layout="container" /> */}
             </PageContainer>
         </>
     );

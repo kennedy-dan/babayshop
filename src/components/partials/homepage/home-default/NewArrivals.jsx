@@ -2,6 +2,10 @@ import React, { useMemo } from 'react';
 import Link from 'next/link';
 import HorizontalProduct from '~/components/elements/products/HorizontalProduct';
 import useGetProducCollection from '~/hooks/useGetProducCollection';
+import { getCategoriesWithProducts } from '~/redux/features/productSlice';
+import { useDispatch } from 'react-redux';
+
+
 
 const NewArrivals = ({ collectionSlug }) => {
     const { collectionLoading, collectionDetail } =
@@ -61,7 +65,11 @@ const NewArrivals = ({ collectionSlug }) => {
                     </ul>
                 </div>
                 <div className="ps-section__content">
-                    <div className="row">{productItemView}</div>
+                    <div className="row">{Cats1}</div>
+                </div>
+
+                <div className="ps-section__content">
+                    <div className="row">{Cats8}</div>
                 </div>
             </div>
         </div>
@@ -69,3 +77,21 @@ const NewArrivals = ({ collectionSlug }) => {
 };
 
 export default NewArrivals;
+
+const Cats1 = () => {
+    const dispatch = useDispatch()
+    useEffect(() => {
+      
+        dispatch(getCategoriesWithProducts())
+    }, [])
+    
+}
+
+const Cats8 = () => {
+    const dispatch = useDispatch()
+    useEffect(() => {
+      
+        dispatch(getCategoriesWithProducts())
+    }, [])
+    
+}

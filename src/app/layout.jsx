@@ -1,4 +1,15 @@
+
+'use client';
+import './globals.css'
+
 import React from 'react';
+import Providers from '~/redux/provider';
+import AxiosConfig from '../AxiosConfig';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from '~/redux/store';
+import { ToastContainer, Zoom, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 import '~/public/static/fonts/Linearicons/Font/demo-files/demo.css';
 import '~/public/static/fonts/font-awesome/css/font-awesome.min.css';
@@ -19,11 +30,29 @@ import getHeadData, {
     generatePageMetadata,
 } from '~/utilities/seo/RoutePathsSEO';
 
-export const metadata = generatePageMetadata(getHeadData('/'));
+// export const metadata = generatePageMetadata(getHeadData('/'));
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <body>{children}</body>
+        <body>
+        <Providers>
+           <ToastContainer
+            position="top-center"
+            autoClose={1000}
+            hideProgressBar={true}
+            pauseOnFocusLoss={false}
+            transition={Zoom}
+
+            // limit={1}
+          />
+        <PersistGate loading={null} persistor={persistor}>
+          <AxiosConfig>
+            {children}
+          </AxiosConfig>
+        </PersistGate>
+        </Providers>
+      </body>
+
         </html>
     );
 }

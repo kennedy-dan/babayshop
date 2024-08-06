@@ -7,8 +7,8 @@ const CartProduct = ({ product }) => {
     return (
         <div className="ps-product--cart">
             <div className="ps-product__thumbnail">
-                <Link href={'/product/[pid]'} as={`/product/${product.id}`}>
-                    {thumbnailImage}
+                <Link href={`/product/${product?.product?.id}`}>
+                    <img src={product?.product?.image_url} alt='product image' />
                 </Link>
             </div>
             <div className="ps-product__content">{product.title}</div>

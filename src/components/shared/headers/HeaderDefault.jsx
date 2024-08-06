@@ -21,7 +21,9 @@ const HeaderDefault = () => {
             <div className="header__top">
                 <div className="ps-container">
                     <div className="header__left">
-                        <Logo />
+                        <div>
+                            <img src='/static/logo.png' className='w-32 h-20 ' alt='' />
+                        </div>
                         <MenuCategoriesDropdown />
                     </div>
                     <div className="header__center">
@@ -32,7 +34,7 @@ const HeaderDefault = () => {
                     </div>
                 </div>
             </div>
-            <DesktopNavigation />
+            {/* <DesktopNavigation /> */}
         </header>
     );
 };
