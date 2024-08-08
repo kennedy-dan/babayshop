@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useBoolean } from 'ahooks';
-import {
-    GET_CATEGORY_ENTRIES_QUERY,
-    GET_PRODUCT_BRAND_ENTRIES_QUERY,
-} from '~/services/queries/strapiQueries';
+// import {
+//     GET_CATEGORY_ENTRIES_QUERY,
+//     GET_PRODUCT_BRAND_ENTRIES_QUERY,
+// } from '~/services/queries/strapiQueries';
 // import {
 //     getStrapiEntriesService,
 //     getStrapiEntryBySlugService,
@@ -22,7 +22,7 @@ export default function useProductBrand(slug) {
         await getStrapiEntryBySlugService(
             COLLECTION_TYPE,
             slug,
-            GET_CATEGORY_ENTRIES_QUERY
+            // GET_CATEGORY_ENTRIES_QUERY
         ).then(async (response) => {
             await disableLoading();
             setBrandDetails(
