@@ -3,7 +3,7 @@ import React, { useEffect, useMemo } from 'react';
 import PageContainer from '~/components/layouts/PageContainer';
 import { Table } from 'antd';
 import useGetProducts from '~/hooks/useGetProducts';
-import { updateEntry } from '~/services/strapiServices/strapiHttpServices';
+// import { updateEntry } from '~/services/strapiServices/strapiHttpServices';
 
 export default function Page() {
     const { loading, products, getStrapiProducts } = useGetProducts();
@@ -47,7 +47,7 @@ export default function Page() {
                                 ),
                             },
                         };
-                        await updateEntry(`products/${item.id}`, params);
+                        // await updateEntry(`products/${item.id}`, params);
                         return params;
                     },
                     getStrapiProducts({
@@ -77,7 +77,7 @@ export default function Page() {
                                 ],
                             },
                         };
-                        await updateEntry(`products/${item.id}`, params);
+                        // await updateEntry(`products/${item.id}`, params);
                         return params;
                     },
                     getStrapiProducts({

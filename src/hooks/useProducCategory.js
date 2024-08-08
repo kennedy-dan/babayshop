@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useBoolean } from 'ahooks';
-import { GET_CATEGORY_ENTRIES_QUERY } from '~/services/queries/strapiQueries';
+// import { GET_CATEGORY_ENTRIES_QUERY } from '~/services/queries/strapiQueries';
 // import { getStrapiEntriesService } from '~/services/strapi/strapiQueryServices';
 
 const COLLECTION_TYPE = 'product-categories';
