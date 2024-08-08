@@ -5,7 +5,7 @@ import { notify } from "../utils";
 export default function AxiosConfig({ children }) {
   const { token } = useSelector((state) => state.auth);
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  axios.defaults.baseURL = "http://rbw.treendit.com/api/";
+  axios.defaults.baseURL = "//rbw.treendit.com/api/";
   axios.defaults.headers.post["Content-Type"] = "application/json";
 
   axios.interceptors.response.use(
