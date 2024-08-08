@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
-import { userChangeIsLoggedIn } from '~/redux/features/userSlide';
+// import { userChangeIsLoggedIn } from '~/redux/features/userSlide';
 
 const accountLinks = [
     {
@@ -34,7 +34,7 @@ const AccountQuickLinks = (props) => {
     const dispatch = useDispatch();
     const handleLogout = (e) => {
         e.preventDefault();
-        dispatch(userChangeIsLoggedIn(false));
+        // dispatch(userChangeIsLoggedIn(false));
     };
 
     // const isLoggedIn = useSelector(({ user }) => user.isLoggedIn);

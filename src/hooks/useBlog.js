@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import {
-    getStrapiEntriesService,
-    getStrapiEntryBySlugService,
-} from '~/services/strapi/strapiQueryServices';
+// import {
+//     getStrapiEntriesService,
+//     getStrapiEntryBySlugService,
+// } from '~/services/strapi/strapiQueryServices';
 
 const COLLECTION_TYPE = 'posts';
 
@@ -23,19 +23,19 @@ export default function useBlog() {
 
     async function getPosts(queryRaw) {
         enableLoading();
-        try {
-            const response = await getStrapiEntriesService(
-                COLLECTION_TYPE,
-                queryRaw || { populate: '*' }
-            );
-            setPosts(response.data || []);
-            setMeta(response.meta || null);
-        } catch (error) {
-            setPosts([]);
-            setMeta(null);
-        } finally {
-            disableLoading();
-        }
+        // try {
+        //     const response = await getStrapiEntriesService(
+        //         COLLECTION_TYPE,
+        //         queryRaw || { populate: '*' }
+        //     );
+        //     setPosts(response.data || []);
+        //     setMeta(response.meta || null);
+        // } catch (error) {
+        //     setPosts([]);
+        //     setMeta(null);
+        // } finally {
+        //     disableLoading();
+        // }
     }
 
     async function getCategories(queryRaw) {
@@ -55,12 +55,12 @@ export default function useBlog() {
 
     async function getPost(slug) {
         enableLoading();
-        await getStrapiEntryBySlugService(COLLECTION_TYPE, slug).then(
-            async (response) => {
-                await disableLoading();
-                setPost(response ? response.attributes : null);
-            }
-        );
+        // await getStrapiEntryBySlugService(COLLECTION_TYPE, slug).then(
+        //     async (response) => {
+        //         await disableLoading();
+        //         setPost(response ? response.attributes : null);
+        //     }
+        // );
     }
 
     return {

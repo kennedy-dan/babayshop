@@ -2,7 +2,7 @@ import React from 'react';
 import { formatCurrency } from '~/utilities/product-helper';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getStrapiImageURL } from '~/services/strapiServices/image/getStrapiImageService';
+// import { getStrapiImageURL } from '~/services/strapiServices/image/getStrapiImageService';
 
 export default function useProduct(product, productID) {
     const productPrice = product?.sale_price ? (
@@ -22,13 +22,7 @@ export default function useProduct(product, productID) {
     );
 
     const productThumbnailImage = product?.thumbnail ? (
-        <Image
-            src={getStrapiImageURL(product.thumbnail)}
-            alt=""
-            layout="responsive"
-            width={200}
-            height={200}
-        />
+      <></>
     ) : (
         <img src="https://placehold.co/400x400" alt="" />
     );

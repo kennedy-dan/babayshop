@@ -13,7 +13,7 @@ import { generateTempArray } from '~/utilities/common-helpers';
 import SkeletonProduct from '~/components/elements/skeletons/SkeletonProduct';
 import useGetProducts from '~/hooks/useGetProducts';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { DEFAULT_QUERY_GET_PRODUCTS } from '~/services/queries/productStrapiQueries';
+// import { DEFAULT_QUERY_GET_PRODUCTS } from '~/services/queries/productStrapiQueries';
 
 const ShopItems = ({ columns = 4, pageSize = 12 }) => {
     const Router = useRouter();
@@ -62,11 +62,11 @@ const ShopItems = ({ columns = 4, pageSize = 12 }) => {
         (payload) => {
             const query = payload
                 ? {
-                      ...DEFAULT_QUERY_GET_PRODUCTS,
+                    //   ...DEFAULT_QUERY_GET_PRODUCTS,
                       ...payload,
                   }
                 : {
-                      ...DEFAULT_QUERY_GET_PRODUCTS,
+                    //   ...DEFAULT_QUERY_GET_PRODUCTS,
                   };
             getStrapiProducts(query);
         },

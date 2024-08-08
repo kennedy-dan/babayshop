@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import Promotion from '~/components/elements/media/Promotion';
 import useBanner from '~/hooks/useBanner';
-import { getStrapiImageURL } from '~/services/strapiServices/image/getStrapiImageService';
+// import { getStrapiImageURL } from '~/services/strapiServices/image/getStrapiImageService';
 
 const BANNER_SLUGS = ['home-discount', 'home-discount-2'];
 
@@ -19,9 +19,7 @@ const HomeAds = () => {
             (item) => item.attributes.slug === 'home-discount'
         );
 
-        return items
-            ? getStrapiImageURL(items.attributes?.images[0].image)
-            : null;
+        
     }, [loading, banners]);
     const secondBanner = useMemo(() => {
         if (loading) return [];

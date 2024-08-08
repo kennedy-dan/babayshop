@@ -17,7 +17,7 @@ const getToken1 = async () => {
 };
 
 const instance = axios.create({
-	baseURL: "//rbw.treendit.com/api/",
+	baseURL: "http://rbw.treendit.com/api/",
 	headers: {
 		"Content-Type": "application/json",
 		"Access-Control-Allow-Origin": "*",

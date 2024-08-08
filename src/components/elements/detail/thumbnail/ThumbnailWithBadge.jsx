@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import Slider from 'react-slick';
 import NextArrow from '~/components/elements/carousel/NextArrow';
 import PrevArrow from '~/components/elements/carousel/PrevArrow';
-import { getStrapiImageURL } from '~/services/strapiServices/image/getStrapiImageService';
+// import { getStrapiImageURL } from '~/services/strapiServices/image/getStrapiImageService';
 
 const ThumbnailWithBadge = ({ product, vertical = true }) => {
     const galleryCarousel = useRef(null);
@@ -13,7 +13,7 @@ const ThumbnailWithBadge = ({ product, vertical = true }) => {
     const images = useMemo(() => {
         if (product.attributes.images.data?.length > 0) {
             return product.attributes.images.data.map((image) => {
-                return getStrapiImageURL(image, 'large', true);
+                // return getStrapiImageURL(image, 'large', true);
             });
         } else {
             return [];

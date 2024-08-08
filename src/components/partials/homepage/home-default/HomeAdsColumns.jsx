@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import Promotion from '~/components/elements/media/Promotion';
 import useBanner from '~/hooks/useBanner';
-import { getStrapiImageURL } from '~/services/strapiServices/image/getStrapiImageService';
+// import { getStrapiImageURL } from '~/services/strapiServices/image/getStrapiImageService';
 
 const BANNER_SLUGS = ['home-ads'];
 
@@ -20,11 +20,7 @@ const HomeAdsColumns = () => {
             (item) => item.attributes.slug === 'home-ads'
         );
 
-        return items
-            ? items.attributes.images.map((item) =>
-                  getStrapiImageURL(item?.image)
-              )
-            : [];
+   
     }, [loading, banners]);
 
     return (

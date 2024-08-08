@@ -4,7 +4,7 @@ import { Tabs } from 'antd';
 import Product from '~/components/elements/products/Product';
 import HorizontalProduct from '~/components/elements/products/HorizontalProduct';
 import useGetProducts from '~/hooks/useGetProducts';
-import { DEFAULT_QUERY_GET_PRODUCTS } from '~/services/queries/productStrapiQueries';
+// import { DEFAULT_QUERY_GET_PRODUCTS } from '~/services/queries/productStrapiQueries';
 
 const { TabPane } = Tabs;
 
@@ -15,7 +15,7 @@ const Market3ProductGroup = ({ categorySlug, banners, links, heading }) => {
         (categorySlug) => {
             if (categorySlug) {
                 const query = {
-                    ...DEFAULT_QUERY_GET_PRODUCTS,
+                    // ...DEFAULT_QUERY_GET_PRODUCTS,
                     filters: {
                         product_categories: {
                             slug: {

@@ -5,7 +5,7 @@ import PrevArrow from '~/components/elements/carousel/PrevArrow';
 import Link from 'next/link';
 import Promotion from '~/components/elements/media/Promotion';
 import useBanner from '~/hooks/useBanner';
-import { getStrapiImageURL } from '~/services/strapiServices/image/getStrapiImageService';
+// import { getStrapiImageURL } from '~/services/strapiServices/image/getStrapiImageService';
 
 const BANNER_SLUGS = ['home-banner', 'home-right-banner'];
 
@@ -23,11 +23,7 @@ const HomeDefaultBanner = () => {
             (item) => item.attributes.slug === 'home-banner'
         );
 
-        return primaryBanner
-            ? primaryBanner.attributes.images.map((item) =>
-                  getStrapiImageURL(item?.image)
-              )
-            : [];
+       
     }, [loading, banners]);
 
     const secondBannerItems = [

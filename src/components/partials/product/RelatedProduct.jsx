@@ -5,14 +5,14 @@ import { carouselStandard } from '~/utilities/carousel-helpers';
 import NextArrow from '~/components/elements/carousel/NextArrow';
 import PrevArrow from '~/components/elements/carousel/PrevArrow';
 import useGetProducts from '~/hooks/useGetProducts';
-import { DEFAULT_QUERY_GET_PRODUCTS } from '~/services/queries/productStrapiQueries';
+// import { DEFAULT_QUERY_GET_PRODUCTS } from '~/services/queries/productStrapiQueries';
 
 const RelatedProduct = ({ collectionSlug, boxed, layout }) => {
     const { loading, products, getStrapiProducts } = useGetProducts();
 
     useEffect(() => {
         const query = {
-            ...DEFAULT_QUERY_GET_PRODUCTS,
+            // ...DEFAULT_QUERY_GET_PRODUCTS,
             filters: {
                 product_collections: {
                     slug: {

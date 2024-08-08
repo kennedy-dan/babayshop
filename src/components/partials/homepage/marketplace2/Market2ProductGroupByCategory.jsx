@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import useGetProducts from '~/hooks/useGetProducts';
-import { DEFAULT_QUERY_GET_PRODUCTS } from '~/services/queries/productStrapiQueries';
+// import { DEFAULT_QUERY_GET_PRODUCTS } from '~/services/queries/productStrapiQueries';
 import { ProductGroupWithCarousel } from '~/components/partials/product/ProductGroupWithCarousel';
 
 const Market2ProductGroupByCategory = ({ categorySlug, title }) => {
@@ -11,7 +11,7 @@ const Market2ProductGroupByCategory = ({ categorySlug, title }) => {
         (categorySlug) => {
             if (categorySlug) {
                 const query = {
-                    ...DEFAULT_QUERY_GET_PRODUCTS,
+                    // ...DEFAULT_QUERY_GET_PRODUCTS,
                     filters: {
                         product_categories: {
                             slug: {

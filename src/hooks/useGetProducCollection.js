@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { useBoolean } from 'ahooks';
 import { DEFAULT_PAGE_SIZE } from '~/utilities/constants';
-import { getStrapiEntriesService } from '~/services/strapi/strapiQueryServices';
+// import { getStrapiEntriesService } from '~/services/strapi/strapiQueryServices';
 
 const COLLECTION_TYPE = 'product-collections';
 
@@ -39,19 +39,19 @@ export default function useGetProducCollection(collectionSlug) {
                 },
             },
         };
-        try {
-            const response = await getStrapiEntriesService(
-                COLLECTION_TYPE,
-                query
-            );
-            setCollectionDetails(
-                response && response.data.length > 0 ? response.data[0] : null
-            );
-        } catch (err) {
-            setCollectionDetails(null);
-        } finally {
-            disableLoading();
-        }
+        // try {
+        //     const response = await getStrapiEntriesService(
+        //         COLLECTION_TYPE,
+        //         query
+        //     );
+        //     setCollectionDetails(
+        //         response && response.data.length > 0 ? response.data[0] : null
+        //     );
+        // } catch (err) {
+        //     setCollectionDetails(null);
+        // } finally {
+        //     disableLoading();
+        // }
     }, [collectionSlug, enableLoading, disableLoading]);
 
     useEffect(() => {

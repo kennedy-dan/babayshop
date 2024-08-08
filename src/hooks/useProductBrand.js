@@ -4,10 +4,10 @@ import {
     GET_CATEGORY_ENTRIES_QUERY,
     GET_PRODUCT_BRAND_ENTRIES_QUERY,
 } from '~/services/queries/strapiQueries';
-import {
-    getStrapiEntriesService,
-    getStrapiEntryBySlugService,
-} from '~/services/strapi/strapiQueryServices';
+// import {
+//     getStrapiEntriesService,
+//     getStrapiEntryBySlugService,
+// } from '~/services/strapi/strapiQueryServices';
 
 const COLLECTION_TYPE = 'product-brands';
 
@@ -33,17 +33,17 @@ export default function useProductBrand(slug) {
 
     const getBrands = async () => {
         enableLoading();
-        try {
-            const response = await getStrapiEntriesService(
-                COLLECTION_TYPE,
-                GET_PRODUCT_BRAND_ENTRIES_QUERY
-            );
-            setBrands(response.data || []);
-        } catch (e) {
-            setBrands(null);
-        } finally {
-            disableLoading();
-        }
+        // try {
+        //     const response = await getStrapiEntriesService(
+        //         COLLECTION_TYPE,
+        //         GET_PRODUCT_BRAND_ENTRIES_QUERY
+        //     );
+        //     setBrands(response.data || []);
+        // } catch (e) {
+        //     setBrands(null);
+        // } finally {
+        //     disableLoading();
+        // }
     };
     useEffect(() => {
         getStrapiBrand();

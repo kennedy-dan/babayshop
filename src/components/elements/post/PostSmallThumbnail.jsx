@@ -2,12 +2,12 @@ import React, { useMemo } from 'react';
 import Link from 'next/link';
 import moment from 'moment';
 import Image from 'next/image';
-import { getStrapiImageURL } from '~/services/strapiServices/image/getStrapiImageService';
+// import { getStrapiImageURL } from '~/services/strapiServices/image/getStrapiImageService';
 
 const PostSmallThumbnail = ({ post }) => {
     const thumbnailImage = post.attributes?.thumbnail ? (
         <Image
-            src={getStrapiImageURL(post.attributes.thumbnail)}
+            // src={getStrapiImageURL(post.attributes.thumbnail)}
             alt=""
             layout="responsive"
             width={200}

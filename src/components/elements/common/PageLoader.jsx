@@ -1,11 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
-import {
-    changeCartItems,
-    changeCompareItems,
-    changeWishlistItems,
-} from '~/redux/features/ecommerceSlide';
+
 
 const PageLoader = () => {
     const dispatch = useDispatch();
@@ -14,13 +10,13 @@ const PageLoader = () => {
     function initEcomerceValues() {
         if (cookies) {
             if (cookies.cart) {
-                dispatch(changeCartItems(cookies.cart));
+                // dispatch(changeCartItems(cookies.cart));
             }
             if (cookies.wishlist) {
-                dispatch(changeWishlistItems(cookies.wishlist));
+                // dispatch(changeWishlistItems(cookies.wishlist));
             }
             if (cookies.compare) {
-                dispatch(changeCompareItems(cookies.compare));
+                // dispatch(changeCompareItems(cookies.compare));
             }
         }
     }

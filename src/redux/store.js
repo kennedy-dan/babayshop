@@ -5,8 +5,7 @@ import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
-import ecomerce from './features/ecommerceSlide';
-import user from './features/userSlide';
+
 
 
 const createNoopStorage = () => {
@@ -39,7 +38,6 @@ const persistedReducer = persistReducer(persistConfig, authSlice);
 const rootReducer = combineReducers({
 	auth: persistedReducer,
 	product: productSlice,
-	ecomerce: ecomerce
 
 });
 const loggingMiddleware = store => next => action => {

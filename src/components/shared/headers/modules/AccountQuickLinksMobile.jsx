@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Dropdown, Menu } from 'antd';
-import { userChangeIsLoggedIn } from '~/redux/features/userSlide';
+// import { userChangeIsLoggedIn } from '~/redux/features/userSlide';
 import { useDispatch } from 'react-redux';
 
 const accountLinks = [
@@ -34,7 +34,7 @@ const accountLinks = [
 export default function AccountQuickLinks() {
     const dispatch = useDispatch();
     const handleLogout = (e) => {
-        dispatch(userChangeIsLoggedIn(false));
+        // dispatch(userChangeIsLoggedIn(false));
     };
 
     const menu = (

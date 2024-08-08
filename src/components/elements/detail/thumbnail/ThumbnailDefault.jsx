@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { getStrapiImageURL } from '~/services/strapiServices/image/getStrapiImageService';
+// import { getStrapiImageURL } from '~/services/strapiServices/image/getStrapiImageService';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -20,7 +20,7 @@ const ThumbnailDefault = ({ product, vertical = true }) => {
         if (product.attributes.images.data?.length > 0) {
             return product.attributes.images.data.map((image) => {
                 return {
-                    url: getStrapiImageURL(image, 'large', true),
+                    // url: getStrapiImageURL(image, 'large', true),
                 };
             });
         } else {

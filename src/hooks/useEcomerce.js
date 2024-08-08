@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
-import {
-    changeCartItems,
-    changeCompareItems,
-    changeWishlistItems,
-} from '~/redux/features/ecommerceSlide';
-import { getStrapiEntriesService } from '~/services/strapi/strapiQueryServices';
+
+// import { getStrapiEntriesService } from '~/services/strapi/strapiQueryServices';
 
 const COLLECTION_TYPE = 'products';
 
@@ -21,73 +17,72 @@ export default function useEcomerce() {
         switch (group) {
             case 'cart':
                 setCookie('cart', items, { path: '/' });
-                dispatch(changeCartItems(items));
+                // dispatch(changeCartItems(items));
                 break;
             case 'wishlist':
                 setCookie('wishlist', items, { path: '/' });
-                dispatch(changeWishlistItems(items));
+                // dispatch(changeWishlistItems(items));
                 break;
             case 'compare':
                 setCookie('compare', items, { path: '/' });
-                dispatch(changeCompareItems(items));
+                // dispatch(changeCompareItems(items));
                 break;
             default:
         }
     }
-    async function getProducts(payload, group = '') {
-        setLoading(true);
-        if (payload && payload.length > 0) {
-            const query = {
-                filters: {
-                    id: {
-                        $in: payload.map((p) => p.id),
-                    },
-                },
-            };
-            try {
-                const response = await getStrapiEntriesService(
-                    COLLECTION_TYPE,
-                    query
-                );
-                if (response && response.length > 0) {
-                    if (group === 'cart') {
-                        let cartItems = response.data;
-                        payload.forEach((item) => {
-                            let existItem = cartItems.find(
-                                (val) => val.id === item.id
-                            );
-                            if (existItem) {
-                                existItem.quantity = item.quantity;
-                            }
-                        });
-                        setProducts(response.data || []);
-                    } else {
-                        setProducts([]);
-                    }
-                    setTimeout(
-                        function () {
-                            setLoading(false);
-                        }.bind(this),
-                        250
-                    );
-                }
-            } catch (error) {
-                console.error('Error fetching products:', error);
-                setProducts([]);
-            } finally {
-                setLoading(false);
-            }
-        } else {
-            setLoading(false);
-            setProducts([]);
-        }
-    }
+    // async function getProducts(payload, group = '') {
+    //     setLoading(true);
+    //     if (payload && payload.length > 0) {
+    //         const query = {
+    //             filters: {
+    //                 id: {
+    //                     $in: payload.map((p) => p.id),
+    //                 },
+    //             },
+    //         };
+    //         try {
+    //             // const response = await getStrapiEntriesService(
+    //             //     COLLECTION_TYPE,
+    //             //     query
+    //             );
+    //             if (response && response.length > 0) {
+    //                 if (group === 'cart') {
+    //                     let cartItems = response.data;
+    //                     payload.forEach((item) => {
+    //                         let existItem = cartItems.find(
+    //                             (val) => val.id === item.id
+    //                         );
+    //                         if (existItem) {
+    //                             existItem.quantity = item.quantity;
+    //                         }
+    //                     });
+    //                     setProducts(response.data || []);
+    //                 } else {
+    //                     setProducts([]);
+    //                 }
+    //                 setTimeout(
+    //                     function () {
+    //                         setLoading(false);
+    //                     }.bind(this),
+    //                     250
+    //                 );
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching products:', error);
+    //             setProducts([]);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     } else {
+    //         setLoading(false);
+    //         setProducts([]);
+    //     }
+    // }
 
     return {
         loading,
         cartItemsOnCookie,
         products,
-        getProducts,
         increaseQty: (payload, currentCart) => {
             if (!currentCart) return [];
             const updatedCart = currentCart.map((item) => {
@@ -98,7 +93,7 @@ export default function useEcomerce() {
                 return item;
             });
             setCookie('cart', updatedCart, { path: '/' });
-            dispatch(changeCartItems(updatedCart));
+            // dispatch(changeCartItems(updatedCart));
             return updatedCart;
         },
 
@@ -112,7 +107,7 @@ export default function useEcomerce() {
             });
 
             setCookie('cart', updatedCart, { path: '/' });
-            dispatch(changeCartItems(updatedCart));
+            // dispatch(changeCartItems(updatedCart));
             return updatedCart;
         },
 

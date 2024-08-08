@@ -4,7 +4,7 @@ import SkeletonProduct from '~/components/elements/skeletons/SkeletonProduct';
 import { generateTempArray } from '~/utilities/common-helpers';
 import { ProductGroupWithCarousel } from '~/components/partials/product/ProductGroupWithCarousel';
 import useGetProducts from '~/hooks/useGetProducts';
-import { DEFAULT_QUERY_GET_PRODUCTS } from '~/services/queries/productStrapiQueries';
+// import { DEFAULT_QUERY_GET_PRODUCTS } from '~/services/queries/productStrapiQueries';
 import { productCollections } from '~/utilities/product-collections';
 
 const HomeDefaultProductListing = ({ categorySlug, title }) => {
@@ -28,7 +28,7 @@ const HomeDefaultProductListing = ({ categorySlug, title }) => {
         (categorySlug) => {
             if (categorySlug) {
                 const query = {
-                    ...DEFAULT_QUERY_GET_PRODUCTS,
+                    // ...DEFAULT_QUERY_GET_PRODUCTS,
                     filters: {
                         product_categories: {
                             slug: {
