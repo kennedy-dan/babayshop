@@ -114,22 +114,8 @@ export default function CartContent() {
     }, [cartItems]);
     console.log(total);
 
-    function getCartProducts() {
-        if (cartItems.length > 0) {
-            const query = {
-                filters: {
-                    id: {
-                        $in: cartItems.map((item) => item.id),
-                    },
-                },
-            };
-            getStrapiProducts(query);
-        }
-    }
+  
 
-    useEffect(() => {
-        getCartProducts();
-    }, [cartItems]);
 
     const cartProducts = useMemo(() => {
         if (cartItems.length === 0) return [];
