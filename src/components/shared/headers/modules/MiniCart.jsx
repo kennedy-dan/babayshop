@@ -108,12 +108,12 @@ const MiniCart = () => {
 
     return (
         <div className="ps-cart--mini">
-            <a className="header__extra" href="#">
+            <Link className="header__extra" href="/account/shopping-cart">
                 <i className="icon-bag2" />
                 <span>
                     <i>{cart?.length}</i>
                 </span>
-            </a>
+            </Link>
             {/* {cartItemsContent} */}
         </div>
     );
