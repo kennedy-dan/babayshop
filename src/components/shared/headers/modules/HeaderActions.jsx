@@ -27,7 +27,8 @@ const HeaderActions = () => {
     return (
         <div className="header__actions">
           {token &&<>   <Link href="/account/wishlist" className="header__extra">
-                <i className="icon-heart" />
+                {/* <i className="icon-heart" /> */}
+                <img src='/static/fav.png' alt='' />
                 <span>
                     <i>{getfav ? fav?.length : 0}</i>
                 </span>

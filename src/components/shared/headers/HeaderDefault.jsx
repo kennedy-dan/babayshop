@@ -63,10 +63,11 @@ const HeaderDefault = () => {
                       <div className="">
                           <Link
                               href={`/shop/${items?.id}`}
-                              // className="ps-block__overlay"
-                          />
+                             > 
+                          
 
                           <p className="text-center">{items?.name}</p>
+                          </Link>
                       </div>
                   </div>
               ))}

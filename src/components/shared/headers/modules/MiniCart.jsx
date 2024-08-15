@@ -109,7 +109,8 @@ const MiniCart = () => {
     return (
         <div className="ps-cart--mini">
             <Link className="header__extra" href="/account/shopping-cart">
-                <i className="icon-bag2" />
+                {/* <i className="icon-bag2" /> */}
+                <img src='/static/cart.png' alt='' />
                 <span>
                     <i>{cart?.length}</i>
                 </span>

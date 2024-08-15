@@ -106,7 +106,7 @@ const SearchHeader = () => {
                     </span>
                 )}
             </div>
-            <button onClick={handleSubmit}>Search</button>
+            <button className='bg-[#F5128F]' style={{backgroundColor:'#F5128F'}} onClick={handleSubmit}>Search</button>
             {quickSearchBox}
         </form>
     );
