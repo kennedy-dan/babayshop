@@ -27,8 +27,8 @@ const HomeDefaultBanner = () => {
     }, [loading, banners]);
 
     const secondBannerItems = [
-        '/static/slide2.jpg',
-        '/static/slide3.jpg',
+        '/static/ads2.png',
+        '/static/ads3.png',
     ]
 
 
@@ -52,7 +52,7 @@ const HomeDefaultBanner = () => {
                             href={'/shop'}
                             className="ps-banner-item--default bg--cover"
                             style={{
-                                backgroundImage: "url(`/static/slide1.jpg`)",
+                                backgroundImage: "url(`/static/ads1.png`)",
                             }}
                         />
                     </div>
@@ -74,7 +74,7 @@ const HomeDefaultBanner = () => {
                             //     backgroundImage: "url(`/static/slide1.jpg`)",
                             // }}
                         >
-                            <img src='/static/slide3.jpg' />
+                            <img src='/static/ads1.png' alt='' />
                         </div>
                     </div>
             </div></div>

@@ -2353,7 +2353,7 @@
 
     &:before {
         content: '\f16d';
-        font-family: FontAwesome;
+        // font-family: FontAwesome;
         @include center();
         z-index: 20;
         color: #ffffff;

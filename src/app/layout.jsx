@@ -9,7 +9,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '~/redux/store';
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import {Poppins} from 'next/font/google'
 
 import '~/public/static/fonts/Linearicons/Font/demo-files/demo.css';
 import '~/public/static/fonts/font-awesome/css/font-awesome.min.css';
@@ -30,11 +30,17 @@ import getHeadData, {
     generatePageMetadata,
 } from '~/utilities/seo/RoutePathsSEO';
 
+const poppins = Poppins({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+})
+
 // export const metadata = generatePageMetadata(getHeadData('/'));
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-        <body>
+        <body className={poppins.className}>
         <Providers>
            <ToastContainer
             position="top-center"

@@ -71,9 +71,10 @@
     }
 
     .header__top {
-        padding: 25px 0;
+        // padding: 25px 0;
+        padding-top: 25px;
         background-color: $color-1st;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+        // border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 
         .ps-container,
         .container {
@@ -108,6 +109,15 @@
         .header__top {
             position: fixed;
             top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: none;
+            // padding: 10px 0;
+            // padding-top: 10px
+        }
+        .header__cats {
+            position: fixed;
+            top: 30;
             width: 100%;
             z-index: 1000;
             border-bottom: none;
@@ -650,7 +660,7 @@
 
             &:after {
                 content: '\e93a';
-                font-family: Linearicons;
+                // font-family: Linearicons;
                 margin-left: 20px;
             }
 
@@ -688,7 +698,7 @@
                     .select2-selection__arrow {
                         &:before {
                             content: '\e93a';
-                            font-family: Linearicons;
+                            // font-family: Linearicons;
                         }
                     }
                 }

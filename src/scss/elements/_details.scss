@@ -55,7 +55,7 @@
 
                 &:before {
                     content: '\f04b';
-                    font-family: FontAwesome;
+                    // font-family: FontAwesome;
                     @include center();
                     color: rgba(#fff, 1);
                     z-index: 20;

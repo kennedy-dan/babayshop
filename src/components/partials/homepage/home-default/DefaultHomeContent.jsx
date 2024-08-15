@@ -22,10 +22,10 @@ export default function DefaultHomeContent() {
 
             <HomeDefaultTopCategories />
            
-            <HomeAds />
-            <DownLoadApp />
-            <NewArrivals collectionSlug="hot-new-arrivals" />
-            <Newletters />
+            {/* <HomeAds /> */}
+            {/* <DownLoadApp /> */}
+            {/* <NewArrivals collectionSlug="hot-new-arrivals" /> */}
+            {/* <Newletters /> */}
         </main>
     );
 }

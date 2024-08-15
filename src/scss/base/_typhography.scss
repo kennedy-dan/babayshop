@@ -1,5 +1,5 @@
 * {
-    font-family: $font-1st;
+    // font-family: $font-1st;
     font-weight: 400;
 }
 
@@ -149,7 +149,7 @@ figure {
         color: $color-text;
 
         i {
-            font-family: $font-2nd;
+            // font-family: $font-2nd;
         }
 
         strong {
@@ -174,14 +174,14 @@ figure {
             position: absolute;
             top: 10px;
             left: 30px;
-            font-family: $font-2nd;
+            // font-family: $font-2nd;
             font-size: 5rem;
             color: $color-text;
         }
 
         p {
             margin-bottom: 0;
-            font-family: $font-2nd;
+            // font-family: $font-2nd;
             font-size: 14px;
             font-weight: 400;
             line-height: 1.8em;
@@ -244,7 +244,7 @@ figure {
     border-left: 4px solid $color-1st;
     padding-left: 60px;
     p {
-        font-family: $font-2nd;
+        // font-family: $font-2nd;
         font-size: 26px;
         font-weight: 400;
         color: $color-heading;

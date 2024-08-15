@@ -50,8 +50,8 @@ const Orderhistory = () => {
                   {console.log(items?.payment?.date)}
                   {items?.payment?.date
                     ? format(parseISO(items.payment.date), "MMM d, yyyy")
-                    : "N/A"}{" "}
-                </div>{" "}
+                    : "N/A"}
+                </div>
                 <div className="md:ml-16">
                   <p className="text-black font-bold text-[17px] ">
                     Total aount

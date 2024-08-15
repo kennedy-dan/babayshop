@@ -151,7 +151,7 @@
         position: relative;
         display: block;
         padding-left: 15px;
-        font-family: $font-1st;
+        // font-family: $font-1st;
         font-size: 14px;
         letter-spacing: 0.5px;
         color: #626262;
@@ -160,7 +160,7 @@
             content: '\f0da';
             @include vertical-align();
             left: 0;
-            font-family: FontAwesome;
+            // font-family: FontAwesome;
         }
 
         &:hover {

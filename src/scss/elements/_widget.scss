@@ -20,7 +20,7 @@
     @extend %list-reset;
 
     .widget-title {
-        font-family: $font-1st;
+        // font-family: $font-1st;
         display: block;
         margin-bottom: 2.5rem;
         font-size: 1.6rem;
@@ -41,7 +41,7 @@
 
                 &:before {
                     content: '\f105';
-                    font-family: FontAwesome;
+                    // font-family: FontAwesome;
                     @include hidden;
                     position: absolute;
                     top: 10px;

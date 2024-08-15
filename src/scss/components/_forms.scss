@@ -42,7 +42,7 @@
             content: '\e93a';
             @include vertical-align();
             right: 8px;
-            font-family: 'Linearicons';
+            // font-family: 'Linearicons';
             font-size: 12px;
         }
 
@@ -464,7 +464,7 @@
 
         &:after {
             content: '\e789';
-            font-family: 'Linearicons';
+            // font-family: 'Linearicons';
             @include vertical-align();
             right: 10px;
             font-size: 16px;

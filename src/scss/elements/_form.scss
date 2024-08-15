@@ -73,7 +73,7 @@ textarea.form-control {
         transition: all 0.4s ease;
 
         &:before {
-            font-family: FontAwesome;
+            // font-family: FontAwesome;
             @include center();
             color: $color-heading;
         }
@@ -120,7 +120,7 @@ textarea.form-control {
         margin-bottom: 0;
         position: relative;
         padding-left: 30px;
-        font-family: $font-1st;
+        // font-family: $font-1st;
         color: rgba($color-heading, 0.5);
         font-weight: 400;
         cursor: pointer;
@@ -296,7 +296,7 @@ textarea.form-control {
         position: relative;
         margin-bottom: 0;
         padding-left: 30px;
-        font-family: $font-1st;
+        // font-family: $font-1st;
         color: #737373;
         font-weight: 400;
         cursor: pointer;
