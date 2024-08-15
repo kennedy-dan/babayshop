@@ -17,7 +17,7 @@ export default function DefaultHomeContent() {
             <HomeDefaultBanner />
             {/* <HomeAdsColumns /> */}
 
-            <SiteFeatures />
+            {/* <SiteFeatures /> */}
             {/* <HomeDefaultDealOfDay collectionSlug="deals-of-the-day" /> */}
 
             <HomeDefaultTopCategories />
