@@ -287,6 +287,81 @@ const HomeDefaultTopCategories = () => {
                 <div className='w-full mt-32' >
                     <img src='/static/ads1.png' className='w-full'  />
                 </div>
+
+                {categoriesWithProducts?.results?.slice(6, 8)?.map((items, index) => (
+                    <div key={index} className="mb-16 mt-32">
+                        <div className="flex justify-between  w-full">
+                            <div className="">
+                                <h3 className="text-black ">{items?.name}</h3>
+                            </div>
+                            <div>
+                                <Link href={`/shop/${items?.id}`}>
+                                    View All
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="flex space-x-12 mt-4">
+                            {items?.products?.slice(0, 6)?.map((data) => (
+                           <motion.div
+                           key={data.id}
+                           whileHover="hover"
+                           initial="rest"
+                           animate="rest"
+                           className="  "
+                           >
+                           <div className="relative">
+                               <div className="justify-cente flex  p-9 mb-4 " style={{ background: 'white' }}>
+                                   <img
+                                       src={
+                                           data?.image_url
+                                               ? data?.image_url
+                                               : '/static/toy.jpg'
+                                       }
+                                       alt=""
+                                       className="h-[200px] w-[240px] object-cover rounded-lg cursor-pointer"
+                                   />
+                               </div>
+
+                               <motion.div
+                                   className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
+                                   variants={{
+                                       rest: { opacity: 0, y: '100%' },
+                                       hover: { y: -20, opacity: 1 },
+                                   }}
+                                   transition={{ duration: 0.3 }}>
+                                   <div
+                                       onClick={() => addToCart(data?.id)}
+                                       className="cursor-pointer mr-2">
+                                       <CiShoppingCart size={24} />
+                                   </div>
+                                   <div className="cursor-pointer">
+                                       <MdFavoriteBorder size={24} />
+                                   </div>
+                               </motion.div>
+                               <div className="text-center">
+                                   <p className="uppercase">
+                                       {data?.name}
+                                   </p>
+                               </div>
+                           </div>
+
+                           <hr className="my-2" />
+                           <div className="text-center">
+                               <p className="text-blue-600">
+                                   {data?.description}
+                               </p>
+                           </div>
+                           <div className="text-black font-semibold text-[20px] flex justify-center items-center">
+                               <img src="/static/Naira.png" alt="" />
+                               <p className="pl-1">
+                                   {Math.floor(data?.price)}
+                               </p>
+                           </div>
+                       </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     );

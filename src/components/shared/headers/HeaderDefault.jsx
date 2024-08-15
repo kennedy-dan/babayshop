@@ -46,7 +46,7 @@ const HeaderDefault = () => {
                                 alt=""
                             />
                         </div>
-                        <MenuCategoriesDropdown />
+                        {/* <MenuCategoriesDropdown /> */}
                     </div>
                     <div className="header__center">
                         <SearchHeader />
