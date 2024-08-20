@@ -21,7 +21,14 @@ export default function Page() {
         <PageContainer footer={<FooterDefault />} title="Wishlist">
             <div className="ps-page--simple">
                 <BreadCrumb breacrumb={breadCrumb} />
+                <div className="ps-section--shopping ps-whishlist">
+            <div className="container">
+                <div className="mb-6">
+                    <h3 className="text-[26px] text-black ">Favorite</h3>
+                </div>
                 <Wishlist />
+                </div>
+                </div>
             </div>
             <Newletters layout="container" />
         </PageContainer>

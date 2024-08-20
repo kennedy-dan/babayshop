@@ -39,13 +39,13 @@ const HeaderDefault = () => {
             <div className="header__top">
                 <div className="ps-container">
                     <div className="header__left">
-                        <div>
+                        <Link href='/'>
                             <img
                                 src="/static/logo.png"
                                 className="w-32 h-20 "
                                 alt=""
                             />
-                        </div>
+                        </Link>
                         {/* <MenuCategoriesDropdown /> */}
                     </div>
                     <div className="header__center">

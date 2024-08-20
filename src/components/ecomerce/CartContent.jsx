@@ -5,7 +5,8 @@ import ModuleEcomerceCartItems from '~/components/ecomerce/modules/ModuleEcomerc
 import ModuleCartSummary from '~/components/ecomerce/modules/ModuleCartSummary';
 import useGetProducts from '~/hooks/useGetProducts';
 import { useState } from 'react';
-import { IoClose } from "react-icons/io5";
+import { IoClose } from 'react-icons/io5';
+import Image from 'next/image';
 
 import {
     addtocart,
@@ -114,9 +115,6 @@ export default function CartContent() {
     }, [cartItems]);
     console.log(total);
 
-  
-
-
     const cartProducts = useMemo(() => {
         if (cartItems.length === 0) return [];
         return products.map((product) => {
@@ -152,54 +150,72 @@ export default function CartContent() {
         }
         return (
             <div className=" justify-between py-20 px-10 lg:px-[20px] lg:py-[20px] xl:px-[20px] xl:py-[100px] md:space-x-10">
-                <div className="w-full">
-                    <div className="grid gap-5 grid-cols-6 font-semibold  px-3 bg-gray-300 mb-5 py-4 " >
-                        <div className='col-span-2 ' >
-                            <p className='text-black font-bold' >PRODUCT</p>
+                <div className="w-full flex justify-between space-x-12 ">
+                    <div className="w-[60%]">
+                        <div className="grid gap-5 grid-cols-4 font-semibold  px-3 bg-[#003057] mb-5 py-4 ">
+                            <div className="col-span-2 ">
+                                <p className="text-white font-bold">PRODUCT</p>
+                            </div>
+                            <div>
+                                <p className="text-white font-bold">PRICE</p>
+                            </div>{' '}
+                            <div className="flex justify-end">
+                                <p className="text-white font-bold">QUANTITY</p>
+                            </div>
                         </div>
-                        <div>
-                            <p className='text-black font-bold'>PRICE</p>
-                        </div>{' '}
-                        <div>
-                            <p className='text-black font-bold'>QUANTITY</p>
-                        </div>
-                        <div>
-                            <p className='text-black font-bold'>TOTAL</p>
-                        </div>{' '}
-                        <div>
-                            <p className='text-black font-bold'>ACTION</p>
-                        </div>
-                    </div>
-                    <div className="">
-                    {cartItems?.map((items, index) => (
-                        <div key={index} className="w-full grid gap-5 grid-cols-6">
-                                <div className="flex col-span-2 space-x-5  ">
-                                    <div className="w-1/">
-                                        <div>
-                                            <img
-                                                src={
-                                                    items?.product?.image_url
-                                                        ? items?.product
-                                                              ?.image_url
-                                                        : '/static/toy.jpg'
-                                                }
-                                                alt=""
-                                                className="w-[70px] h-[70px]  object-cover"
+                        <div className="">
+                            {cartItems?.map((items, index) => (
+                                <div
+                                    key={index}
+                                    className="w-full grid gap-5 mb-5 grid-cols-4">
+                                    <div className="flex col-span-2 space-  ">
+                                        <div className="flex space-x-3  ">
+                                            <div className="bg-white p-9 rounded-2xl">
+                                                <Image
+                                                    src={
+                                                        items?.product
+                                                            ?.image_url
+                                                            ? items?.product
+                                                                  ?.image_url
+                                                            : '/static/toy.jpg'
+                                                    }
+                                                    alt=""
+                                                    height={500}
+                                                    width={500}
+                                                    className="w-[70px] h-[70px]  object-cover"
 
-                                                //   width={500}
-                                                //   height={500}
-                                            />
+                                                    //   width={500}
+                                                    //   height={500}
+                                                />
+                                            </div>
+                                            <div>
+                                                <p className=" text-black text-[16px] w-[] ">
+                                                    {items?.product?.name}
+                                                </p>
+                                                <div
+                                                    onClick={() =>
+                                                        removeCart(items)
+                                                    }
+                                                    className="flex cursor-pointer space-x-4 mt-16 items-center">
+                                                    <div>
+                                                        <img
+                                                            src="/static/remove.png"
+                                                            alt=""
+                                                        />
+                                                    </div>
+                                                    <p>Remove</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="w-ful">
+                                        {/* <div className="w-ful">
                                         <p className=" text-black text-[16px] w-[] ">
                                             {items?.product?.name}
                                         </p>
                                    
+                                    </div> */}
                                     </div>
-                                </div>
-                                <div>
-                                {getcart?.isLoading ||
+                                    <div>
+                                        {getcart?.isLoading ||
                                         (addcart?.isLoading &&
                                             updatingItemId === items.id) ? (
                                             <ClipLoader
@@ -214,141 +230,114 @@ export default function CartContent() {
                                                         alt=""
                                                     />
                                                 </div>
-                                                <p className='text-[16px] font-bold text-black' > 
+                                                <p className="text-[16px]  text-black">
                                                     {Math.floor(items?.price)}
                                                 </p>
                                             </div>
                                         )}
-                                </div>
-                                <div className="">
-                                    <div className="flex  items-center">
-                                        <button
-                                            onClick={() =>
-                                                decreaseQuant(items)
-                                            }>
-                                            <img
-                                                src={'/static/sub.png'}
-                                                alt="Decrease"
-                                            />
-                                        </button>
-                                        <p className="text-black font-bold px-2 text-[13px]">
-                                            {items.quantity}
-                                        </p>
-                                        <button
-                                            onClick={() =>
-                                                increaseQuant(items)
-                                            }>
-                                            <img
-                                                src={'/static/add.png'}
-                                                alt="Increase"
-                                            />
-                                        </button>
                                     </div>
+                                    <div className="flex justify-end items-start">
+                                        <div className="w-full flex justify-end">
+                                            <button className="flex w-[50%] border-2 rounded-md  px-2 py-2 justify-between border-gray-400 items-center">
+                                                <button
+                                                    onClick={() =>
+                                                        decreaseQuant(items)
+                                                    }>
+                                                    <img
+                                                        src={'/static/dec.png'}
+                                                        alt=""
+                                                    />
+                                                </button>
+                                                <p className="text-black font-[400] px-2 text-[13px]">
+                                                    {items?.quantity}
+                                                </p>
+                                                <button
+                                                    onClick={() =>
+                                                        increaseQuant(items)
+                                                    }>
+                                                    <img
+                                                        src={'/static/inc.png'}
+                                                        alt=""
+                                                    />
+                                                </button>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    {/* <br /> */}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="flex justify-end ">
+                    <div>
+                    <p className='text-[20px] text-black font-[500] '>Cart Summary</p>
+
+                        <div className=" md:w-[370px] bg-white  mt-8  p-[20px]   font-montserrat ">
+                            {/* <p className="font-bold text-[32px]">Summary</p> */}
+
+                            <div className="flex justify-between  mt-3">
+                                <p className="text-[16px] font-[400] text-black">
+                                    Subtotal
+                                </p>
+                                <p className="text-[16px] text-black">
+                                    N {total && total?.toFixed(2)}
+                                </p>
+                            </div>
+
+                            <hr className="" />
 
                             
-                                </div>
-
-                                <div>
-                                {getcart?.isLoading ||
-                                        (addcart?.isLoading &&
-                                            updatingItemId === items.id) ? (
-                                            <ClipLoader
-                                                color="black"
-                                                size={12}
-                                            />
-                                        ) : (
-                                            <div className="text-black font-semibold text-[24px]  space-x-1 font-urbanist flex items-center ">
-                                                <div>
-                                                    <img
-                                                        src="/static/Naira.png"
-                                                        alt=""
-                                                    />
-                                                </div>
-                                                <p className='text-[17px] font-bold text-black' >
-                                                    {Math.floor(items?.price)}
-                                                </p>
-                                            </div>
-                                        )}
-                                </div>
-                                <div
-                                        className="flex  cursor-pointer "
-                                        onClick={() => removeCart(items)}>
-                                       
-                                        {removecart?.isLoading &&
-                                        removeItemId === items?.id ? (
-                                            <ClipLoader
-                                                color="black"
-                                                size={12}
-                                            />
-                                        ) : (
-                                            <div><IoClose size={22} /></div>
-                                        )}
-                                    </div>
-
-                            {/* <br /> */}
-                            <hr className="my-5" />
-                        </div>
-                    ))}
-                    </div>
-
-                  
-                </div>
-                {/* <div className="mt-10">
-                            <Link href="/account/checkout">
-                                <button className="w-full text-white bg-yellow-600 py-4 rounded-lg font-semibold text-[16px] ">
-                                  
-                                </button>
-                            </Link>
-                        </div> */}
-                <div className='flex justify-end ' >
-                    <div>
-   <div className=" md:w-[370px] bg-gray-300 mt-4 md:mt-0 rounded-xl p-[20px] border-2  font-montserrat ">
-                        {/* <p className="font-bold text-[32px]">Summary</p> */}
-                      
-                        <div className="flex justify-between font-[500] mt-7">
-                            <p className="text-[16px] text-black">Subtotal</p>
-                            <p className="text-[16px] text-black">
-                                N {total && total?.toFixed(2)}
-                            </p>
-                        </div>
-
-                        <hr className='mt-7' />
-
-                        <div className="flex justify-between font-[500] py-6">
-                            {/* <p className="text-[16px]">Tax</p>
-                  <p className="text-[16px]">N 4000</p> */}
-                        </div>
-
-                   {cartItems?.map(items => <div className='' >
-                      <p className=" text-black text-[16px] w-[] ">
+                            <div className='my-4' >
+                                {cartItems?.map((items) => (
+                                    <div className="flex justify-between">
+                                        <p className=" text-black font-[300] text-[14px] w-[] ">
                                             {items?.product?.name}
                                         </p>
 
-                                        <div className='mt-1' >
-                                             <p className="text-black  px-2 text-[13px]">
-                                            X{items.quantity}
-                                        </p>
+                                        <div className="mt-1">
+                                            <p className="text-black font-[300]  px-2 text-[14px]">
+                                                X{items.quantity}
+                                            </p>
                                         </div>
-                                        <hr className='my-9' />
-                   </div>)}
-                       <div className="flex justify-between font-bold  mt-7">
-                            <p className="text-[20px] text-red-700 font-bold">Total</p>
-                            <p className="text-[20px] text-red-700 font-bold ">
-                                N {total && total?.toFixed(2)}
-                            </p>
+                                        {/* <hr className="my-9" /> */}
+                                    </div>
+                                ))}
+                            </div>
+                        <hr />
+
+                            <div className="mt-10">
+
+                            <div className="flex justify-between font-bold  mt-7">
+                                <p className="text-[20px] text-black font-[500]">
+                                    Total
+                                </p>
+                                <p className="text-[20px] text-black font-[500] ">
+                                    N {total && total?.toFixed(2)}
+                                </p>
+                            </div>
                         </div>
-                      
-                    </div>
-                          <div className="mt-10">
-                            <Link href="/account/checkout">
-                                <button className="w-full text-white bg-yellow-600 py-4 rounded-lg font-semibold text-[16px] ">
-                                  Proceed To  Checkout
+                           
+                        </div>
+                        <Link className='' href="/account/checkout">
+                                <button className="w-full text-white bg-[#F5128F] mt-5 py-4 rounded-lg font-semibold text-[16px] ">
+                                    Check Out
                                 </button>
                             </Link>
-                        </div>
                     </div>
-                 
                 </div>
+                </div>
+                <div className="mt-10 w-[30%]">
+                    <p>Coupon discount</p>
+                    <input className='w-full bg-[#FAFAFA] border border-1 px-3 py-2  'placeholder='Enter Coupon Here' />
+
+                    <div className='flex justify-end  mt-3 '  >
+                        <button className=' bg-white py-3 px-6 rounded-3xl font-[500] text-[#F5128F] ' >Apply</button>
+                    </div>
+                            
+                        </div>
+
+              
             </div>
         );
     }, [products, cartItems]);

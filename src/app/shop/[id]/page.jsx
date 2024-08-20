@@ -9,12 +9,17 @@ import PageContainer from '~/components/layouts/PageContainer';
 import Newletters from '~/components/partials/commons/Newletters';
 import ShopBanner from '~/components/partials/shop/ShopBanner';
 import ShopBrands from '~/components/partials/shop/ShopBrands';
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
 import ShopCategories from '~/components/partials/shop/ShopCategories';
 import ProductGroupByCarousel from '~/components/partials/product/ProductGroupByCarousel';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSingleCats, addtocart, favAction, getFavorites } from '~/redux/features/productSlice';
+import {
+    getSingleCats,
+    addtocart,
+    favAction,
+    getFavorites,
+} from '~/redux/features/productSlice';
 import { useParams } from 'next/navigation';
 import { Pagination } from 'antd';
 import { MdOutlineFavorite, MdFavorite } from 'react-icons/md';
@@ -22,6 +27,7 @@ import Link from 'next/link';
 import { CiShoppingCart } from 'react-icons/ci';
 import { MdFavoriteBorder } from 'react-icons/md';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const breadCrumb = [
     {
@@ -32,7 +38,6 @@ const breadCrumb = [
         text: 'Shop Default',
     },
 ];
-
 
 export default function Page() {
     const dispatch = useDispatch();
@@ -54,7 +59,7 @@ export default function Page() {
     const router = useParams();
     const { id } = router;
 
-    const routerId = id
+    const routerId = id;
 
     useEffect(() => {
         const indexOfLastItem = currentPage * itemsPerPage;
@@ -88,42 +93,128 @@ export default function Page() {
         dispatch(addtocart(data));
     };
 
-    
-const handleFavoriteClick = async (id, isFavorite) => {
-  if(!token){
-    toast.info('Login to add to favorite')
-    router.push('/account/login')
-    return
-  }
-  setLoadingFavorites((prev) => ({ ...prev, [id]: true }));
-  const action = isFavorite ? "remove" : "add";
-  try {
-    await dispatch(favAction({ id, action })).unwrap();
-    toast.success(
-      `Product ${action === "add" ? "added to" : "removed from"} favorites`
-    );
-    dispatch(getFavorites()); // Refresh the favorites list
-  
-  dispatch(getSingleCats(routerId))
+    const handleFavoriteClick = async (id, isFavorite) => {
+        if (!token) {
+            toast.info('Login to add to favorite');
+            router.push('/account/login');
+            return;
+        }
+        setLoadingFavorites((prev) => ({ ...prev, [id]: true }));
+        const action = isFavorite ? 'remove' : 'add';
+        try {
+            await dispatch(favAction({ id, action })).unwrap();
+            toast.success(
+                `Product ${action === 'add' ? 'added to' : 'removed from'} favorites`
+            );
+            dispatch(getFavorites()); // Refresh the favorites list
 
-  } catch (error) {
-    toast.error(`Failed to ${action} favorite: ${error.message}`);
-  } finally {
-    setLoadingFavorites((prev) => ({ ...prev, [id]: false }));
-  }
-};
-
+            dispatch(getSingleCats(routerId));
+        } catch (error) {
+            toast.error(`Failed to ${action} favorite: ${error.message}`);
+        } finally {
+            setLoadingFavorites((prev) => ({ ...prev, [id]: false }));
+        }
+    };
 
     return (
         <PageContainer title="Shop">
             <div className="ps-page--shop">
                 <BreadCrumb breacrumb={breadCrumb} layout="fullwidth" />
                 <div className="ps-container">
-                    <ShopBanner />
-                    <ShopBrands />
+                    {/* <ShopBanner />
+                    <ShopBrands /> */}
 
-                    <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 ">
-                        {currentItems?.map((items, index) => (
+                    <div className="grid grid-cols-5 gap-4">
+                        {data?.map((data, index) => (
+                            <motion.div
+                                key={data.id}
+                                whileHover="hover"
+                                initial="rest"
+                                animate="rest"
+                                className=" mb-6 ">
+                                <div className="relative">
+                                    <div
+                                        className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-8 "
+                                        >
+                                        <Image
+                                            src={
+                                                data?.image_url
+                                                    ? data?.image_url
+                                                    : '/static/toy.jpg'
+                                            }
+                                            width={500}
+                                            height={500}
+                                            alt=""
+                                            className="h-[230px] w-[250px] object-cover rounded-lg cursor-pointer"
+                                        />
+
+                                        <motion.div
+                                            className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
+                                            variants={{
+                                                rest: { opacity: 0, y: '10%' },
+                                                hover: { y: -37, opacity: 1 },
+                                            }}
+                                            transition={{ duration: 0.3 }}>
+                                            <div
+                                                onClick={() =>
+                                                    addToCart(data?.id)
+                                                }
+                                                className="cursor-pointer mr-2 h-14 w-14 flex justify-center items-center rounded-full bg-gray-600 ">
+                                                    <img src='/static/cartic.png' alt='' />
+                                                {/* <CiShoppingCart size={24} /> */}
+                                            </div>
+                                            <div
+                                                className="cursor-pointer bg-gray-600 h-14 w-14 flex justify-center items-center  rounded-full"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    handleFavoriteClick(
+                                                        data?.id,
+                                                        data?.is_favorite
+                                                    );
+                                                }}>
+                                                {loadingFavorites[data?.id] ? (
+                                                    // <ClipLoader size={20} color="#000000" />
+                                                    <p></p>
+                                                ) : data?.is_favorite ? (
+                                                    <MdFavorite
+                                                        size={24}
+                                                        color="red"
+                                                    />
+                                                ) : (
+                                                    <MdFavoriteBorder
+                                                        size={24}
+                                                        color="white"
+                                                    />
+                                                )}
+                                            </div>
+                                        </motion.div>
+                                    </div>
+
+                                    <Link href={`/product/${data?.id}`}>
+                                        <div className="text-center">
+                                            <p className="uppercase text-[18px]" >
+                                                {data?.name}
+                                            </p>
+                                        </div>
+                                    </Link>
+                                </div>
+                                <Link href={`/product/${data?.id}`}>
+                                    <hr className="my-2" />
+                                    <div className="text-center">
+                                        <p className="text-blue-600 text-[16px]">
+                                            {data?.description}
+                                        </p>
+                                    </div>
+                                    <div className="text-black font-semibold text-[20px] flex justify-center items-center">
+                                        <img src="/static/Naira.png" alt="" />
+                                        <p className="pl-1">
+                                            {Math.floor(data?.price)}
+                                        </p>
+                                    </div>
+                                </Link>
+                            </motion.div>
+                        ))}
+                        {/* {currentItems?.map((items, index) => (
                             <motion.div
                                 key={index}
                                 whileHover="hover"
@@ -150,7 +241,7 @@ const handleFavoriteClick = async (id, isFavorite) => {
                                         </div>
                                     </Link>
                                     <motion.div
-                                    className="flex absolute bottom-0 left-0 justify-center right-0 bg-white bg-opacity-80 p-2"
+                                    className="flex absolute bottom-0 left-0 justify-center right-0 bg-opacity-80 p-2"
                                     variants={{
                                         rest: { opacity: 0, y: '100%' },
                                         hover: { y: 0, opacity: 1 },
@@ -204,7 +295,7 @@ const handleFavoriteClick = async (id, isFavorite) => {
                                     </div>
                                 </div>
                             </motion.div>
-                        ))}
+                        ))} */}
                     </div>
                     {/* <div className="ps-layout--shop">
                         <div className="ps-layout__left">

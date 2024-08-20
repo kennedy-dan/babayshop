@@ -21,7 +21,7 @@ const nextSettings = {
                 pathname: '/uploads/**',
             },
         ],
-        domains: ['www.royalbabiesworld.com']
+        domains: ['www.royalbabiesworld.com', 'www.kcnpnm.org']
     },
 };
 
