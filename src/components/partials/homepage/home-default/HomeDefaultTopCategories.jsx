@@ -181,11 +181,12 @@ const HomeDefaultTopCategories = () => {
                                             {data?.description}
                                         </p>
                                     </div>
-                                    <div className="text-black font-semibold  flex justify-center items-center">
+                                    <div className="text-black font-[500]  flex justify-center items-center">
                                         <div>
                                             <img
                                                 src="/static/Naira.png"
                                                 alt=""
+                                                className='mr-2'
                                             />
                                         </div>
                                         
@@ -311,15 +312,21 @@ const HomeDefaultTopCategories = () => {
                                                     {data?.description}
                                                 </p>
                                             </div>
-                                            <div className="text-black font-semibold text-[20px] flex justify-center items-center">
-                                                <img
-                                                    src="/static/Naira.png"
-                                                    alt=""
-                                                />
-                                                <p className="pl-1">
-                                                    {Math.floor(data?.price)}
-                                                </p>
-                                            </div>
+                                            <div className="text-black font-[500]  flex justify-center items-center">
+                                        <div>
+                                            <img
+                                                src="/static/Naira.png"
+                                                alt=""
+                                                className='mr-2'
+                                            />
+                                        </div>
+                                        
+
+                                            < >
+                                                {Math.floor(data?.price)}
+                                            </>
+                                        
+                                    </div>
                                         </Link>
                                     </motion.div>
                                 ))}
@@ -445,15 +452,21 @@ const HomeDefaultTopCategories = () => {
                                                     {data?.description}
                                                 </p>
                                             </div>
-                                            <div className="text-black font-semibold text-[20px] flex justify-center items-center">
-                                                <img
-                                                    src="/static/Naira.png"
-                                                    alt=""
-                                                />
-                                                <p className="pl-1">
-                                                    {Math.floor(data?.price)}
-                                                </p>
-                                            </div>
+                                            <div className="text-black font-[500]  flex justify-center items-center">
+                                        <div>
+                                            <img
+                                                src="/static/Naira.png"
+                                                alt=""
+                                                className='mr-2'
+                                            />
+                                        </div>
+                                        
+
+                                            < >
+                                                {Math.floor(data?.price)}
+                                            </>
+                                        
+                                    </div>
                                         </Link>
                                     </motion.div>
                                 ))}
@@ -574,15 +587,21 @@ const HomeDefaultTopCategories = () => {
                                                     {data?.description}
                                                 </p>
                                             </div>
-                                            <div className="text-black font-semibold text-[20px] flex justify-center items-center">
-                                                <img
-                                                    src="/static/Naira.png"
-                                                    alt=""
-                                                />
-                                                <p className="pl-1">
-                                                    {Math.floor(data?.price)}
-                                                </p>
-                                            </div>
+                                            <div className="text-black font-[500]  flex justify-center items-center">
+                                        <div>
+                                            <img
+                                                src="/static/Naira.png"
+                                                alt=""
+                                                className='mr-2'
+                                            />
+                                        </div>
+                                        
+
+                                            < >
+                                                {Math.floor(data?.price)}
+                                            </>
+                                        
+                                    </div>
                                         </Link>
                                     </motion.div>
                                 ))}
