@@ -188,11 +188,12 @@ const HomeDefaultTopCategories = () => {
                                                 alt=""
                                             />
                                         </div>
-                                        <div>
-                                            <h6 className="ml-1">
+                                        
+
+                                            < >
                                                 {Math.floor(data?.price)}
-                                            </h6>
-                                        </div>
+                                            </>
+                                        
                                     </div>
                                 </Link>
                             </motion.div>
