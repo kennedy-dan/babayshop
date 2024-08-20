@@ -267,7 +267,7 @@ const ProductDefaultPage = () => {
                                             SKU: {getSingleProductData?.sku}
                                         </p>
 
-                                        <div className="text-black font-[500]  flex justify-center items-center">
+                                        <div className="text-black  font-semibold  flex text-[24px] items-center">
                                                 <div>
                                                     <img
                                                         src="/static/Naira.png"
