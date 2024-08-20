@@ -8,7 +8,7 @@ import {
     getAllProducts,
     favAction,
     getSingleCats,
-    getFavorites
+    getFavorites,
 } from '~/redux/features/productSlice';
 import { FaShoppingCart } from 'react-icons/fa';
 import { toast } from 'react-toastify';
@@ -17,7 +17,6 @@ import { motion } from 'framer-motion';
 import { MdOutlineFavorite, MdFavorite } from 'react-icons/md';
 import { MdFavoriteBorder } from 'react-icons/md';
 import Image from 'next/image';
-
 
 const HomeDefaultTopCategories = () => {
     const dispatch = useDispatch();
@@ -52,10 +51,8 @@ const HomeDefaultTopCategories = () => {
             dispatch(getFavorites()); // Refresh the favorites list
 
             dispatch(getSingleCats(catsid));
-        dispatch(getAllProducts());
-        dispatch(getCategoriesWithProducts());
-
-
+            dispatch(getAllProducts());
+            dispatch(getCategoriesWithProducts());
         } catch (error) {
             toast.error(`Failed to ${action} favorite: ${error.message}`);
         } finally {
@@ -85,12 +82,12 @@ const HomeDefaultTopCategories = () => {
                                     href={`/shop/${items?.id}`}
                                     // className="ps-block__overlay"
                                 >
-                                <img
-                                    src="/static/cats.png"
-                                    alt="martfury"
-                                    className="h-[190px] rounded-2xl"
-                                />
-                                <p className="text-center">{items?.name}</p>
+                                    <img
+                                        src="/static/cats.png"
+                                        alt="martfury"
+                                        className="h-[190px] rounded-2xl"
+                                    />
+                                    <p className="text-center">{items?.name}</p>
                                 </Link>
                             </div>
                         </div>
@@ -103,16 +100,14 @@ const HomeDefaultTopCategories = () => {
                     </div>
                     <div className="flex justify-between">
                         {allp?.slice(0, 4)?.map((data, index) => (
-                                <motion.div
+                            <motion.div
                                 key={data.id}
                                 whileHover="hover"
                                 initial="rest"
                                 animate="rest"
                                 className="  ">
                                 <div className="relative">
-                                    <div
-                                        className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-9 mb-4 "
-                                        >
+                                    <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-9 mb-4 ">
                                         <Image
                                             src={
                                                 data?.image_url
@@ -124,7 +119,7 @@ const HomeDefaultTopCategories = () => {
                                             alt=""
                                             className="h-[230px] w-[250px] object-cover rounded-lg cursor-pointer"
                                         />
-   
+
                                         <motion.div
                                             className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
                                             variants={{
@@ -137,7 +132,10 @@ const HomeDefaultTopCategories = () => {
                                                     addToCart(data?.id)
                                                 }
                                                 className="cursor-pointer mr-2 h-14 w-14 flex justify-center items-center rounded-full bg-gray-600 ">
-                                                    <img src='/static/cartic.png' alt='' />
+                                                <img
+                                                    src="/static/cartic.png"
+                                                    alt=""
+                                                />
                                                 {/* <CiShoppingCart size={24} /> */}
                                             </div>
                                             <div
@@ -147,8 +145,7 @@ const HomeDefaultTopCategories = () => {
                                                     handleFavoriteClick(
                                                         data?.id,
                                                         data?.is_favorite,
-                                            data?.category?.id
-
+                                                        data?.category?.id
                                                     );
                                                 }}>
                                                 {loadingFavorites[data?.id] ? (
@@ -168,10 +165,10 @@ const HomeDefaultTopCategories = () => {
                                             </div>
                                         </motion.div>
                                     </div>
-   
+
                                     <Link href={`/product/${data?.id}`}>
                                         <div className="text-center">
-                                            <p className="uppercase text-[18px]" >
+                                            <p className="uppercase text-[18px]">
                                                 {data?.name}
                                             </p>
                                         </div>
@@ -184,11 +181,18 @@ const HomeDefaultTopCategories = () => {
                                             {data?.description}
                                         </p>
                                     </div>
-                                    <div className="text-black font-semibold text-[20px] flex justify-center items-center">
-                                        <img src="/static/Naira.png" alt="" />
-                                        <p className="pl-1">
-                                            {Math.floor(data?.price)}
-                                        </p>
+                                    <div className="text-black font-semibold  flex justify-center items-center">
+                                        <div>
+                                            <img
+                                                src="/static/Naira.png"
+                                                alt=""
+                                            />
+                                        </div>
+                                        <div>
+                                            <p className="ml-1">
+                                                {Math.floor(data?.price)}
+                                            </p>
+                                        </div>
                                     </div>
                                 </Link>
                             </motion.div>
@@ -214,94 +218,109 @@ const HomeDefaultTopCategories = () => {
                             </div>
                             <div className="flex space-x-12 mt-4">
                                 {items?.products?.slice(0, 6)?.map((data) => (
-                             <motion.div
-                             key={data.id}
-                             whileHover="hover"
-                             initial="rest"
-                             animate="rest"
-                             className="  ">
-                             <div className="relative">
-                                 <div
-                                     className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-9 mb-4 "
-                                     >
-                                     <Image
-                                         src={
-                                             data?.image_url
-                                                 ? data?.image_url
-                                                 : '/static/toy.jpg'
-                                         }
-                                         width={500}
-                                         height={500}
-                                         alt=""
-                                         className="h-[230px] w-[250px] object-cover rounded-lg cursor-pointer"
-                                     />
+                                    <motion.div
+                                        key={data.id}
+                                        whileHover="hover"
+                                        initial="rest"
+                                        animate="rest"
+                                        className="  ">
+                                        <div className="relative">
+                                            <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-9 mb-4 ">
+                                                <Image
+                                                    src={
+                                                        data?.image_url
+                                                            ? data?.image_url
+                                                            : '/static/toy.jpg'
+                                                    }
+                                                    width={500}
+                                                    height={500}
+                                                    alt=""
+                                                    className="h-[230px] w-[250px] object-cover rounded-lg cursor-pointer"
+                                                />
 
-                                     <motion.div
-                                         className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
-                                         variants={{
-                                             rest: { opacity: 0, y: '10%' },
-                                             hover: { y: -37, opacity: 1 },
-                                         }}
-                                         transition={{ duration: 0.3 }}>
-                                         <div
-                                             onClick={() =>
-                                                 addToCart(data?.id)
-                                             }
-                                             className="cursor-pointer mr-2 h-14 w-14 flex justify-center items-center rounded-full bg-gray-600 ">
-                                                 <img src='/static/cartic.png' alt='' />
-                                             {/* <CiShoppingCart size={24} /> */}
-                                         </div>
-                                         <div
-                                             className="cursor-pointer bg-gray-600 h-14 w-14 flex justify-center items-center  rounded-full"
-                                             onClick={(e) => {
-                                                 e.stopPropagation();
-                                                 handleFavoriteClick(
-                                                     data?.id,
-                                                     data?.is_favorite,
-                                                     data?.category?.id
-                                                 );
-                                             }}>
-                                             {loadingFavorites[data?.id] ? (
-                                                 // <ClipLoader size={20} color="#000000" />
-                                                 <p></p>
-                                             ) : data?.is_favorite ? (
-                                                 <MdFavorite
-                                                     size={24}
-                                                     color="red"
-                                                 />
-                                             ) : (
-                                                 <MdFavoriteBorder
-                                                     size={24}
-                                                     color="white"
-                                                 />
-                                             )}
-                                         </div>
-                                     </motion.div>
-                                 </div>
+                                                <motion.div
+                                                    className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
+                                                    variants={{
+                                                        rest: {
+                                                            opacity: 0,
+                                                            y: '10%',
+                                                        },
+                                                        hover: {
+                                                            y: -37,
+                                                            opacity: 1,
+                                                        },
+                                                    }}
+                                                    transition={{
+                                                        duration: 0.3,
+                                                    }}>
+                                                    <div
+                                                        onClick={() =>
+                                                            addToCart(data?.id)
+                                                        }
+                                                        className="cursor-pointer mr-2 h-14 w-14 flex justify-center items-center rounded-full bg-gray-600 ">
+                                                        <img
+                                                            src="/static/cartic.png"
+                                                            alt=""
+                                                        />
+                                                        {/* <CiShoppingCart size={24} /> */}
+                                                    </div>
+                                                    <div
+                                                        className="cursor-pointer bg-gray-600 h-14 w-14 flex justify-center items-center  rounded-full"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleFavoriteClick(
+                                                                data?.id,
+                                                                data?.is_favorite,
+                                                                data?.category
+                                                                    ?.id
+                                                            );
+                                                        }}>
+                                                        {loadingFavorites[
+                                                            data?.id
+                                                        ] ? (
+                                                            // <ClipLoader size={20} color="#000000" />
+                                                            <p></p>
+                                                        ) : data?.is_favorite ? (
+                                                            <MdFavorite
+                                                                size={24}
+                                                                color="red"
+                                                            />
+                                                        ) : (
+                                                            <MdFavoriteBorder
+                                                                size={24}
+                                                                color="white"
+                                                            />
+                                                        )}
+                                                    </div>
+                                                </motion.div>
+                                            </div>
 
-                                 <Link href={`/product/${data?.id}`}>
-                                     <div className="text-center">
-                                         <p className="uppercase text-[18px]" >
-                                             {data?.name}
-                                         </p>
-                                     </div>
-                                 </Link>
-                             </div>
-                             <Link href={`/product/${data?.id}`}>
-                                 <hr className="my-2" />
-                                 <div className="text-center">
-                                     <p className="text-blue-600 text-[16px]">
-                                         {data?.description}
-                                     </p>
-                                 </div>
-                                 <div className="text-black font-semibold text-[20px] flex justify-center items-center">
-                                     <img src="/static/Naira.png" alt="" />
-                                     <p className="pl-1">
-                                         {Math.floor(data?.price)}
-                                     </p>
-                                 </div>
-                             </Link>
-                         </motion.div>
+                                            <Link href={`/product/${data?.id}`}>
+                                                <div className="text-center">
+                                                    <p className="uppercase text-[18px]">
+                                                        {data?.name}
+                                                    </p>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                        <Link href={`/product/${data?.id}`}>
+                                            <hr className="my-2" />
+                                            <div className="text-center">
+                                                <p className="text-blue-600 text-[16px]">
+                                                    {data?.description}
+                                                </p>
+                                            </div>
+                                            <div className="text-black font-semibold text-[20px] flex justify-center items-center">
+                                                <img
+                                                    src="/static/Naira.png"
+                                                    alt=""
+                                                />
+                                                <p className="pl-1">
+                                                    {Math.floor(data?.price)}
+                                                </p>
+                                            </div>
+                                        </Link>
+                                    </motion.div>
                                 ))}
                             </div>
                         </div>
@@ -333,95 +352,109 @@ const HomeDefaultTopCategories = () => {
                             </div>
                             <div className="flex space-x-12 mt-4">
                                 {items?.products?.slice(0, 6)?.map((data) => (
-                                      <motion.div
-                                      key={data.id}
-                                      whileHover="hover"
-                                      initial="rest"
-                                      animate="rest"
-                                      className="  ">
-                                      <div className="relative">
-                                          <div
-                                              className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-9 mb-4 "
-                                              >
-                                              <Image
-                                                  src={
-                                                      data?.image_url
-                                                          ? data?.image_url
-                                                          : '/static/toy.jpg'
-                                                  }
-                                                  width={500}
-                                                  height={500}
-                                                  alt=""
-                                                  className="h-[230px] w-[250px] object-cover rounded-lg cursor-pointer"
-                                              />
-         
-                                              <motion.div
-                                                  className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
-                                                  variants={{
-                                                      rest: { opacity: 0, y: '10%' },
-                                                      hover: { y: -37, opacity: 1 },
-                                                  }}
-                                                  transition={{ duration: 0.3 }}>
-                                                  <div
-                                                      onClick={() =>
-                                                          addToCart(data?.id)
-                                                      }
-                                                      className="cursor-pointer mr-2 h-14 w-14 flex justify-center items-center rounded-full bg-gray-600 ">
-                                                          <img src='/static/cartic.png' alt='' />
-                                                      {/* <CiShoppingCart size={24} /> */}
-                                                  </div>
-                                                  <div
-                                                      className="cursor-pointer bg-gray-600 h-14 w-14 flex justify-center items-center  rounded-full"
-                                                      onClick={(e) => {
-                                                          e.stopPropagation();
-                                                          handleFavoriteClick(
-                                                              data?.id,
-                                                              data?.is_favorite,
-                                                     data?.category?.id
+                                    <motion.div
+                                        key={data.id}
+                                        whileHover="hover"
+                                        initial="rest"
+                                        animate="rest"
+                                        className="  ">
+                                        <div className="relative">
+                                            <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-9 mb-4 ">
+                                                <Image
+                                                    src={
+                                                        data?.image_url
+                                                            ? data?.image_url
+                                                            : '/static/toy.jpg'
+                                                    }
+                                                    width={500}
+                                                    height={500}
+                                                    alt=""
+                                                    className="h-[230px] w-[250px] object-cover rounded-lg cursor-pointer"
+                                                />
 
-                                                          );
-                                                      }}>
-                                                      {loadingFavorites[data?.id] ? (
-                                                          // <ClipLoader size={20} color="#000000" />
-                                                          <p></p>
-                                                      ) : data?.is_favorite ? (
-                                                          <MdFavorite
-                                                              size={24}
-                                                              color="red"
-                                                          />
-                                                      ) : (
-                                                          <MdFavoriteBorder
-                                                              size={24}
-                                                              color="white"
-                                                          />
-                                                      )}
-                                                  </div>
-                                              </motion.div>
-                                          </div>
-         
-                                          <Link href={`/product/${data?.id}`}>
-                                              <div className="text-center">
-                                                  <p className="uppercase text-[18px]" >
-                                                      {data?.name}
-                                                  </p>
-                                              </div>
-                                          </Link>
-                                      </div>
-                                      <Link href={`/product/${data?.id}`}>
-                                          <hr className="my-2" />
-                                          <div className="text-center">
-                                              <p className="text-blue-600 text-[16px]">
-                                                  {data?.description}
-                                              </p>
-                                          </div>
-                                          <div className="text-black font-semibold text-[20px] flex justify-center items-center">
-                                              <img src="/static/Naira.png" alt="" />
-                                              <p className="pl-1">
-                                                  {Math.floor(data?.price)}
-                                              </p>
-                                          </div>
-                                      </Link>
-                                  </motion.div>
+                                                <motion.div
+                                                    className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
+                                                    variants={{
+                                                        rest: {
+                                                            opacity: 0,
+                                                            y: '10%',
+                                                        },
+                                                        hover: {
+                                                            y: -37,
+                                                            opacity: 1,
+                                                        },
+                                                    }}
+                                                    transition={{
+                                                        duration: 0.3,
+                                                    }}>
+                                                    <div
+                                                        onClick={() =>
+                                                            addToCart(data?.id)
+                                                        }
+                                                        className="cursor-pointer mr-2 h-14 w-14 flex justify-center items-center rounded-full bg-gray-600 ">
+                                                        <img
+                                                            src="/static/cartic.png"
+                                                            alt=""
+                                                        />
+                                                        {/* <CiShoppingCart size={24} /> */}
+                                                    </div>
+                                                    <div
+                                                        className="cursor-pointer bg-gray-600 h-14 w-14 flex justify-center items-center  rounded-full"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleFavoriteClick(
+                                                                data?.id,
+                                                                data?.is_favorite,
+                                                                data?.category
+                                                                    ?.id
+                                                            );
+                                                        }}>
+                                                        {loadingFavorites[
+                                                            data?.id
+                                                        ] ? (
+                                                            // <ClipLoader size={20} color="#000000" />
+                                                            <p></p>
+                                                        ) : data?.is_favorite ? (
+                                                            <MdFavorite
+                                                                size={24}
+                                                                color="red"
+                                                            />
+                                                        ) : (
+                                                            <MdFavoriteBorder
+                                                                size={24}
+                                                                color="white"
+                                                            />
+                                                        )}
+                                                    </div>
+                                                </motion.div>
+                                            </div>
+
+                                            <Link href={`/product/${data?.id}`}>
+                                                <div className="text-center">
+                                                    <p className="uppercase text-[18px]">
+                                                        {data?.name}
+                                                    </p>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                        <Link href={`/product/${data?.id}`}>
+                                            <hr className="my-2" />
+                                            <div className="text-center">
+                                                <p className="text-blue-600 text-[16px]">
+                                                    {data?.description}
+                                                </p>
+                                            </div>
+                                            <div className="text-black font-semibold text-[20px] flex justify-center items-center">
+                                                <img
+                                                    src="/static/Naira.png"
+                                                    alt=""
+                                                />
+                                                <p className="pl-1">
+                                                    {Math.floor(data?.price)}
+                                                </p>
+                                            </div>
+                                        </Link>
+                                    </motion.div>
                                 ))}
                             </div>
                         </div>
@@ -447,96 +480,110 @@ const HomeDefaultTopCategories = () => {
                                 </div>
                             </div>
                             <div className="flex space-x-6 mt-4">
-                            {items?.products?.slice(0, 6)?.map((data) => (
-                                         <motion.div
-                                         key={data.id}
-                                         whileHover="hover"
-                                         initial="rest"
-                                         animate="rest"
-                                         className="  ">
-                                         <div className="relative">
-                                             <div
-                                                 className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-9 mb-4 "
-                                                 >
-                                                 <Image
-                                                     src={
-                                                         data?.image_url
-                                                             ? data?.image_url
-                                                             : '/static/toy.jpg'
-                                                     }
-                                                     width={500}
-                                                     height={500}
-                                                     alt=""
-                                                     className="h-[230px] w-[250px] object-cover rounded-lg cursor-pointer"
-                                                 />
-            
-                                                 <motion.div
-                                                     className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
-                                                     variants={{
-                                                         rest: { opacity: 0, y: '10%' },
-                                                         hover: { y: -37, opacity: 1 },
-                                                     }}
-                                                     transition={{ duration: 0.3 }}>
-                                                     <div
-                                                         onClick={() =>
-                                                             addToCart(data?.id)
-                                                         }
-                                                         className="cursor-pointer mr-2 h-14 w-14 flex justify-center items-center rounded-full bg-gray-600 ">
-                                                             <img src='/static/cartic.png' alt='' />
-                                                         {/* <CiShoppingCart size={24} /> */}
-                                                     </div>
-                                                     <div
-                                                         className="cursor-pointer bg-gray-600 h-14 w-14 flex justify-center items-center  rounded-full"
-                                                         onClick={(e) => {
-                                                             e.stopPropagation();
-                                                             handleFavoriteClick(
-                                                                 data?.id,
-                                                                 data?.is_favorite,
-                                                     data?.category?.id
+                                {items?.products?.slice(0, 6)?.map((data) => (
+                                    <motion.div
+                                        key={data.id}
+                                        whileHover="hover"
+                                        initial="rest"
+                                        animate="rest"
+                                        className="  ">
+                                        <div className="relative">
+                                            <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-9 mb-4 ">
+                                                <Image
+                                                    src={
+                                                        data?.image_url
+                                                            ? data?.image_url
+                                                            : '/static/toy.jpg'
+                                                    }
+                                                    width={500}
+                                                    height={500}
+                                                    alt=""
+                                                    className="h-[230px] w-[250px] object-cover rounded-lg cursor-pointer"
+                                                />
 
-                                                             );
-                                                         }}>
-                                                         {loadingFavorites[data?.id] ? (
-                                                             // <ClipLoader size={20} color="#000000" />
-                                                             <p></p>
-                                                         ) : data?.is_favorite ? (
-                                                             <MdFavorite
-                                                                 size={24}
-                                                                 color="red"
-                                                             />
-                                                         ) : (
-                                                             <MdFavoriteBorder
-                                                                 size={24}
-                                                                 color="white"
-                                                             />
-                                                         )}
-                                                     </div>
-                                                 </motion.div>
-                                             </div>
-            
-                                             <Link href={`/product/${data?.id}`}>
-                                                 <div className="text-center">
-                                                     <p className="uppercase text-[18px]" >
-                                                         {data?.name}
-                                                     </p>
-                                                 </div>
-                                             </Link>
-                                         </div>
-                                         <Link href={`/product/${data?.id}`}>
-                                             <hr className="my-2" />
-                                             <div className="text-center">
-                                                 <p className="text-blue-600 text-[16px]">
-                                                     {data?.description}
-                                                 </p>
-                                             </div>
-                                             <div className="text-black font-semibold text-[20px] flex justify-center items-center">
-                                                 <img src="/static/Naira.png" alt="" />
-                                                 <p className="pl-1">
-                                                     {Math.floor(data?.price)}
-                                                 </p>
-                                             </div>
-                                         </Link>
-                                     </motion.div>
+                                                <motion.div
+                                                    className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
+                                                    variants={{
+                                                        rest: {
+                                                            opacity: 0,
+                                                            y: '10%',
+                                                        },
+                                                        hover: {
+                                                            y: -37,
+                                                            opacity: 1,
+                                                        },
+                                                    }}
+                                                    transition={{
+                                                        duration: 0.3,
+                                                    }}>
+                                                    <div
+                                                        onClick={() =>
+                                                            addToCart(data?.id)
+                                                        }
+                                                        className="cursor-pointer mr-2 h-14 w-14 flex justify-center items-center rounded-full bg-gray-600 ">
+                                                        <img
+                                                            src="/static/cartic.png"
+                                                            alt=""
+                                                        />
+                                                        {/* <CiShoppingCart size={24} /> */}
+                                                    </div>
+                                                    <div
+                                                        className="cursor-pointer bg-gray-600 h-14 w-14 flex justify-center items-center  rounded-full"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleFavoriteClick(
+                                                                data?.id,
+                                                                data?.is_favorite,
+                                                                data?.category
+                                                                    ?.id
+                                                            );
+                                                        }}>
+                                                        {loadingFavorites[
+                                                            data?.id
+                                                        ] ? (
+                                                            // <ClipLoader size={20} color="#000000" />
+                                                            <p></p>
+                                                        ) : data?.is_favorite ? (
+                                                            <MdFavorite
+                                                                size={24}
+                                                                color="red"
+                                                            />
+                                                        ) : (
+                                                            <MdFavoriteBorder
+                                                                size={24}
+                                                                color="white"
+                                                            />
+                                                        )}
+                                                    </div>
+                                                </motion.div>
+                                            </div>
+
+                                            <Link href={`/product/${data?.id}`}>
+                                                <div className="text-center">
+                                                    <p className="uppercase text-[18px]">
+                                                        {data?.name}
+                                                    </p>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                        <Link href={`/product/${data?.id}`}>
+                                            <hr className="my-2" />
+                                            <div className="text-center">
+                                                <p className="text-blue-600 text-[16px]">
+                                                    {data?.description}
+                                                </p>
+                                            </div>
+                                            <div className="text-black font-semibold text-[20px] flex justify-center items-center">
+                                                <img
+                                                    src="/static/Naira.png"
+                                                    alt=""
+                                                />
+                                                <p className="pl-1">
+                                                    {Math.floor(data?.price)}
+                                                </p>
+                                            </div>
+                                        </Link>
+                                    </motion.div>
                                 ))}
                             </div>
                         </div>
