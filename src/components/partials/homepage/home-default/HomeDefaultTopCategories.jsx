@@ -189,9 +189,9 @@ const HomeDefaultTopCategories = () => {
                                             />
                                         </div>
                                         <div>
-                                            <p className="ml-1">
+                                            <h6 className="ml-1">
                                                 {Math.floor(data?.price)}
-                                            </p>
+                                            </h6>
                                         </div>
                                     </div>
                                 </Link>
