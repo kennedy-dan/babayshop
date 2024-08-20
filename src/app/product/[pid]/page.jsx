@@ -267,19 +267,17 @@ const ProductDefaultPage = () => {
                                             SKU: {getSingleProductData?.sku}
                                         </p>
 
-                                        <div className="text-black font-semibold text-[24px] my-3 space-x-1  flex items-center">
-                                            <div>
-                                                <img
-                                                    src="/static/Nairaprod.png"
-                                                    alt=""
-                                                />
+                                        <div className="text-black font-[500]  flex justify-center items-center">
+                                                <div>
+                                                    <img
+                                                        src="/static/Naira.png"
+                                                        alt=""
+                                                        className="mr-2"
+                                                    />
+                                                </div>
+
+                                                <>{Math.floor(data?.price)}</>
                                             </div>
-                                            <p className="font-[00] text-black text-[19px]">
-                                                {Math.floor(
-                                                    getSingleProductData?.price
-                                                )}
-                                            </p>
-                                        </div>
 
                                         <p className="pt-2  text-black ">
                                             Quantity
@@ -476,17 +474,17 @@ const ProductDefaultPage = () => {
                                                         {data?.description}
                                                     </p>
                                                 </div>
-                                                <div className="text-black font-semibold text-[20px] flex justify-center items-center">
+                                                <div className="text-black font-[500]  flex justify-center items-center">
+                                                <div>
                                                     <img
                                                         src="/static/Naira.png"
                                                         alt=""
+                                                        className="mr-2"
                                                     />
-                                                    <p className="pl-1">
-                                                        {Math.floor(
-                                                            data?.price
-                                                        )}
-                                                    </p>
                                                 </div>
+
+                                                <>{Math.floor(data?.price)}</>
+                                            </div>
                                             </Link>
                                         </motion.div>
                                     ))}

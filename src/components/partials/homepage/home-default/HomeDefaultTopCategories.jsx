@@ -186,15 +186,11 @@ const HomeDefaultTopCategories = () => {
                                             <img
                                                 src="/static/Naira.png"
                                                 alt=""
-                                                className='mr-2'
+                                                className="mr-2"
                                             />
                                         </div>
-                                        
 
-                                            < >
-                                                {Math.floor(data?.price)}
-                                            </>
-                                        
+                                        <>{Math.floor(data?.price)}</>
                                     </div>
                                 </Link>
                             </motion.div>
@@ -313,20 +309,16 @@ const HomeDefaultTopCategories = () => {
                                                 </p>
                                             </div>
                                             <div className="text-black font-[500]  flex justify-center items-center">
-                                        <div>
-                                            <img
-                                                src="/static/Naira.png"
-                                                alt=""
-                                                className='mr-2'
-                                            />
-                                        </div>
-                                        
+                                                <div>
+                                                    <img
+                                                        src="/static/Naira.png"
+                                                        alt=""
+                                                        className="mr-2"
+                                                    />
+                                                </div>
 
-                                            < >
-                                                {Math.floor(data?.price)}
-                                            </>
-                                        
-                                    </div>
+                                                <>{Math.floor(data?.price)}</>
+                                            </div>
                                         </Link>
                                     </motion.div>
                                 ))}
@@ -453,20 +445,16 @@ const HomeDefaultTopCategories = () => {
                                                 </p>
                                             </div>
                                             <div className="text-black font-[500]  flex justify-center items-center">
-                                        <div>
-                                            <img
-                                                src="/static/Naira.png"
-                                                alt=""
-                                                className='mr-2'
-                                            />
-                                        </div>
-                                        
+                                                <div>
+                                                    <img
+                                                        src="/static/Naira.png"
+                                                        alt=""
+                                                        className="mr-2"
+                                                    />
+                                                </div>
 
-                                            < >
-                                                {Math.floor(data?.price)}
-                                            </>
-                                        
-                                    </div>
+                                                <>{Math.floor(data?.price)}</>
+                                            </div>
                                         </Link>
                                     </motion.div>
                                 ))}
@@ -588,20 +576,16 @@ const HomeDefaultTopCategories = () => {
                                                 </p>
                                             </div>
                                             <div className="text-black font-[500]  flex justify-center items-center">
-                                        <div>
-                                            <img
-                                                src="/static/Naira.png"
-                                                alt=""
-                                                className='mr-2'
-                                            />
-                                        </div>
-                                        
+                                                <div>
+                                                    <img
+                                                        src="/static/Naira.png"
+                                                        alt=""
+                                                        className="mr-2"
+                                                    />
+                                                </div>
 
-                                            < >
-                                                {Math.floor(data?.price)}
-                                            </>
-                                        
-                                    </div>
+                                                <>{Math.floor(data?.price)}</>
+                                            </div>
                                         </Link>
                                     </motion.div>
                                 ))}
