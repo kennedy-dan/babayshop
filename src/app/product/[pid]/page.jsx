@@ -276,7 +276,7 @@ const ProductDefaultPage = () => {
                                                     />
                                                 </div>
 
-                                                <>{Math.floor(data?.price)}</>
+                                                <>{Math.floor(getSingleProductData?.price)}</>
                                             </div>
 
                                         <p className="pt-2  text-black ">
