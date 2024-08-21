@@ -55,7 +55,7 @@ export default function CartScreen() {
                     <div className="pb-4">
                         <p className="pb-3">Personal Information </p>
                         <p className="text-black">
-                            {user?.first_name + ' ' + user.last_name}
+                            {user?.first_name + ' ' + user?.last_name}
                         </p>
                         <p className="text-black">{user?.email}</p>
                     </div>
