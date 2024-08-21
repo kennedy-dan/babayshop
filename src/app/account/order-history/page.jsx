@@ -53,7 +53,7 @@ const Orderhistory = () => {
                                         {items?.payment?.date}
                                     </p> ? (
                                         format(
-                                            parseISO(items.payment.date),
+                                            parseISO(items?.payment?.date),
                                             'MMM d, yyyy'
                                         )
                                     ) : (
