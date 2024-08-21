@@ -89,8 +89,7 @@ export default function CartScreen() {
             </div>
 
             <div className="rounded-2xl mt-5 bg-white ">
-                <div
-                    className="grid grid-cols-3 bg-[#003057] py-4 px-4 rounded-t-2xl text-white ">
+                <div className="grid grid-cols-3 bg-[#003057] py-4 px-4 rounded-t-2xl text-white ">
                     <div>Voucher</div>
                     <div>Status</div>
                     <div></div>
@@ -99,7 +98,7 @@ export default function CartScreen() {
                     <div className="grid grid-cols-3 px-4 mb-8  ">
                         <div className="font-semibold">{det.voucher}</div>
                         <div>{det.status}</div>
-                        <div className='justify-end flex w-full' >
+                        <div className="justify-end flex w-full">
                             <img alt="" src="/static/copy.png" />
                         </div>
                     </div>
@@ -127,16 +126,14 @@ export default function CartScreen() {
                                     Date
                                 </p>
                                 {console.log(items?.payment?.date)}
-                                {<p className=" text-[16px] ">
-                                    {items?.payment?.date}
-                                </p> ? (
-                                    format(
-                                        parseISO(items?.payment?.date),
-                                        'MMM d, yyyy'
-                                    )
-                                ) : (
-                                    'N/A'
-                                )}
+                                <p>
+                                {items?.payment?.date
+                                    ? format(
+                                          parseISO(items?.payment?.date),
+                                          'MMM d, yyyy'
+                                      )
+                                    : 'N/A'}
+                                    </p>
                             </div>
                             <div className="md:ml-16">
                                 <p className="text-black font-[500] text-[17px] ">

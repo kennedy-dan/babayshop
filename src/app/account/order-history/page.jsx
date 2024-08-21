@@ -49,16 +49,16 @@ const Orderhistory = () => {
                                         Date
                                     </p>
                                     {console.log(items?.payment?.date)}
-                                    {<p className=" text-[16px] ">
-                                        {items?.payment?.date}
-                                    </p> ? (
-                                        format(
-                                            parseISO(items?.payment?.date),
-                                            'MMM d, yyyy'
-                                        )
-                                    ) : (
-                                        'N/A'
-                                    )}
+                                    <p>
+                                        {items?.payment?.date
+                                            ? format(
+                                                  parseISO(
+                                                      items?.payment?.date
+                                                  ),
+                                                  'MMM d, yyyy'
+                                              )
+                                            : 'N/A'}
+                                    </p>
                                 </div>
                                 <div className="md:ml-16">
                                     <p className="text-black font-[500] text-[17px] ">
