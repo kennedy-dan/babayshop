@@ -8,7 +8,6 @@ import Newsletters from '~/components/partials/commons/Newletters';
 import PageContainer from '~/components/layouts/PageContainer';
 import MarketPlacePromotionHeader from '~/components/partials/homepage/marketplace/MarketPlacePromotionHeader';
 import HeaderMarketPlace from '~/components/shared/headers/HeaderMarketPlace';
-import HeaderMobile from '~/components/shared/headers/HeaderMobile';
 import MarketCollection from '~/components/partials/homepage/marketplace/modules/MarketCollection';
 import {
     marketCollectionData,
@@ -20,7 +19,6 @@ const HomeMarketPlacePage = () => {
         <>
             <MarketPlacePromotionHeader />
             <HeaderMarketPlace />
-            <HeaderMobile />
         </>
     );
 

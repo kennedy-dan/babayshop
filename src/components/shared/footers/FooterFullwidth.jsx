@@ -7,7 +7,7 @@ const FooterFullwidth = () => (
     <footer className="ps-footer">
         <div className="ps-container">
             <FooterWidgets />
-            <FooterLinks />
+            {/* <FooterLinks /> */}
             <FooterCopyright />
         </div>
     </footer>

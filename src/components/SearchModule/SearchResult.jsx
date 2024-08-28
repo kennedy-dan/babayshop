@@ -128,87 +128,99 @@ const SearchResult = ({name}) => {
 
       
           <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 ">
-                        {currentItems?.map((items, index) => (
-                            <motion.div
-                                key={index}
-                                whileHover="hover"
-                                initial="rest"
-                                animate="rest"
-                                className="mt-6 font-urbanist hover:border-2 hover:p-5">
-                                <div className="relative">
-                                    <Link href={`/product/${items?.id}`}>
-                                        <div
-                                            className="flex"
-                                            // onClick={() => handleTrackOpen(items?.id)}
-                                        >
-                                            <img
-                                                src={
-                                                    items?.image_url
-                                                        ? items?.image_url
-                                                        : '/static/toy.jpg'
-                                                }
-                                                alt=""
-                                                className=" h-[300px] object-contain rounded-lg cursor-pointer"
-                                                width={500}
-                                                height={500}
-                                            />
-                                        </div>
-                                    </Link>
-                                    <motion.div
-                                    className="flex absolute bottom-0 left-0 justify-center right-0 bg-white bg-opacity-80 p-2"
-                                    variants={{
-                                        rest: { opacity: 0, y: '100%' },
-                                        hover: { y: 0, opacity: 1 },
-                                    }}
-                                    transition={{ duration: 0.3 }}>
-                                    <div
-                                        onClick={() => addToCart(items?.id)}
-                                        className="cursor-pointer mr-2">
-                                        <CiShoppingCart size={24} />
-                                    </div>
-                                    <div
-                                        className="cursor-pointer"
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleFavoriteClick(
-                                                items?.id,
-                                                items?.is_favorite
-                                            );
-                                        }}>
-                                        {loadingFavorites[items?.id] ? (
-                                            // <ClipLoader size={20} color="#000000" />
-                                            <p></p>
-                                        ) : items?.is_favorite ? (
-                                            <MdFavorite size={24} color="red" />
-                                        ) : (
-                                            <MdFavoriteBorder size={24} color="" />
-                                        )}
-                                    </div>
-                                </motion.div>
-                                </div>
+                        {currentItems?.map((data, index) => (
+                             <motion.div
+                             key={index}
+                             whileHover="hover"
+                             initial="rest"
+                             animate="rest"
+                             className=" mb-6 ">
+                             <div className="relative">
+                                 <div
+                                     className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-8 "
+                                     >
+                                     <Image
+                                         src={
+                                             data?.image_url
+                                                 ? data?.image_url
+                                                 : '/static/toy.jpg'
+                                         }
+                                         width={500}
+                                         height={500}
+                                         alt=""
+                                         className="h-[230px] w-[250px] object-cover rounded-lg cursor-pointer"
+                                     />
 
-                            
+                                     <motion.div
+                                         className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
+                                         variants={{
+                                             rest: { opacity: 0, y: '10%' },
+                                             hover: { y: -37, opacity: 1 },
+                                         }}
+                                         transition={{ duration: 0.3 }}>
+                                         <div
+                                             onClick={() =>
+                                                 addToCart(data?.id)
+                                             }
+                                             className="cursor-pointer mr-2 h-14 w-14 flex justify-center items-center rounded-full bg-gray-600 ">
+                                                 <img src='/static/cartic.png' alt='' />
+                                             {/* <CiShoppingCart size={24} /> */}
+                                         </div>
+                                         <div
+                                             className="cursor-pointer bg-gray-600 h-14 w-14 flex justify-center items-center  rounded-full"
+                                             onClick={(e) => {
+                                                 e.stopPropagation();
+                                                 handleFavoriteClick(
+                                                     data?.id,
+                                                     data?.is_favorite
+                                                 );
+                                             }}>
+                                             {loadingFavorites[data?.id] ? (
+                                                 // <ClipLoader size={20} color="#000000" />
+                                                 <p></p>
+                                             ) : data?.is_favorite ? (
+                                                 <MdFavorite
+                                                     size={24}
+                                                     color="red"
+                                                 />
+                                             ) : (
+                                                 <MdFavoriteBorder
+                                                     size={24}
+                                                     color="white"
+                                                 />
+                                             )}
+                                         </div>
+                                     </motion.div>
+                                 </div>
 
-                                <p className="text-black font-semibold uppercase text-[13px]">
-                                    {items.name}
-                                </p>
-                                <hr />
-                                <div className="">
-                                    <p className="text-blue-600 font-semibold mt-2 text-[15px]">
-                                        {items.description}
-                                    </p>
-                                    <div className="text-black font-semibold text-[20px] flex items-center">
-                                        <img
-                                            src="/static/Naira.png"
-                                            alt=""
-                                            className="w-4 h-4"
-                                        />
-                                        <p className="pl-1">
-                                            {Math.floor(items?.price)}
-                                        </p>
-                                    </div>
-                                </div>
-                            </motion.div>
+                                 <Link href={`/product/${data?.id}`}>
+                                     <div className="text-center">
+                                         <p className="uppercase text-[18px]" >
+                                             {data?.name}
+                                         </p>
+                                     </div>
+                                 </Link>
+                             </div>
+                             <Link href={`/product/${data?.id}`}>
+                                 <hr className="my-2" />
+                                 <div className="text-center">
+                                     <p className="text-blue-600 text-[16px]">
+                                         {data?.description}
+                                     </p>
+                                 </div>
+                                 <div className="text-black font-[500]  flex justify-center items-center">
+                                             <div>
+                                                 <img
+                                                     src="/static/Naira.png"
+                                                     alt=""
+                                                     className="mr-2"
+                                                 />
+                                             </div>
+
+                                             <>{Math.floor(data?.price)}</>
+                                         </div>
+                             </Link>
+                         </motion.div>
                         ))}
                     </div>
       </div>

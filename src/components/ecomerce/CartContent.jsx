@@ -7,24 +7,26 @@ import useGetProducts from '~/hooks/useGetProducts';
 import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import Image from 'next/image';
+import { unwrapResult } from "@reduxjs/toolkit";
 
 import {
     addtocart,
     getcartData,
     RemoveFromCart,
+    valCoupons,
 } from '~/redux/features/productSlice';
 import { ClipLoader } from 'react-spinners';
 export default function CartContent() {
     const dispatch = useDispatch();
-    // const cartItems = useSelector(({ ecomerce }) => ecomerce.cartItems);
-    const { getStrapiProducts, products } = useGetProducts();
-    const { getcart, addcart, removecart } = useSelector(
+    const { getcart, addcart, removecart , valcoupons} = useSelector(
         (state) => state.product
     );
+
     const [cartItems, setCartItems] = useState([]);
     const [quant, setquant] = useState(null);
     const [updatingItemId, setUpdatingItemId] = useState(null);
     const [removeItemId, setremoveItemId] = useState(null);
+    const [coupon, setCoupon] = useState('')
     const [prod, setprod] = useState(null);
     const [total, setTotal] = useState(0);
     useEffect(() => {
@@ -110,168 +112,146 @@ export default function CartContent() {
         }, 0);
     };
 
+    const validate = async () => {
+      const responseData = await  dispatch(valCoupons(coupon))
+      
+    const response = unwrapResult(responseData);
+
+    console.log(response)
+    if (response?.data?.code === 200) {
+        console.log('yeahh')
+        localStorage.setItem('coupon', coupon)
+    }
+
+    }
+
     useEffect(() => {
         setTotal(calculateTotal());
     }, [cartItems]);
-    console.log(total);
 
-    const cartProducts = useMemo(() => {
-        if (cartItems.length === 0) return [];
-        return products.map((product) => {
-            return {
-                id: product.id,
-                title: product.attributes.title || 'Untitled Product',
-                slug: product.attributes.slug || 'untitled-product',
-                thumbnailImage: product.attributes.thumbnail || null,
-                price: product.attributes.price || 0,
-                sale_price: product.attributes.sale_price || 0,
-                quantity:
-                    cartItems.find((item) => item.id === product.id)
-                        ?.quantity ?? 0,
-            };
-        });
-    }, [products, cartItems]);
-
-    const content = useMemo(() => {
-        if (cartItems.length === 0) {
-            return (
-                <div className="ps-section__content">
-                    <div className="alert alert-info">
-                        <p className="mb-0">Your cart is currently empty.</p>
-                    </div>
-
-                    <div className="ps-section__cart-actions">
-                        <Link href={'/shop'} className="ps-btn">
-                            Back to Shop
-                        </Link>
-                    </div>
-                </div>
-            );
-        }
-        return (
-            <div className=" justify-between py-20 px-10 lg:px-[20px] lg:py-[20px] xl:px-[20px] xl:py-[100px] md:space-x-10">
-                <div className="w-full flex justify-between space-x-12 ">
-                    <div className="w-[60%]">
-                        <div className="grid gap-5 grid-cols-4 font-semibold  px-3 bg-[#003057] mb-5 py-4 ">
-                            <div className="col-span-2 ">
-                                <p className="text-white font-bold">PRODUCT</p>
-                            </div>
-                            <div>
-                                <p className="text-white font-bold">PRICE</p>
-                            </div>{' '}
-                            <div className="flex justify-end">
-                                <p className="text-white font-bold">QUANTITY</p>
-                            </div>
+    return (
+        <div className=" justify-between py-20 px-6 lg:px-[20px] lg:py-[20px] xl:px-[20px] xl:py-[100px] md:space-x-10">
+            <div className="w-full md:flex md:justify-between md:space-x-12 ">
+                <div className="md:w-[60%]">
+                    <div className="grid gap-5 grid-cols-4 font-semibold  px-3 bg-[#003057] mb-5 py-4 ">
+                        <div className="col-span-2 ">
+                            <p className="text-white font-bold">PRODUCT</p>
                         </div>
-                        <div className="">
-                            {cartItems?.map((items, index) => (
-                                <div
-                                    key={index}
-                                    className="w-full grid gap-5 mb-5 grid-cols-4">
-                                    <div className="flex col-span-2 space-  ">
-                                        <div className="flex space-x-3  ">
-                                            <div className="bg-white p-9 rounded-2xl">
-                                                <Image
-                                                    src={
-                                                        items?.product
-                                                            ?.image_url
-                                                            ? items?.product
-                                                                  ?.image_url
-                                                            : '/static/toy.jpg'
-                                                    }
-                                                    alt=""
-                                                    height={500}
-                                                    width={500}
-                                                    className="w-[70px] h-[70px]  object-cover"
+                        <div>
+                            <p className="text-white font-bold">PRICE</p>
+                        </div>{' '}
+                        <div className="flex justify-end">
+                            <p className="text-white font-bold">QUANTITY</p>
+                        </div>
+                    </div>
+                    <div className="">
+                        {cartItems?.map((items, index) => (
+                            <div
+                                key={index}
+                                className="w-full grid gap-5 mb-5 grid-cols-4">
+                                <div className="flex col-span-2 space-  ">
+                                    <div className="flex space-x-3  ">
+                                        <div className="md:bg-white md:p-9 rounded-2xl">
+                                            <Image
+                                                src={
+                                                    items?.product?.image_url
+                                                        ? items?.product
+                                                              ?.image_url
+                                                        : '/static/toy.jpg'
+                                                }
+                                                alt=""
+                                                height={500}
+                                                width={500}
+                                                className="md:w-[70px] md:h-[70px] h-[20px] w-[20px]  object-cover"
 
-                                                    //   width={500}
-                                                    //   height={500}
-                                                />
-                                            </div>
-                                            <div>
-                                                <p className=" text-black text-[16px] w-[] ">
-                                                    {items?.product?.name}
-                                                </p>
-                                                <div
-                                                    onClick={() =>
-                                                        removeCart(items)
-                                                    }
-                                                    className="flex cursor-pointer space-x-4 mt-16 items-center">
-                                                    <div>
-                                                        <img
-                                                            src="/static/remove.png"
-                                                            alt=""
-                                                        />
-                                                    </div>
-                                                    <p>Remove</p>
+                                                //   width={500}
+                                                //   height={500}
+                                            />
+                                        </div>
+                                        <div>
+                                            <p className=" text-black md:text-[16px] text-[12px] w-[] ">
+                                                {items?.product?.name}
+                                            </p>
+                                            <div
+                                                onClick={() =>
+                                                    removeCart(items)
+                                                }
+                                                className="flex cursor-pointer space-x-4 mt-16 items-center">
+                                                <div>
+                                                    <img
+                                                        src="/static/remove.png"
+                                                        alt=""
+                                                    />
                                                 </div>
+                                                <p className=" text-black md:text-[16px] text-[12px] w-[] ">Remove</p>
                                             </div>
                                         </div>
-                                        {/* <div className="w-ful">
+                                    </div>
+                                    {/* <div className="w-ful">
                                         <p className=" text-black text-[16px] w-[] ">
                                             {items?.product?.name}
                                         </p>
                                    
                                     </div> */}
-                                    </div>
-                                    <div>
-                                        {getcart?.isLoading ||
-                                        (addcart?.isLoading &&
-                                            updatingItemId === items.id) ? (
-                                            <ClipLoader
-                                                color="black"
-                                                size={12}
-                                            />
-                                        ) : (
-                                            <div className="text-black font-semibold text-[24px]  space-x-1 font-urbanist flex items-center ">
-                                                <div>
-                                                    <img
-                                                        src="/static/Naira.png"
-                                                        alt=""
-                                                    />
-                                                </div>
-                                                <p className="text-[16px]  text-black">
-                                                    {Math.floor(items?.price)}
-                                                </p>
-                                            </div>
-                                        )}
-                                    </div>
-                                    <div className="flex justify-end items-start">
-                                        <div className="w-full flex justify-end">
-                                            <button className="flex w-[50%] border-2 rounded-md  px-2 py-2 justify-between border-gray-400 items-center">
-                                                <button
-                                                    onClick={() =>
-                                                        decreaseQuant(items)
-                                                    }>
-                                                    <img
-                                                        src={'/static/dec.png'}
-                                                        alt=""
-                                                    />
-                                                </button>
-                                                <p className="text-black font-[400] px-2 text-[13px]">
-                                                    {items?.quantity}
-                                                </p>
-                                                <button
-                                                    onClick={() =>
-                                                        increaseQuant(items)
-                                                    }>
-                                                    <img
-                                                        src={'/static/inc.png'}
-                                                        alt=""
-                                                    />
-                                                </button>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    {/* <br /> */}
                                 </div>
-                            ))}
-                        </div>
+                                <div>
+                                    {getcart?.isLoading ||
+                                    (addcart?.isLoading &&
+                                        updatingItemId === items.id) ? (
+                                        <ClipLoader color="black" size={12} />
+                                    ) : (
+                                        <div className="text-black font-semibold text-[24px]  space-x-1 font-urbanist flex items-center ">
+                                            <div>
+                                                <img
+                                                    src="/static/Naira.png"
+                                                    alt=""
+                                                />
+                                            </div>
+                                            <p className="text-[16px]  text-black">
+                                                {Math.floor(items?.price)}
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="flex justify-end items-start">
+                                    <div className="w-full flex justify-end">
+                                        <button className="flex md:w-[50%] w-[100%] border-2 rounded-md  px-2 py-2 justify-between border-gray-400 items-center">
+                                            <button
+                                                onClick={() =>
+                                                    decreaseQuant(items)
+                                                }>
+                                                <img
+                                                    src={'/static/dec.png'}
+                                                    alt=""
+                                                />
+                                            </button>
+                                            <p className="text-black font-[400] px-2 text-[13px]">
+                                                {items?.quantity}
+                                            </p>
+                                            <button
+                                                onClick={() =>
+                                                    increaseQuant(items)
+                                                }>
+                                                <img
+                                                    src={'/static/inc.png'}
+                                                    alt=""
+                                                />
+                                            </button>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {/* <br /> */}
+                            </div>
+                        ))}
                     </div>
-                    <div className="flex justify-end ">
+                </div>
+
+                <div className="md:flex md:justify-end   ">
                     <div>
-                    <p className='text-[20px] text-black font-[500] '>Cart Summary</p>
+                        <p className="text-[20px] text-black font-[500] ">
+                            Cart Summary
+                        </p>
 
                         <div className=" md:w-[370px] bg-white  mt-8  p-[20px]   font-montserrat ">
                             {/* <p className="font-bold text-[32px]">Summary</p> */}
@@ -287,8 +267,7 @@ export default function CartContent() {
 
                             <hr className="" />
 
-                            
-                            <div className='my-4' >
+                            <div className="my-4">
                                 {cartItems?.map((items) => (
                                     <div className="flex justify-between">
                                         <p className=" text-black font-[300] text-[14px] w-[] ">
@@ -304,43 +283,54 @@ export default function CartContent() {
                                     </div>
                                 ))}
                             </div>
-                        <hr />
+                            <hr />
 
                             <div className="mt-10">
-
-                            <div className="flex justify-between font-bold  mt-7">
-                                <p className="text-[20px] text-black font-[500]">
-                                    Total
-                                </p>
-                                <p className="text-[20px] text-black font-[500] ">
-                                    N {total && total?.toFixed(2)}
-                                </p>
+                                <div className="flex justify-between font-bold  mt-7">
+                                    <p className="text-[20px] text-black font-[500]">
+                                        Total
+                                    </p>
+                                    {getcart?.isLoading && (
+                                        <ClipLoader size={12} color="black" />
+                                    )}
+                                    {!getcart?.isLoading && (
+                                        <p className="text-[20px] text-black font-[500] ">
+                                            N {total && total?.toFixed(2)}
+                                        </p>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                           
+                        <Link className="" href="/account/checkout">
+                            <button className="w-full text-white bg-[#F5128F] mt-5 py-4 rounded-lg font-semibold text-[16px] ">
+                                Check Out
+                            </button>
+                        </Link>
+                        <div className="mt-10 ">
+                            <p className='font-[500] mb-2' >Coupon / Voucher discount</p>
+                            <input
+                                className="w-full bg-[#FAFAFA] border border-1 px-3 py-2  "
+                                placeholder="Enter Coupon Here"
+                                value={coupon}
+                                onChange={(e) => setCoupon(e.target.value)}
+                            />
+
+                            <div className="flex justify-end  mt-3 ">
+                                {valcoupons?.success &&  <button onClick={validate} className=" bg-white py-3 px-6 rounded-3xl font-[500] text-[#F5128F] ">
+                                    Apply
+                                </button> }
+                                {!valcoupons?.success &&  <button onClick={validate} className=" bg-white py-3 px-6 rounded-3xl font-[500] text-[#F5128F] ">
+                                    Validate
+                                </button> }
+                               
+                            </div>
                         </div>
-                        <Link className='' href="/account/checkout">
-                                <button className="w-full text-white bg-[#F5128F] mt-5 py-4 rounded-lg font-semibold text-[16px] ">
-                                    Check Out
-                                </button>
-                            </Link>
                     </div>
                 </div>
-                </div>
-                <div className="mt-10 w-[30%]">
-                    <p>Coupon discount</p>
-                    <input className='w-full bg-[#FAFAFA] border border-1 px-3 py-2  'placeholder='Enter Coupon Here' />
-
-                    <div className='flex justify-end  mt-3 '  >
-                        <button className=' bg-white py-3 px-6 rounded-3xl font-[500] text-[#F5128F] ' >Apply</button>
-                    </div>
-                            
-                        </div>
-
-              
             </div>
-        );
-    }, [products, cartItems]);
+        </div>
+    );
+    // }, [products, cartItems]);
 
     return <section>{content}</section>;
 }

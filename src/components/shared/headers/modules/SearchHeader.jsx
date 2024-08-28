@@ -39,7 +39,7 @@ const SearchHeader = () => {
 
     useEffect(() => {
         if (searchQuery) {
-            getStrapiProducts(searchQuery);
+            // getStrapiProducts(searchQuery);
         }
     }, [searchQuery]);
 

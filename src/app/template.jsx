@@ -9,7 +9,7 @@ import getHeadData, {
 } from '~/utilities/seo/RoutePathsSEO';
 import './globals.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { getcartData, getFavorites } from '~/redux/features/productSlice';
+import { getcartData, getFavorites, getPages } from '~/redux/features/productSlice';
 
 
 export const metadata = generatePageMetadata(getHeadData('/'));
@@ -26,12 +26,18 @@ export default function Template({ children }) {
     
      
     }, [])
+
+    useEffect(() => {
+      dispatch(getPages())
+  
+    }, [])
+    
     
     return (
         <>
             {children}
             <PageLoader />
-            <MobileNavigation />
+            {/* <MobileNavigation /> */}
             <BackTop>
                 <button className="ps-btn--backtop">
                     <i className="icon-arrow-up" />

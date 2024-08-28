@@ -14,7 +14,7 @@ import Newletters from '~/components/partials/commons/Newletters';
 export default function DefaultHomeContent() {
     return (
         <main id="homepage-1">
-            <HomeDefaultBanner />
+            {/* <HomeDefaultBanner /> */}
             {/* <HomeAdsColumns /> */}
 
             {/* <SiteFeatures /> */}

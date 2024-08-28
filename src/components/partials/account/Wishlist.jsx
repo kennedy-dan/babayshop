@@ -92,7 +92,7 @@ export default function Wishlist() {
                         )}
                         {!getfav?.isLoading && (
                             <div className="">
-                                <div className="grid grid-cols-4 gap-6">
+                                <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 md:gap-6 gap-3">
                                     {fav?.map((data, index) => (
                                         <motion.div
                                             key={data?.product?.id}

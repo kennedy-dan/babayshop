@@ -50,6 +50,8 @@ export default function Page() {
     const { user } = useSelector((state) => state.auth);
     const [phone, setPhone] = useState('');
     const [txRef, setTxRef] = useState(null);
+    const [finalamount, setFinalamount] = useState(null);
+    const [coupon, setCoupon] = useState('');
     const [deliveryOption, setDeliveryOption] = useState('pickup');
 
     const storedata = getstore?.results?.data?.data;
@@ -71,7 +73,12 @@ export default function Page() {
         if (token) {
             dispatch(getcartData());
         }
+        const coup = localStorage.getItem('coupon')
+        setCoupon(coup)
+        
     }, []);
+
+    console.log(coupon)
 
    
 
@@ -98,6 +105,7 @@ export default function Page() {
             country: country,
             city: city,
             payment_method: 'Card',
+            coupon_code: coupon
         };
 
         try {
@@ -106,8 +114,10 @@ export default function Page() {
 
             if (addtocheckout.fulfilled.match(resultAction)) {
                 const tx_ref = resultAction?.payload?.data?.data?.reference;
+                const discountamount = resultAction?.payload?.data?.data?.final_amount;
 
                 setTxRef(tx_ref);
+                setFinalamount(discountamount)
                 console.log(resultAction);
             } else {
                 // console.error('Failed to checkout:', resultAction.payload);
@@ -115,11 +125,13 @@ export default function Page() {
         } catch (err) {}
     };
 
+    console.log(finalamount)
+
     let customDetails = {
         title: 'RBW',
         // description: "Puchase a shop print",
         tx_ref: txRef,
-        amount: parseFloat(total?.toFixed(2)),
+        amount: parseInt(finalamount),
         // remarks: checkoutDetails.canvasResult?.transaction?.remarks,
     };
 
@@ -142,12 +154,13 @@ export default function Page() {
                 <section className="py-20 px-10 lg:px-[20px] font-montserrat lg:py-[20px] xl:px-[100px] xl:py-[100px]">
                     <p className="font-bold text-[24px] pb-5">Checkout</p>
                     <div className="md:flex justify-between">
-                        <div className="w-1/2">
+                        <div className="md:w-1/2">
                             <p>Door delivery</p>
 
                             <hr className="my-4" />
 
                             <>
+                         
                                 <div>
                                     <p className="font-bold pb-1 mt-9 text-[14px] ">
                                         First name
@@ -347,7 +360,7 @@ export default function Page() {
                                     {checkout?.success && txRef && (
                                         <button
                                             // onClick={addtoCheckout}
-                                            className="bg-secondary text-[16px] w-full mt-10 py-4 text-white ">
+                                            className="bg-[#F5128F] text-[16px] w-full mt-10 py-4 text-white ">
                                             <PaystackButton
                                                 text="Make Payment"
                                                 {...payConfig}
@@ -360,7 +373,7 @@ export default function Page() {
                     </div>
                 </section>
             </div>
-            <Newletters layout="container" />
+            {/* <Newletters layout="container" /> */}
         </PageContainer>
     );
 }

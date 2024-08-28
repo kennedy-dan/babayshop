@@ -9,6 +9,7 @@ import {
     favAction,
     getSingleCats,
     getFavorites,
+    getcartData
 } from '~/redux/features/productSlice';
 import { FaShoppingCart } from 'react-icons/fa';
 import { toast } from 'react-toastify';
@@ -20,13 +21,21 @@ import Image from 'next/image';
 
 const HomeDefaultTopCategories = () => {
     const dispatch = useDispatch();
-    const { getcats, categoriesWithProducts, allproducts } = useSelector(
-        (state) => state.product
-    );
+    const { getcats, categoriesWithProducts, allproducts, getpages } =
+        useSelector((state) => state.product);
     const [loadingFavorites, setLoadingFavorites] = useState({});
     const { token } = useSelector((state) => state.auth);
 
     const allp = allproducts?.results?.data?.data?.data;
+    const pages = getpages?.results?.data?.data;
+    const homePage = pages?.find((page) => page?.page_title === 'home page');
+    const sectionpage = homePage?.page_sections?.find(
+        (page) => page?.section_title === 'home page'
+    );
+
+    console.log(pages);
+    console.log(homePage);
+    console.log(sectionpage);
     useEffect(() => {
         dispatch(getcategories());
         dispatch(getAllProducts());
@@ -65,16 +74,24 @@ const HomeDefaultTopCategories = () => {
             product_id: id,
             quantity: 1,
         };
-        dispatch(addtocart(data));
-        toast.success('done');
+        dispatch(addtocart(data)).then(() =>{
+            getcartData()
+        })
+        // toast.success('done');
     };
     const catsData = getcats?.results?.data;
 
     return (
         <div className="ps-top-categories">
             <div className="ps-container">
-                <h3>Top categories </h3>
-                <div className="grid grid-cols-6 gap-5">
+                {sectionpage?.section_files?.map((img) => (
+                    <div className='w-full' >
+                        <img src={img?.url} alt='' className='w-full' />
+                    </div>
+                ))}
+                <h3 className='mt-20' >Top categories </h3>
+                {/* <h3>{homePage?.page_title} </h3> */}
+                <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-5">
                     {catsData?.slice(0, 6)?.map((items, index) => (
                         <div key={index} className=" ">
                             <div className="">
@@ -83,7 +100,7 @@ const HomeDefaultTopCategories = () => {
                                     // className="ps-block__overlay"
                                 >
                                     <img
-                                        src="/static/cats.png"
+                                        src={items?.image_url ? items?.image_url : "/static/cats.png"}
                                         alt="martfury"
                                         className="h-[190px] rounded-2xl"
                                     />
@@ -98,7 +115,7 @@ const HomeDefaultTopCategories = () => {
                     <div>
                         <h3>New Arrival</h3>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="md:flex grid grid-cols-2 md:justify-between">
                         {allp?.slice(0, 4)?.map((data, index) => (
                             <motion.div
                                 key={data.id}
@@ -214,7 +231,7 @@ const HomeDefaultTopCategories = () => {
                                     </Link>
                                 </div>
                             </div>
-                            <div className="flex space-x-12 mt-4">
+                            <div className="md:flex md:space-x-12 grid grid-cols-2 md:gap-0 gap-4 mt-4">
                                 {items?.products?.slice(0, 6)?.map((data) => (
                                     <motion.div
                                         key={data.id}
@@ -350,7 +367,7 @@ const HomeDefaultTopCategories = () => {
                                     </Link>
                                 </div>
                             </div>
-                            <div className="flex space-x-12 mt-4">
+                            <div className="md:flex md:space-x-12 grid grid-cols-2 md:gap-0 gap-4 mt-4">
                                 {items?.products?.slice(0, 6)?.map((data) => (
                                     <motion.div
                                         key={data.id}
@@ -481,7 +498,7 @@ const HomeDefaultTopCategories = () => {
                                     </Link>
                                 </div>
                             </div>
-                            <div className="flex space-x-6 mt-4">
+                            <div className="md:flex md:space-x-12 grid grid-cols-2 md:gap-0 gap-4 mt-4">
                                 {items?.products?.slice(0, 6)?.map((data) => (
                                     <motion.div
                                         key={data.id}

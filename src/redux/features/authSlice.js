@@ -40,6 +40,36 @@ export const registerContributor = createAsyncThunk(
   }
 );
 
+
+export const _resetUser = createAsyncThunk(
+  `customer/forgotpassword`,
+  async (payload) => {
+    console.log(payload);
+    const response = await axios.post("auth/forgot-password", payload);
+    return response;
+  }
+);
+
+export const _verifyotp = createAsyncThunk(
+  `customer/verifyotp`,
+  async (payload) => {
+    console.log(payload);
+    const response = await axios.post("auth/verify-otp", payload);
+    return response;
+  }
+);
+
+export const _changePword = createAsyncThunk(
+  `customer/changePword`,
+  async (payload) => {
+    console.log(payload);
+    const response = await axios.post("auth/reset-password", payload);
+    return response;
+  }
+);
+
+
+
 // export const contributorLogin = createAsyncThunk(
 // 	`contributor/register`,
 // 	async ({ createData, cateID }) => {
@@ -128,8 +158,47 @@ export const authSlice = createSlice({
       .addCase(getUsers.fulfilled, (state, { payload }) => {
         state.users.result = false;
 
-        state.users.result = payload.data.data;
+        state.users.result = payload.data;
         // toast.success(payload.data.message);
+      });
+
+      builder
+      .addCase(_resetUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(_resetUser.rejected, (state) => {
+        state.loading = false;
+      })
+      .addCase(_resetUser.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user = payload?.data?.data;
+        toast.success(payload?.data?.message);
+      });
+
+      builder
+      .addCase(_verifyotp.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(_verifyotp.rejected, (state) => {
+        state.loading = false;
+      })
+      .addCase(_verifyotp.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user = payload?.data?.data;
+        toast.success(payload?.data?.message);
+      });
+
+      builder
+      .addCase(_changePword.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(_changePword.rejected, (state) => {
+        state.loading = false;
+      })
+      .addCase(_changePword.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user = payload?.data?.data;
+        toast.success(payload?.data?.message);
       });
   },
 });

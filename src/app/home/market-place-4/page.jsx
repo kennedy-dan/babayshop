@@ -9,7 +9,6 @@ import CategoriesBoxClothings from '~/components/partials/homepage/marketplace4/
 import CategoriesBoxGardenAndKitchen from '~/components/partials/homepage/marketplace4/modules/CategoriesBoxGardenAndKitchen';
 import ProductGroupDealHot from '~/components/partials/product/ProductGroupDealHot';
 import HeaderMarketPlace4 from '~/components/shared/headers/HeaderMarketPlace4';
-import HeaderMobile from '~/components/shared/headers/HeaderMobile';
 import FooterMarketPlace2 from '~/components/shared/footers/FooterMarketPlace2';
 import PageContainer from '~/components/layouts/PageContainer';
 
@@ -17,7 +16,6 @@ const HomeMarketPlace4Page = () => {
     const headers = (
         <>
             <HeaderMarketPlace4 />
-            <HeaderMobile />
         </>
     );
     const footer = <FooterMarketPlace2 />;

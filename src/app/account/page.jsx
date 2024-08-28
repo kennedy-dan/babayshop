@@ -6,21 +6,44 @@ import FooterDefault from '~/components/shared/footers/FooterDefault';
 import Newletters from '~/components/partials/commons/Newletters';
 import CartContent from '~/components/ecomerce/CartContent';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderHistory } from '~/redux/features/productSlice';
+import {
+    orderHistory,
+    redeemPoint,
+    getredeemPoint,
+} from '~/redux/features/productSlice';
 import Wishlist from '~/components/partials/account/Wishlist';
 import { format, parseISO } from 'date-fns';
+import { Modal } from 'antd';
+import { toast } from 'react-toastify';
+import { IoReturnDownBack } from 'react-icons/io5';
+import { getUsers } from '~/redux/features/authSlice';
 
 export default function CartScreen() {
     const dispatch = useDispatch();
-    const { getOrder } = useSelector((state) => state.product);
-    const { user } = useSelector((state) => state.auth);
+    const { getOrder, getredeem } = useSelector((state) => state.product);
+    const { user, users } = useSelector((state) => state.auth);
+
+    const [openModal, setOpenModal] = useState(false);
+    const [value, setValue] = useState(null);
 
     const [index, setIndex] = useState(0);
     const data = getOrder?.results?.data?.data;
 
     useEffect(() => {
         dispatch(orderHistory());
+        dispatch(getUsers());
+        dispatch(getredeemPoint());
     }, []);
+
+    const redeemed = getredeem?.results?.data?.data;
+
+    const handleModalOpen = () => {
+        setOpenModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setOpenModal(false);
+    };
     const breadCrumb = [
         {
             text: 'Home',
@@ -31,6 +54,19 @@ export default function CartScreen() {
         },
     ];
 
+    const submitpoint = () => {
+        if (users?.result?.data?.loyalty_points < 50) {
+            toast.error('Loyalty point must be up to 50');
+            return;
+        }
+        const data = {
+            points: value,
+        };
+
+        dispatch(redeemPoint(data)).then(({}) => {
+            dispatch(getredeemPoint());
+        });
+    };
     const nav = [
         { name: 'My Profile', img: '/static/proficon.png' },
         { name: 'Favorite', img: '/static/favourite.png' },
@@ -47,8 +83,20 @@ export default function CartScreen() {
     const setIndexValue = (id) => {
         setIndex(id);
     };
+    const copyToClipboard = (text) => {
+        navigator.clipboard
+            .writeText(text)
+            .then(() => {
+                // You can add a notification here to inform the user that the text has been copied
+                toast.success('Copied')
+                // alert('Copied to clipboard!');
+            })
+            .catch((err) => {
+                console.error('Failed to copy: ', err);
+            });
+    };
     const myaccount = (
-        <div className="flex w-full space-x-8 ">
+        <div className="md:flex w-full md:space-x-8 ">
             <div className="w-[70%]">
                 <p>My Account</p>
                 <div className="bg-white px-3 py-6 rounded-2xl">
@@ -64,12 +112,16 @@ export default function CartScreen() {
                     </div>
                 </div>
             </div>
-            <div className=" w-[30%] mt-4 ">
+            <div className=" md:w-[30%] mt-4 ">
                 <div className="bg-white border-[#F5128F] border-2 px-3 py-6  h-fit rounded-2xl">
                     <p>My Loyalty Point</p>
-                    <p className="text-[#F5128F] py-4">46 Points</p>
+                    <p className="text-[#F5128F] py-4">
+                        {users?.result?.data?.loyalty_points} Points
+                    </p>
 
-                    <button className="bg-[#ECECEC] py-3 px-6 rounded-3xl">
+                    <button
+                        onClick={handleModalOpen}
+                        className="bg-[#ECECEC] py-3 px-6 rounded-3xl">
                         Redeem Points
                     </button>
                 </div>
@@ -81,25 +133,36 @@ export default function CartScreen() {
             <div className="bg-white border-[#F5128F] border-2 px-3 h-[80px] items-center flex justify-between  rounded-2xl">
                 <p>
                     My Loyalty Point:{' '}
-                    <span className="text-[#F5128F] pl-6">45 Points</span>
+                    <span className="text-[#F5128F] pl-6">
+                        {users?.result?.data.loyalty_points} Points
+                    </span>
                 </p>
-                <button className="bg-[#ECECEC] py-3 px-6 rounded-3xl">
+                <button
+                    onClick={handleModalOpen}
+                    className="bg-[#ECECEC] py-3 px-6 rounded-3xl">
                     Redeem Points
                 </button>
             </div>
 
-            <div className="rounded-2xl mt-5 bg-white ">
+            <div className="rounded-2xl md:text-base text-[12px] mt-5 bg-white ">
                 <div className="grid grid-cols-3 bg-[#003057] py-4 px-4 rounded-t-2xl text-white ">
                     <div>Voucher</div>
                     <div>Status</div>
                     <div></div>
                 </div>
-                {lp.map((det) => (
+                {redeemed?.map((det) => (
                     <div className="grid grid-cols-3 px-4 mb-8  ">
-                        <div className="font-semibold">{det.voucher}</div>
+                        <div className="font-semibold">{det.code}</div>
                         <div>{det.status}</div>
                         <div className="justify-end flex w-full">
-                            <img alt="" src="/static/copy.png" />
+                            {/* <img alt="" src="/static/copy.png" /> */}
+                            <div
+                                onClick={() => copyToClipboard(det.code)}
+                                className="cursor-pointer">
+                                <img alt="" src="/static/copy.png" />
+
+                                {/* <Copy size={20} /> */}
+                            </div>
                         </div>
                     </div>
                 ))}
@@ -108,7 +171,7 @@ export default function CartScreen() {
     );
 
     const carthist = (
-        <div className="bg-white rounded-3xl">
+        <div className="bg-white  rounded-3xl">
             {data?.map((items, index) => (
                 <div key={index} className="   md:px-[50px] px-[15px] ">
                     <div className=" md:px-9 px-3 md:space-y-0 space-y-4 py-4 md:flex justify-between border-b-2 border-b-[#EBF6F6] ">
@@ -127,13 +190,13 @@ export default function CartScreen() {
                                 </p>
                                 {console.log(items?.payment?.date)}
                                 <p>
-                                {items?.payment?.date
-                                    ? format(
-                                          parseISO(items?.payment?.date),
-                                          'MMM d, yyyy'
-                                      )
-                                    : 'N/A'}
-                                    </p>
+                                    {items?.payment?.date
+                                        ? format(
+                                              parseISO(items?.payment?.date),
+                                              'MMM d, yyyy'
+                                          )
+                                        : 'N/A'}
+                                </p>
                             </div>
                             <div className="md:ml-16">
                                 <p className="text-black font-[500] text-[17px] ">
@@ -200,15 +263,15 @@ export default function CartScreen() {
                     <BreadCrumb breacrumb={breadCrumb} />
                     <div className="ps-section--shopping ps-shopping-cart">
                         <div className="container">
-                            <div className="flex space-x-8 w-full ">
-                                <div className="bg-white h-fit rouded-lg p-4 w-[20%]">
+                            <div className="md:flex md:space-x-8 w-full ">
+                                <div className="bg-white h-fit rouded-lg p-4 md:block md:mb-0 mb-6 flex justify-between md:w-[20%]">
                                     {nav.map((items, index) => (
                                         <div
                                             key={index}
                                             onClick={() => setIndexValue(index)}
                                             className="mb-8 cursor-pointer ">
                                             <div className="flex items-center space-x-4">
-                                                <div>
+                                                <div className='md:block hidden' >
                                                     <img
                                                         alt=""
                                                         src={items.img}
@@ -216,7 +279,7 @@ export default function CartScreen() {
                                                 </div>
 
                                                 <div>
-                                                    <p className="text-black">
+                                                    <p className="text-black font-semibold md:text-base text-[9px]">
                                                         {items.name}
                                                     </p>
                                                 </div>
@@ -225,26 +288,44 @@ export default function CartScreen() {
                                     ))}
                                 </div>
                                 {index === 0 && (
-                                    <div className="w-[90%]">{myaccount}</div>
+                                    <div className="w-full md:w-[90%]">{myaccount}</div>
                                 )}
 
                                 {index === 1 && (
-                                    <div className="w-[90%]">{wlist}</div>
+                                    <div className="w-full md:w-[90%]">{wlist}</div>
                                 )}
 
                                 {index === 2 && (
-                                    <div className="w-[90%]">{carthist}</div>
+                                    <div className="w-full md:w-[90%]">{carthist}</div>
                                 )}
 
                                 {index === 3 && (
-                                    <div className="w-[90%]">{loyalty}</div>
+                                    <div className="w-full md:w-[90%]">{loyalty}</div>
                                 )}
                                 {/* <div className="w-[90%]">{wlist}</div> */}
                             </div>
                         </div>
                     </div>
+                    <Modal
+                        open={openModal}
+                        style={{ top: 180 }}
+                        onCancel={handleCloseModal}
+                        footer={false}>
+                        <input
+                            value={value}
+                            onChange={(e) => setValue(e.target.value)}
+                            type="number"
+                            className=" py-3 rounded-md w-full px-3 border border-1 "
+                        />
+                        <div className="mt-4">
+                            <button
+                                className="bg-[#F5128F] py-4 w-[50%] px-3 text-white rounded-md "
+                                onClick={submitpoint}>
+                                submit
+                            </button>
+                        </div>
+                    </Modal>
                 </div>
-                <Newletters layout="container" />
             </PageContainer>
         </>
     );

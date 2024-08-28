@@ -136,12 +136,12 @@
         }
     }
 
-    @include media('<lg') {
-        display: none;
-        &.header--mobile {
-            display: block;
-        }
-    }
+    // @include media('<lg') {
+    //     display: none;
+    //     &.header--mobile {
+    //         display: block;
+    //     }
+    // }
 }
 
 .header--standard {
@@ -414,7 +414,7 @@
     z-index: 9999;
     text-align: center;
     border-bottom: 0 none;
-    background-color: $color-1st;
+    background-color: #003057;
     transition: all 0.4s $ease-in-out-quad;
     @include clearfix();
 

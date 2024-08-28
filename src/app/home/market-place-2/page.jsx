@@ -6,7 +6,6 @@ import MarketPlace2Promotions from '~/components/partials/homepage/marketplace2/
 import MarketPlace2Download from '~/components/partials/homepage/marketplace2/MarketPlace2Download';
 import MarketPlace2Categories from '~/components/partials/homepage/marketplace2/MarketPlace2Categories';
 import HeaderMarketPlace2 from '~/components/shared/headers/HeaderMarketPlace2';
-import HeaderMobile from '~/components/shared/headers/HeaderMobile';
 import FooterMarketPlace2 from '~/components/shared/footers/FooterMarketPlace2';
 import PageContainer from '~/components/layouts/PageContainer';
 
@@ -14,7 +13,6 @@ const HomeMarketPlace2Page = () => {
     const headers = (
         <>
             <HeaderMarketPlace2 />
-            <HeaderMobile />
         </>
     );
     const footer = <FooterMarketPlace2 />;

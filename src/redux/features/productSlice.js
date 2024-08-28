@@ -152,6 +152,26 @@ export const getCategoriesWithProducts = createAsyncThunk(
     }
 );
 
+export const getPages = createAsyncThunk(`customer/pages`, async () => {
+    const response = await axios.get("pages");
+    return response;
+  });
+
+  export const valCoupons = createAsyncThunk(`customer/valCoupons`, async (data) => {
+    const response = await axios.get(`coupons/validate/${data}`);
+    return response;
+  });
+
+  export const redeemPoint = createAsyncThunk(`customer/redeemePoint`, async (data) => {
+    const response = await axios.post("loyalty-points/redeem", data);
+    return response;
+  });
+
+    export const getredeemPoint = createAsyncThunk(`customer/getredeemPoint`, async (data) => {
+    const response = await axios.get("loyalty-points/coupons");
+    return response;
+  });
+
 // export const contributorLogin = createAsyncThunk(
 // 	`contributor/register`,
 // 	async ({ createData, cateID }) => {
@@ -181,9 +201,25 @@ const initialState = {
         success: false,
     },
 
+    addredeem: {
+        isLoading: false,
+        results: null,
+    },
+
+      getredeem: {
+        isLoading: false,
+        results: null,
+    },
+
     getcart: {
         isLoading: false,
         results: null,
+    },
+
+    valcoupons: {
+        isLoading: false,
+        results: null,
+        success: false
     },
 
     removecart: {
@@ -192,6 +228,10 @@ const initialState = {
     },
 
     getcats: {
+        results: null,
+        isLoading: true,
+    },
+    getpages: {
         results: null,
         isLoading: true,
     },
@@ -344,6 +384,41 @@ export const productSlice = createSlice({
                 state.singlecats.isLoading = true;
             });
 
+            builder
+            .addCase(getPages.pending, (state) => {
+                state.getpages.isLoading = true;
+            })
+            .addCase(getPages.fulfilled, (state, { payload }) => {
+                state.getpages.isLoading = false;
+                state.getpages.results = payload;
+            })
+            .addCase(getPages.rejected, (state) => {
+                state.getpages.isLoading = true;
+            });
+            //VAL COUPONS
+            builder
+            .addCase(valCoupons.pending, (state) => {
+                state.valcoupons.isLoading = true;
+                state.valcoupons.success = false;
+            })
+            .addCase(valCoupons.fulfilled, (state, { payload }) => {
+                state.valcoupons.isLoading = false;
+                state.valcoupons.success = true;
+
+                state.valcoupons.results = payload;
+                if(payload?.data?.code === 200){
+                    toast.success('Coupon added successfully')
+
+                }
+                
+
+            })
+            .addCase(valCoupons.rejected, (state) => {
+                state.valcoupons.isLoading = true;
+                state.valcoupons.success = false;
+
+            });
+
         builder
             .addCase(addtocheckout.pending, (state) => {
                 state.checkout.isLoading = true;
@@ -429,6 +504,30 @@ export const productSlice = createSlice({
             })
             .addCase(getFavorites.rejected, (state, { payload }) => {
                 state.getfav.isLoading = true;
+            });
+
+                builder
+            .addCase(redeemPoint.pending, (state) => {
+                state.addredeem.isLoading = true;
+            })
+            .addCase(redeemPoint.fulfilled, (state, { payload }) => {
+                state.addredeem.isLoading = false;
+                state.addredeem.results = payload;
+            })
+            .addCase(redeemPoint.rejected, (state, { payload }) => {
+                state.addredeem.isLoading = true;
+            });
+
+                   builder
+            .addCase(getredeemPoint.pending, (state) => {
+                state.getredeem.isLoading = true;
+            })
+            .addCase(getredeemPoint.fulfilled, (state, { payload }) => {
+                state.getredeem.isLoading = false;
+                state.getredeem.results = payload;
+            })
+            .addCase(getredeemPoint.rejected, (state, { payload }) => {
+                state.getredeem.isLoading = true;
             });
 
         builder

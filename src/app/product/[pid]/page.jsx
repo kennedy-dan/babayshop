@@ -184,7 +184,6 @@ const ProductDefaultPage = () => {
             return (
                 <>
                     <HeaderDefault />
-                    <HeaderMobileProduct />
                 </>
             );
         }
@@ -205,7 +204,7 @@ const ProductDefaultPage = () => {
                         )}
                         {!singleproducts?.isLoading && (
                             <div>
-                                <div className="flex my-20 w-full space-x-12   font-montserrat">
+                                <div className="md:flex my-20 w-full md:space-x-12   font-montserrat">
                                     <div className=" bg-white rounded-lg h-fit  p-4">
                                         <img
                                             src={
@@ -232,9 +231,9 @@ const ProductDefaultPage = () => {
                                             // height={800}
                                         />
                                     </div>
-                                    <div className="w-[31%]">
+                                    <div className="md:w-[31%]">
                                         <div className="flex space-x-4 items-center justify-between">
-                                            <p className="text-[36px] font-[500] text-black  ">
+                                            <p className="md:text-[36px] text-[18px] font-[500] text-black  ">
                                                 {getSingleProductData?.name}
                                             </p>
                                             <div onClick={() => handleFavoriteClickProdd(getSingleProductData?.id, getSingleProductData?.is_favorite)} >
@@ -349,7 +348,7 @@ const ProductDefaultPage = () => {
                                             }
                                         </p>
                                     </div>
-                                    <div>
+                                    <div className='lg:block hidden'  >
                                         <WidgetProductFeatures />
                                     </div>
                                 </div>
@@ -379,7 +378,7 @@ const ProductDefaultPage = () => {
                                     {desc === 'review' && <Review />}
                                 </div> */}
                                 <p className='mt-20 mb-4 text-[26px] ' >Related products</p>
-                                <div className="flex justify-between">
+                                <div className="md:flex md:justify-between grid grid-cols-2 ">
                                     {data?.slice(0, 4)?.map((data, index) => (
                                         <motion.div
                                             key={data.id}
@@ -494,7 +493,7 @@ const ProductDefaultPage = () => {
                     </div>
                 </div>
             </div>
-            <Newletters />
+            {/* <Newletters /> */}
         </PageContainer>
     );
 };
