@@ -197,28 +197,18 @@ export default function Login() {
                                 </Form.Item>
                             </div>
                             <div className="flex justiy-end cursor-pointer mt-2 " onClick={handleTrackOpen}>
-            <p className="text-[#4FA9AB] text-[16px]">Forget password</p>
+            <p className="text-[#4FA9AB] text-[16px]">Forgot password</p>
           </div>
                             <div className="form-group">
-                                <div className="ps-checkbox">
-                                    <input
-                                        className="form-control"
-                                        type="checkbox"
-                                        id="remember-me"
-                                        name="remember-me"
-                                    />
-                                    <label htmlFor="remember-me">
-                                        Rememeber me
-                                    </label>
-                                </div>
+                              
                             </div>
                             <div className="form-group submit">
-                                <button
+                                <div
                                     type="submit"
                                     onClick={login}
-                                    className="ps-btn bg-[#F5128F] ps-btn--fullwidth">
+                                    className="ps-btn text-enter text-white bg-[#F5128F] ps-btn--fullwidth">
                                     Login
-                                </button>
+                                </div>
                             </div>
                         </div>
                   

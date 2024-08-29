@@ -169,7 +169,7 @@ const ProductDefaultPage = () => {
             return (
                 <>
                     <HeaderDefault />
-                    <HeaderMobileProduct />
+                    {/* <HeaderMobileProduct /> */}
                 </>
             );
         }
@@ -177,7 +177,7 @@ const ProductDefaultPage = () => {
             return (
                 <>
                     <HeaderProduct product={product} />
-                    <HeaderMobileProduct />
+                    {/* <HeaderMobileProduct /> */}
                 </>
             );
         } else {

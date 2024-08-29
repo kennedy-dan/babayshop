@@ -62,7 +62,7 @@ const ProductGrouppedPage = () => {
                     <RelatedProduct collectionSlug="shop-recommend-items" />
                 </div>
             </div>
-            <Newsletters />
+            {/* <Newsletters /> */}
         </PageContainer>
     );
 };

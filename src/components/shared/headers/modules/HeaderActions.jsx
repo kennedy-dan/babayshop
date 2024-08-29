@@ -29,10 +29,7 @@ const HeaderActions = ({ showDrawerAdv }) => {
 
     return (
         <div className="header__actions">
-            {token && (
-                <>
-                    {' '}
-                    <div className="md:block hidden">
+              <div className="block">
                         <Link
                             href="/account/wishlist"
                             className="header__extra ">
@@ -46,6 +43,10 @@ const HeaderActions = ({ showDrawerAdv }) => {
                     <div>
                         <MiniCart />
                     </div>
+            {token && (
+                <>
+                    {' '}
+                  
                     <div className="md:block hidden">
                         <Link
                             href="/account"

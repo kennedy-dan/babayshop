@@ -155,39 +155,15 @@ export default function Register() {
                                 </Form.Item>
                             </div>
                             <div className="form-group submit">
-                                <button
+                                <div
                                 onClick={register}
                                     type="submit"
-                                    className="ps-btn ps-btn--fullwidth">
+                                    className="ps-btn text-enter text-white bg-[#F5128F] ps-btn--fullwidth">
                                     Register
-                                </button>
+                                </div>
                             </div>
                         </div>
-                        <div className="ps-form__footer">
-                            <p>Connect with:</p>
-                            <ul className="ps-list--social">
-                                <li>
-                                    <a className="facebook" href="#">
-                                        <i className="fa fa-facebook" />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a className="google" href="#">
-                                        <i className="fa fa-google-plus" />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a className="twitter" href="#">
-                                        <i className="fa fa-twitter" />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a className="instagram" href="#">
-                                        <i className="fa fa-instagram" />
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                
                     </div>
                 </Form>
             </div>

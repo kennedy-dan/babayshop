@@ -45,7 +45,7 @@ export default function StoreListPage() {
                     </div>
                 </section>
             </div>
-            <Newsletters layout="container" />
+            {/* <Newsletters layout="container" /> */}
         </PageContainer>
     );
 }

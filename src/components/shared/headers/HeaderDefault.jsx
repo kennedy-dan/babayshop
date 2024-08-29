@@ -90,7 +90,7 @@ const HeaderDefault = () => {
                     </div>
                 </div>
 
-                <div className="bg-white py-3 px-[30px] md:hidden block ">
+                <div className="bg-[#fffff0] py-3 px-[30px] md:hidden block ">
                     <Dropdown
                         menu={{
                             items: menuItems,
@@ -104,7 +104,7 @@ const HeaderDefault = () => {
                     </Dropdown>
                 </div>
 
-                <div className="w-full mt-4 bg-white space-x-5 pt-3 items-center md:justify-between hidden md:flex px-[30px] ">
+                <div className="w-full mt-4 bg-[#fffff0] space-x-5 pt-3 items-center md:justify-between hidden md:flex px-[30px] ">
                     {catsData?.slice(0, 8)?.map((items, index) => (
                         <div key={index} className=" ">
                             <div className="">
@@ -148,11 +148,7 @@ const HeaderDefault = () => {
                         />
                     </div>
                     <div className="space-y-6 font-[500] text-[19px]">
-                        <div>
-                            <Link href="/page/about-us">
-                                <div className="text-black">about</div>
-                            </Link>
-                        </div>
+                     
 
                         <div>
                             <Link href="/contact">
@@ -182,7 +178,7 @@ const HeaderDefault = () => {
                     {user && (
                         <div className="space-y-6 font-[500] text-[19px]">
                             <div>
-                                <Link href="/profile">
+                                <Link href="/account">
                                     <div className="flex space-x-3">
                                         <img src="/images/profile.png" alt="" />
                                         <p>My Profile</p>
@@ -191,7 +187,7 @@ const HeaderDefault = () => {
                             </div>
 
                             <div>
-                                <Link href="/favorites">
+                                <Link href="/account/wishlist">
                                     {' '}
                                     <div className="flex my-4 space-x-3">
                                         <img src="/images/fav.png" alt="" />
@@ -201,7 +197,7 @@ const HeaderDefault = () => {
                             </div>
 
                             <div>
-                                <Link href="/order-history">
+                                <Link href="/account/order-history">
                                     <div className="flex space-x-3">
                                         <img src="/images/ord.png" alt="" />
                                         <p>Orders History</p>

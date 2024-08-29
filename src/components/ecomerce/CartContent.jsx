@@ -162,7 +162,7 @@ export default function CartContent() {
                                                 alt=""
                                                 height={500}
                                                 width={500}
-                                                className="md:w-[70px] md:h-[70px] h-[20px] w-[20px]  object-cover"
+                                                className="md:w-[70px] md:h-[70px] h-[26px] w-[26px]  object-cover"
 
                                                 //   width={500}
                                                 //   height={500}
@@ -183,7 +183,7 @@ export default function CartContent() {
                                                         alt=""
                                                     />
                                                 </div>
-                                                <p className=" text-black md:text-[16px] text-[12px] w-[] ">Remove</p>
+                                                <div className=" text-black md:text-[16px] text-[12px] w-[] ">Remove</div>
                                             </div>
                                         </div>
                                     </div>
@@ -200,17 +200,17 @@ export default function CartContent() {
                                         updatingItemId === items.id) ? (
                                         <ClipLoader color="black" size={12} />
                                     ) : (
-                                        <div className="text-black font-semibold text-[24px]  space-x-1 font-urbanist flex items-center ">
-                                            <div>
-                                                <img
-                                                    src="/static/Naira.png"
-                                                    alt=""
-                                                />
-                                            </div>
-                                            <p className="text-[16px]  text-black">
-                                                {Math.floor(items?.price)}
-                                            </p>
+                                        <div className="text-black font-[500]  flex justify-center items-center">
+                                        <div>
+                                            <img
+                                                src="/static/Naira.png"
+                                                alt=""
+                                                className="mr-2"
+                                            />
                                         </div>
+
+                                        <>{Math.floor(items?.price)}</>
+                                    </div>
                                     )}
                                 </div>
                                 <div className="flex justify-end items-start">
@@ -225,9 +225,9 @@ export default function CartContent() {
                                                     alt=""
                                                 />
                                             </button>
-                                            <p className="text-black font-[400] px-2 text-[13px]">
+                                            <div className="text-black font-[400] px-2 text-[13px]">
                                                 {items?.quantity}
-                                            </p>
+                                            </div>
                                             <button
                                                 onClick={() =>
                                                     increaseQuant(items)

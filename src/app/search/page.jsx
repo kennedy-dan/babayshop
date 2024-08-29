@@ -24,7 +24,7 @@ const SearchPage = () => {
             <div className="container">
                 <SearchContent />
             </div>
-            <Newsletters layout="container" />
+            {/* <Newsletters layout="container" /> */}
         </PageContainer>
     );
 };

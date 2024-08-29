@@ -71,7 +71,7 @@ const HomeMarketPlacePage = () => {
                         />
                     </div>
                 </div>
-                <Newsletters />
+                {/* <Newsletters /> */}
             </main>
         </PageContainer>
     );

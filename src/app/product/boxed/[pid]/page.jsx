@@ -55,7 +55,7 @@ const ProductDefaultBoxedPage = () => {
                     <RelatedProduct collectionSlug="shop-recommend-items" />
                 </div>
             </div>
-            <Newsletters layout="container" />
+            {/* <Newsletters layout="container" /> */}
         </PageContainer>
     );
 };

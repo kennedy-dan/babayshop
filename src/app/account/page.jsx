@@ -88,7 +88,7 @@ export default function CartScreen() {
             .writeText(text)
             .then(() => {
                 // You can add a notification here to inform the user that the text has been copied
-                toast.success('Copied')
+                toast.success('Copied');
                 // alert('Copied to clipboard!');
             })
             .catch((err) => {
@@ -255,6 +255,43 @@ export default function CartScreen() {
         </div>
     );
 
+    const account = (
+        <div>
+            <div classNae="flex justify-between">
+                <div>
+                    <p>Personal Information</p>
+                    <p>Please provide your personal information</p>
+                </div>
+                <div>
+                    <p>Name</p>
+                    <input className="border border-1 px-4 border-gray-500" />
+
+                    <div>
+                        {' '}
+                        <p>Name</p>
+                        <input className="border border-1 px-4 border-gray-500" />
+                    </div>
+                </div>
+            </div>
+            <div classNae="flex justify-between mt-10">
+                <div>
+                    <p>Address Details</p>
+                    <p>Please provide your personal information</p>
+                </div>
+                <div>
+                    <p>Name</p>
+                    <input className="border border-1 px-4 border-gray-500" />
+
+                    <div>
+                        {' '}
+                        <p>Name</p>
+                        <input className="border border-1 px-4 border-gray-500" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+
     const wlist = <Wishlist />;
     return (
         <>
@@ -271,7 +308,7 @@ export default function CartScreen() {
                                             onClick={() => setIndexValue(index)}
                                             className="mb-8 cursor-pointer ">
                                             <div className="flex items-center space-x-4">
-                                                <div className='md:block hidden' >
+                                                <div className="md:block hidden">
                                                     <img
                                                         alt=""
                                                         src={items.img}
@@ -288,19 +325,27 @@ export default function CartScreen() {
                                     ))}
                                 </div>
                                 {index === 0 && (
-                                    <div className="w-full md:w-[90%]">{myaccount}</div>
+                                    <div className="w-full md:w-[90%]">
+                                        {myaccount}
+                                    </div>
                                 )}
 
                                 {index === 1 && (
-                                    <div className="w-full md:w-[90%]">{wlist}</div>
+                                    <div className="w-full md:w-[90%]">
+                                        {wlist}
+                                    </div>
                                 )}
 
                                 {index === 2 && (
-                                    <div className="w-full md:w-[90%]">{carthist}</div>
+                                    <div className="w-full md:w-[90%]">
+                                        {carthist}
+                                    </div>
                                 )}
 
                                 {index === 3 && (
-                                    <div className="w-full md:w-[90%]">{loyalty}</div>
+                                    <div className="w-full md:w-[90%]">
+                                        {loyalty}
+                                    </div>
                                 )}
                                 {/* <div className="w-[90%]">{wlist}</div> */}
                             </div>

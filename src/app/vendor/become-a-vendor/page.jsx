@@ -34,7 +34,7 @@ const BecomeAVendorPage = () => {
                 <VendorFaqs />
                 <VendorBanner />
             </div>
-            <Newsletters layout="container" />
+            {/* <Newsletters layout="container" /> */}
         </PageContainer>
     );
 };
