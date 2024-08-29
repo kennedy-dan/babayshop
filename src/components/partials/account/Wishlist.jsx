@@ -113,7 +113,7 @@ export default function Wishlist() {
                                                         width={500}
                                                         height={500}
                                                         alt=""
-                                                        className="h-[230px] w-[250px] object-cover rounded-lg cursor-pointer"
+                                                        className="md:h-[230px] md:w-[250px] w-[190px] h-[190px] object-cover rounded-lg cursor-pointer"
                                                     />
 
                                                     <motion.div

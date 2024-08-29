@@ -151,7 +151,7 @@ export default function CartScreen() {
                     <div></div>
                 </div>
                 {redeemed?.map((det) => (
-                    <div className="grid grid-cols-3 px-4 mb-8  ">
+                    <div className="grid grid-cols-3 px-4 py-4 mb-8  ">
                         <div className="font-semibold">{det.code}</div>
                         <div>{det.status}</div>
                         <div className="justify-end flex w-full">
