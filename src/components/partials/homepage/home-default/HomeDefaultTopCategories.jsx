@@ -99,7 +99,7 @@ const HomeDefaultTopCategories = () => {
             quantity: 1,
         };
         dispatch(addtocart(data)).then(() =>{
-            getcartData()
+           dispatch(getcartData())
         })
         // toast.success('done');
     };
