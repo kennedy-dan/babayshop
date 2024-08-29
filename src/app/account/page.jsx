@@ -70,7 +70,7 @@ export default function CartScreen() {
     const nav = [
         { name: 'My Profile', img: '/static/proficon.png' },
         { name: 'Favorite', img: '/static/favourite.png' },
-        { name: 'Cart History', img: '/static/carticon.png' },
+        { name: 'Order History', img: '/static/carticon.png' },
         { name: 'Loyalty & Voucher', img: '/static/loyal.png' },
         { name: 'Settings', img: '/static/set.png' },
     ];
@@ -172,6 +172,7 @@ export default function CartScreen() {
 
     const carthist = (
         <div className="bg-white  rounded-3xl">
+            {data?.length < 1 && <p>No Order History</p>}
             {data?.map((items, index) => (
                 <div key={index} className="   md:px-[50px] px-[15px] ">
                     <div className=" md:px-9 px-3 md:space-y-0 space-y-4 py-4 md:flex justify-between border-b-2 border-b-[#EBF6F6] ">
@@ -257,35 +258,35 @@ export default function CartScreen() {
 
     const account = (
         <div>
-            <div classNae="flex justify-between">
-                <div>
+            <div className="md:flex">
+                <div className='md:w-1/2' >
                     <p>Personal Information</p>
-                    <p>Please provide your personal information</p>
+                    <p className='text-[11px]'>Please provide your personal information</p>
                 </div>
-                <div>
+                <div className='md:w-1/2 md:mt-0 mt-8'>
                     <p>Name</p>
-                    <input className="border border-1 px-4 border-gray-500" />
+                    <input value={user?.first_name + ' ' + user?.last_name} className="border w-[80%] border-1 px-4 py-3 border-gray-500" />
 
-                    <div>
+                    <div className='mt-5' >
                         {' '}
-                        <p>Name</p>
-                        <input className="border border-1 px-4 border-gray-500" />
+                        <p>Email</p>
+                        <input value={user?.email} className="border w-[80%] border-1 px-4 py-3 border-gray-500" />
                     </div>
                 </div>
             </div>
-            <div classNae="flex justify-between mt-10">
-                <div>
+            <div className="md:flex justify-between mt-10">
+                <div className='md:w-1/2'>
                     <p>Address Details</p>
-                    <p>Please provide your personal information</p>
+                    <p className='text-[11px]' >Default shipping address</p>
                 </div>
-                <div>
-                    <p>Name</p>
-                    <input className="border border-1 px-4 border-gray-500" />
+                <div className='md:w-1/2 md:mt-0 mt-8'>
+                    <p>Phone Number</p>
+                    <input  className="border w-[80%] mt-1 border-1 px-4 py-3 border-gray-500" />
 
-                    <div>
+                    <div className='mt-5' >
                         {' '}
-                        <p>Name</p>
-                        <input className="border border-1 px-4 border-gray-500" />
+                        <p>Address</p>
+                        <textarea rews={18}  className="border w-[80%] mt-1 border-1 px-4 py-3 border-gray-500" />
                     </div>
                 </div>
             </div>
@@ -316,9 +317,9 @@ export default function CartScreen() {
                                                 </div>
 
                                                 <div>
-                                                    <p className="text-black font-semibold md:text-base text-[9px]">
+                                                    <div className="text-black md:font-[500] font-semibold md:text-[13px] text-[9px]">
                                                         {items.name}
-                                                    </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -345,6 +346,11 @@ export default function CartScreen() {
                                 {index === 3 && (
                                     <div className="w-full md:w-[90%]">
                                         {loyalty}
+                                    </div>
+                                )}
+                                    {index === 4 && (
+                                    <div className="w-full md:w-[90%]">
+                                        {account}
                                     </div>
                                 )}
                                 {/* <div className="w-[90%]">{wlist}</div> */}
