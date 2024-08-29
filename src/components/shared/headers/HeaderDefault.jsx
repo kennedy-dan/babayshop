@@ -12,7 +12,7 @@ import { Drawer, Space } from 'antd';
 import { MdOutlineCancel } from 'react-icons/md';
 import { Dropdown } from 'antd';
 import { useRouter } from 'next/navigation';
-import { MdArrowDropDown } from "react-icons/md";
+import { MdArrowDropDown } from 'react-icons/md';
 
 import {
     getcategories,
@@ -48,8 +48,8 @@ const HeaderDefault = () => {
         }
     }, []);
     const handleMenuClick = (item) => {
-    router.push(`/shop/${item.id}`);
-  };
+        router.push(`/shop/${item.id}`);
+    };
 
     const showDrawerAdv = () => {
         setOpenAdv(true);
@@ -63,7 +63,7 @@ const HeaderDefault = () => {
         key: item?.id,
         label: item?.name,
         onClick: () => handleMenuClick(item),
-      }));
+    }));
 
     return (
         <header
@@ -90,22 +90,18 @@ const HeaderDefault = () => {
                     </div>
                 </div>
 
-                <div className='bg-white px-[30px] md:hidden block ' >
-                <Dropdown
-      menu={{
-        items: menuItems,
-      }}
-    >
-      <a onClick={(e) => e.preventDefault()}>
-        <Space>
-            <div className='text-black ' >
-            Categories
-
-            </div>
-          <MdArrowDropDown />
-        </Space>
-      </a>
-    </Dropdown>
+                <div className="bg-white py-3 px-[30px] md:hidden block ">
+                    <Dropdown
+                        menu={{
+                            items: menuItems,
+                        }}>
+                        <a onClick={(e) => e.preventDefault()}>
+                            <Space>
+                                <div className="text-black ">Categories</div>
+                                <MdArrowDropDown />
+                            </Space>
+                        </a>
+                    </Dropdown>
                 </div>
 
                 <div className="w-full mt-4 bg-white space-x-5 pt-3 items-center md:justify-between hidden md:flex px-[30px] ">
@@ -120,6 +116,9 @@ const HeaderDefault = () => {
                     ))}
                 </div>
             </div>
+            <div className="header__center lg:hidden mx-[30px] mt-10 block">
+                        <SearchHeader />
+                    </div>
             {/* <DesktopNavigation /> */}
             <Drawer
                 // title="WeOut"

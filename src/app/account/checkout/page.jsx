@@ -115,7 +115,7 @@ export default function Page() {
             if (addtocheckout.fulfilled.match(resultAction)) {
                 const tx_ref = resultAction?.payload?.data?.data?.reference;
                 const discountamount = resultAction?.payload?.data?.data?.final_amount;
-
+                    localStorage.removeItem('coupons')
                 setTxRef(tx_ref);
                 setFinalamount(discountamount)
                 console.log(resultAction);

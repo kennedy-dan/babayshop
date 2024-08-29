@@ -30,12 +30,12 @@ const TranasactionComplete = () => {
       </div>
       <div className='flex justify-center my-10 ' >
           <Link href='/' >
-          <button
-                className=" bg-secondary w-[220px] text-white py-4 rounded-lg font-semibold text-[16px] "
+          <div
+                className=" bg-[#F5128F] w-[220px]   py-4 rounded-lg font-semibold text-[16px] "
               >
-                      <p>Back Home</p>
+                      <p className='text-white text-center' >Back Home</p>
 
-              </button>
+              </div>
           </Link>
         </div>
     </PageContainer>

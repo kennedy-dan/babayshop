@@ -25,6 +25,8 @@ const HomeDefaultTopCategories = () => {
         useSelector((state) => state.product);
     const [loadingFavorites, setLoadingFavorites] = useState({});
     const { token } = useSelector((state) => state.auth);
+    const [isMobile, setIsMobile] = useState(false);
+    const [showActions, setShowActions] = useState(false);
 
     const allp = allproducts?.results?.data?.data?.data;
     const pages = getpages?.results?.data?.data;
@@ -69,6 +71,28 @@ const HomeDefaultTopCategories = () => {
         }
     };
 
+    useEffect(() => {
+        const checkMobile = () => {
+          setIsMobile(window.matchMedia("(max-width: 768px)").matches);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+      }, []);
+    
+      const handleTouchStart = () => {
+        if (isMobile) {
+          setShowActions(true);
+        }
+      };
+    
+      const handleTouchEnd = () => {
+        if (isMobile) {
+          setTimeout(() => setShowActions(false), 3000); // Hide after 3 seconds
+        }
+      };
+    
+
     const addToCart = (id) => {
         const data = {
             product_id: id,
@@ -89,11 +113,11 @@ const HomeDefaultTopCategories = () => {
                         <img src={img?.url} alt='' className='w-full' />
                     </div>
                 ))}
-                <h3 className='mt-20' >Top categories </h3>
+                <p className='mt-20 font-bold md:text-[22] text-[16px] text-black mb-3 ' >Top categories </p>
                 {/* <h3>{homePage?.page_title} </h3> */}
                 <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-5">
                     {catsData?.slice(0, 6)?.map((items, index) => (
-                        <div key={index} className=" ">
+                        <div key={index} className="flex flex-col items-center">
                             <div className="">
                                 <Link
                                     href={`/shop/${items?.id}`}
@@ -102,9 +126,12 @@ const HomeDefaultTopCategories = () => {
                                     <img
                                         src={items?.image_url ? items?.image_url : "/static/cats.png"}
                                         alt="martfury"
-                                        className="h-[190px] rounded-2xl"
+                                        className="md:h-[190px] h-[150px] rounded-2xl"
                                     />
-                                    <p className="text-center">{items?.name}</p>
+                                    <div>
+                                    <p className="text-center md:text-base text-[13px] ">{items?.name}</p>
+
+                                    </div>
                                 </Link>
                             </div>
                         </div>
@@ -113,18 +140,21 @@ const HomeDefaultTopCategories = () => {
 
                 <div className="mt-40">
                     <div>
-                        <h3>New Arrival</h3>
+                        <p className='mt-20 font-bold md:text-[22] text-[16px] text-black mb-4 '>New Arrival</p>
                     </div>
-                    <div className="md:flex grid grid-cols-2 md:justify-between">
+                    <div className="md:flex grid grid-cols-2 md:gap-0 gap-4 md:justify-between">
                         {allp?.slice(0, 4)?.map((data, index) => (
                             <motion.div
                                 key={data.id}
-                                whileHover="hover"
+                                whileHover={isMobile ? {} : 'hover'}
+                                whileTap={isMobile ? 'hover' : {}}
                                 initial="rest"
                                 animate="rest"
+                                onTouchStart={() => handleTouchStart(data.id)}
+                                onTouchEnd={() => handleTouchEnd(data.id)}
                                 className="  ">
                                 <div className="relative">
-                                    <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-9 mb-4 ">
+                                    <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800 p-3 md:p-9 mb-4 ">
                                         <Image
                                             src={
                                                 data?.image_url
@@ -134,7 +164,7 @@ const HomeDefaultTopCategories = () => {
                                             width={500}
                                             height={500}
                                             alt=""
-                                            className="h-[230px] w-[250px] object-cover rounded-lg cursor-pointer"
+                                            className="md:h-[230px] md:w-[250px] h-[190px] w-[190px] object-cover rounded-lg cursor-pointer"
                                         />
 
                                         <motion.div
@@ -143,6 +173,7 @@ const HomeDefaultTopCategories = () => {
                                                 rest: { opacity: 0, y: '10%' },
                                                 hover: { y: -37, opacity: 1 },
                                             }}
+                                            
                                             transition={{ duration: 0.3 }}>
                                             <div
                                                 onClick={() =>
@@ -185,7 +216,7 @@ const HomeDefaultTopCategories = () => {
 
                                     <Link href={`/product/${data?.id}`}>
                                         <div className="text-center">
-                                            <p className="uppercase text-[18px]">
+                                            <p className="uppercase text-[14px] md:text-[18px]">
                                                 {data?.name}
                                             </p>
                                         </div>
@@ -194,7 +225,7 @@ const HomeDefaultTopCategories = () => {
                                 <Link href={`/product/${data?.id}`}>
                                     <hr className="my-2" />
                                     <div className="text-center">
-                                        <p className="text-blue-600 text-[16px]">
+                                        <p className="text-blue-600 text-[13px] md:text-[16px] ">
                                             {data?.description}
                                         </p>
                                     </div>
@@ -219,11 +250,11 @@ const HomeDefaultTopCategories = () => {
                     ?.slice(0, 2)
                     ?.map((items, index) => (
                         <div key={index} className="mb-16 mt-32">
-                            <div className="flex justify-between  w-full">
+                            <div className="flex justify-between items-center w-full">
                                 <div className="">
-                                    <h3 className="text-black ">
+                                    <div className=' font-bold md:text-[22] text-[16px] text-black '>
                                         {items?.name}
-                                    </h3>
+                                    </div>
                                 </div>
                                 <div>
                                     <Link href={`/shop/${items?.id}`}>
@@ -235,12 +266,15 @@ const HomeDefaultTopCategories = () => {
                                 {items?.products?.slice(0, 6)?.map((data) => (
                                     <motion.div
                                         key={data.id}
-                                        whileHover="hover"
+                                        whileHover={isMobile ? {} : 'hover'}
+                                        whileTap={isMobile ? 'hover' : {}}
                                         initial="rest"
                                         animate="rest"
+                                        onTouchStart={() => handleTouchStart(data.id)}
+                                        onTouchEnd={() => handleTouchEnd(data.id)}
                                         className="  ">
                                         <div className="relative">
-                                            <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-9 mb-4 ">
+                                            <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800 p-3 md:p-9 mb-4 ">
                                                 <Image
                                                     src={
                                                         data?.image_url
@@ -312,7 +346,7 @@ const HomeDefaultTopCategories = () => {
 
                                             <Link href={`/product/${data?.id}`}>
                                                 <div className="text-center">
-                                                    <p className="uppercase text-[18px]">
+                                                    <p className="uppercase text-[14px] md:text-[18px]">
                                                         {data?.name}
                                                     </p>
                                                 </div>
@@ -321,7 +355,7 @@ const HomeDefaultTopCategories = () => {
                                         <Link href={`/product/${data?.id}`}>
                                             <hr className="my-2" />
                                             <div className="text-center">
-                                                <p className="text-blue-600 text-[16px]">
+                                                <p className="text-blue-600 text-[13px] md:text-[16px]">
                                                     {data?.description}
                                                 </p>
                                             </div>
@@ -344,7 +378,7 @@ const HomeDefaultTopCategories = () => {
                     ))}
 
                 <div className="flex justify-between mt-32">
-                    <div>
+                    <div className='md:block hidden' >
                         <img src="/static/ads4.png" alt="" />
                     </div>
                     <div>
@@ -355,11 +389,11 @@ const HomeDefaultTopCategories = () => {
                     ?.slice(3, 5)
                     ?.map((items, index) => (
                         <div key={index} className="mb-16 mt-32">
-                            <div className="flex justify-between  w-full">
-                                <div className="">
-                                    <h3 className="text-black ">
+                            <div className="flex justify-between items-center  w-full">
+                                <div className=' '>
+                                    <div className=' font-bold md:text-[22] text-[16px] text-black '>
                                         {items?.name}
-                                    </h3>
+                                    </div>
                                 </div>
                                 <div>
                                     <Link href={`/shop/${items?.id}`}>
@@ -371,12 +405,15 @@ const HomeDefaultTopCategories = () => {
                                 {items?.products?.slice(0, 6)?.map((data) => (
                                     <motion.div
                                         key={data.id}
-                                        whileHover="hover"
+                                        whileHover={isMobile ? {} : 'hover'}
+                                        whileTap={isMobile ? 'hover' : {}}
                                         initial="rest"
                                         animate="rest"
+                                        onTouchStart={() => handleTouchStart(data.id)}
+                                        onTouchEnd={() => handleTouchEnd(data.id)}
                                         className="  ">
                                         <div className="relative">
-                                            <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-9 mb-4 ">
+                                            <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-3 md:p-9 mb-4 ">
                                                 <Image
                                                     src={
                                                         data?.image_url
@@ -486,11 +523,11 @@ const HomeDefaultTopCategories = () => {
                     ?.slice(6, 8)
                     ?.map((items, index) => (
                         <div key={index} className="mb-16 mt-32">
-                            <div className="flex justify-between  w-full">
+                            <div className="flex justify-between items-center  w-full">
                                 <div className="">
-                                    <h3 className="text-black ">
+                                    <div className=' font-bold md:text-[22] text-[16px] text-black '>
                                         {items?.name}
-                                    </h3>
+                                    </div>
                                 </div>
                                 <div>
                                     <Link href={`/shop/${items?.id}`}>
@@ -502,12 +539,15 @@ const HomeDefaultTopCategories = () => {
                                 {items?.products?.slice(0, 6)?.map((data) => (
                                     <motion.div
                                         key={data.id}
-                                        whileHover="hover"
-                                        initial="rest"
-                                        animate="rest"
+                                        whileHover={isMobile ? {} : 'hover'}
+                                whileTap={isMobile ? 'hover' : {}}
+                                initial="rest"
+                                animate="rest"
+                                onTouchStart={() => handleTouchStart(data.id)}
+                                onTouchEnd={() => handleTouchEnd(data.id)}
                                         className="  ">
                                         <div className="relative">
-                                            <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-9 mb-4 ">
+                                            <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-3 md:p-9 mb-4 ">
                                                 <Image
                                                     src={
                                                         data?.image_url
@@ -517,7 +557,7 @@ const HomeDefaultTopCategories = () => {
                                                     width={500}
                                                     height={500}
                                                     alt=""
-                                                    className="h-[230px] w-[250px] object-cover rounded-lg cursor-pointer"
+                                                    className="md:h-[230px] md:w-[250px] h-[190px] w-[190px] object-cover rounded-lg cursor-pointer"
                                                 />
 
                                                 <motion.div
@@ -579,7 +619,7 @@ const HomeDefaultTopCategories = () => {
 
                                             <Link href={`/product/${data?.id}`}>
                                                 <div className="text-center">
-                                                    <p className="uppercase text-[18px]">
+                                                    <p className="uppercase text-[14px] md:text-[18px]">
                                                         {data?.name}
                                                     </p>
                                                 </div>
@@ -588,7 +628,7 @@ const HomeDefaultTopCategories = () => {
                                         <Link href={`/product/${data?.id}`}>
                                             <hr className="my-2" />
                                             <div className="text-center">
-                                                <p className="text-blue-600 text-[16px]">
+                                                <p className="text-blue-600 text-[13px] md:text-[16px]">
                                                     {data?.description}
                                                 </p>
                                             </div>

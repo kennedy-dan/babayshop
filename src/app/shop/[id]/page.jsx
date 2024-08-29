@@ -50,6 +50,7 @@ export default function Page() {
     const [isMobile, setIsMobile] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [quantity, setQuantity] = useState(1);
+    const [showActions, setShowActions] = useState(false);
     const [currentItems, setCurrentItems] = useState([]);
     const metaData = singlecats?.results?.data?.metadata;
     const data = singlecats?.results?.data?.data?.data;
@@ -86,28 +87,26 @@ export default function Page() {
         }
     }, []);
     useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth <= 768);
+        const checkMobile = () => {
+            setIsMobile(window.matchMedia('(max-width: 768px)').matches);
         };
-
-        handleResize(); // Check on initial load
-        window.addEventListener('resize', handleResize);
-
-        return () => window.removeEventListener('resize', handleResize);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
     }, []);
-    const handleTouchStart = (id) => {
+
+    const handleTouchStart = () => {
         if (isMobile) {
-            const element = document.getElementById(`item-${id}`);
-            element?.classList.add('mobile-hover');
+            setShowActions(true);
         }
     };
 
-    const handleTouchEnd = (id) => {
+    const handleTouchEnd = () => {
         if (isMobile) {
-            const element = document.getElementById(`item-${id}`);
-            element?.classList.remove('mobile-hover');
+            setTimeout(() => setShowActions(false), 3000); // Hide after 3 seconds
         }
     };
+
     const addToCart = (id) => {
         const data = {
             product_id: id,
@@ -151,13 +150,17 @@ export default function Page() {
                         {data?.map((data, index) => (
                             <motion.div
                                 key={data.id}
-                                whileHover="hover"
+                                whileHover={isMobile ? {} : 'hover'}
+                                whileTap={isMobile ? 'hover' : {}}
                                 initial="rest"
                                 animate="rest"
                                 className=" mb-6 "
                                 onTouchStart={() => handleTouchStart(data.id)}
                                 onTouchEnd={() => handleTouchEnd(data.id)}>
-                                <div className="relative">
+                                <div
+                                    className="relative"
+                                    onTouchStart={handleTouchStart}
+                                    onTouchEnd={handleTouchEnd}>
                                     <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-8 ">
                                         <Image
                                             src={
@@ -177,6 +180,8 @@ export default function Page() {
                                                 rest: { opacity: 0, y: '10%' },
                                                 hover: { y: -37, opacity: 1 },
                                             }}
+                                            // animate='rest'
+                                            // animate={showActions || !isMobile ? "hover" : "rest"}
                                             transition={{ duration: 0.3 }}>
                                             <div
                                                 onClick={() =>

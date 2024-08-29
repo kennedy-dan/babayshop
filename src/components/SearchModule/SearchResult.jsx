@@ -127,7 +127,7 @@ const SearchResult = ({name}) => {
           {!data?.length && <div className='mt-4' ><p className='font-[500] text-4xl' >No record found</p></div>}
 
       
-          <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 ">
+          <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-2 gap-6 ">
                         {currentItems?.map((data, index) => (
                              <motion.div
                              key={index}
@@ -137,7 +137,7 @@ const SearchResult = ({name}) => {
                              className=" mb-6 ">
                              <div className="relative">
                                  <div
-                                     className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-8 "
+                                     className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-3 md:p-8 "
                                      >
                                      <Image
                                          src={
@@ -148,7 +148,7 @@ const SearchResult = ({name}) => {
                                          width={500}
                                          height={500}
                                          alt=""
-                                         className="h-[230px] w-[250px] object-cover rounded-lg cursor-pointer"
+                                         className="md:h-[230px] md:w-[250px] w-[190px] h-[190px] object-cover rounded-lg cursor-pointer"
                                      />
 
                                      <motion.div
@@ -195,7 +195,7 @@ const SearchResult = ({name}) => {
 
                                  <Link href={`/product/${data?.id}`}>
                                      <div className="text-center">
-                                         <p className="uppercase text-[18px]" >
+                                         <p className="uppercase text-[14px] md:text-[18px]" >
                                              {data?.name}
                                          </p>
                                      </div>
@@ -204,7 +204,7 @@ const SearchResult = ({name}) => {
                              <Link href={`/product/${data?.id}`}>
                                  <hr className="my-2" />
                                  <div className="text-center">
-                                     <p className="text-blue-600 text-[16px]">
+                                     <p className="text-blue-600 text-[13px] md:text-[16px]">
                                          {data?.description}
                                      </p>
                                  </div>
