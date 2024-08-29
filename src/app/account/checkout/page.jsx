@@ -251,7 +251,7 @@ export default function Page() {
 
                         <div>
                             <div className="shadow-lg md:w-[540px] md:mt-0 mt-10 rounded-xl p-[20px] border-2  font-montserrat ">
-                                <p className="font-bold text-[32px]">Summary</p>
+                                <p className="font-bold text-[18px] md:text-[32px]">Summary</p>
                                 {data?.map((items, index) => (
                                     <div key={index} className="w-full">
                                         <div className="flex w-full justify-between  font-montserrat">
@@ -280,17 +280,17 @@ export default function Page() {
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div className="text-black font-semibold text-[24px] pt-3 space-x-1 font-urbanist h-fit flex items-center ">
-                                                <div>
-                                                    <img
-                                                        src="/static/Naira.png"
-                                                        alt=""
-                                                    />
-                                                </div>
-                                                <p>
-                                                    {Math.floor(items?.price)}
-                                                </p>
-                                            </div>
+                                            <div className="text-black font-[500]  flex justify-center items-center">
+                                        <div>
+                                            <img
+                                                src="/static/Naira.png"
+                                                alt=""
+                                                className="mr-2"
+                                            />
+                                        </div>
+
+                                        <>{Math.floor(items?.price)}</>
+                                    </div>
                                             {/* <div className="">
                   <div className="flex  items-center">
                     <button onClick={() => decreaseQuant(items)}>
