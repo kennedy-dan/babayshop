@@ -136,7 +136,7 @@ const HomeDefaultTopCategories = () => {
                                         className="md:h-[190px] h-[150px] rounded-2xl"
                                     />
                                     <div>
-                                        <p className="text-center md:text-base text-[13px] ">
+                                        <p className="text-center md:text-[14px] text-[13px] ">
                                             {items?.name}
                                         </p>
                                     </div>
