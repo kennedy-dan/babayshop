@@ -9,7 +9,7 @@ import {
     favAction,
     getSingleCats,
     getFavorites,
-    getcartData
+    getcartData,
 } from '~/redux/features/productSlice';
 import { FaShoppingCart } from 'react-icons/fa';
 import { toast } from 'react-toastify';
@@ -27,6 +27,7 @@ const HomeDefaultTopCategories = () => {
     const { token } = useSelector((state) => state.auth);
     const [isMobile, setIsMobile] = useState(false);
     const [showActions, setShowActions] = useState(false);
+    const [activeItem, setActiveItem] = useState(null);
 
     const allp = allproducts?.results?.data?.data?.data;
     const pages = getpages?.results?.data?.data;
@@ -73,34 +74,34 @@ const HomeDefaultTopCategories = () => {
 
     useEffect(() => {
         const checkMobile = () => {
-          setIsMobile(window.matchMedia("(max-width: 768px)").matches);
+            setIsMobile(window.matchMedia('(max-width: 768px)').matches);
         };
         checkMobile();
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
-      }, []);
-    
-      const handleTouchStart = () => {
+    }, []);
+
+    const handleTouchStart = (id) => {
         if (isMobile) {
-          setShowActions(true);
+            setActiveItem(id);
         }
-      };
-    
-      const handleTouchEnd = () => {
+    };
+
+    const handleTouchEnd = () => {
         if (isMobile) {
-          setTimeout(() => setShowActions(false), 3000); // Hide after 3 seconds
+            // Keep the actions visible for a short time after touch
+            setTimeout(() => setActiveItem(null), 3000);
         }
-      };
-    
+    };
 
     const addToCart = (id) => {
         const data = {
             product_id: id,
             quantity: 1,
         };
-        dispatch(addtocart(data)).then(() =>{
-           dispatch(getcartData())
-        })
+        dispatch(addtocart(data)).then(() => {
+            dispatch(getcartData());
+        });
         // toast.success('done');
     };
     const catsData = getcats?.results?.data;
@@ -109,11 +110,13 @@ const HomeDefaultTopCategories = () => {
         <div className="ps-top-categories">
             <div className="ps-container">
                 {sectionpage?.section_files?.map((img) => (
-                    <div className='w-full' >
-                        <img src={img?.url} alt='' className='w-full' />
+                    <div className="w-full">
+                        <img src={img?.url} alt="" className="w-full" />
                     </div>
                 ))}
-                <p className='mt-20 font-bold md:text-[22] text-[16px] text-black mb-3 ' >Top categories </p>
+                <p className="mt-20 font-bold md:text-[22] text-[16px] text-black mb-3 ">
+                    Top categories{' '}
+                </p>
                 {/* <h3>{homePage?.page_title} </h3> */}
                 <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-5">
                     {catsData?.slice(0, 6)?.map((items, index) => (
@@ -124,13 +127,18 @@ const HomeDefaultTopCategories = () => {
                                     // className="ps-block__overlay"
                                 >
                                     <img
-                                        src={items?.image_url ? items?.image_url : "/static/cats.png"}
+                                        src={
+                                            items?.image_url
+                                                ? items?.image_url
+                                                : '/static/cats.png'
+                                        }
                                         alt="martfury"
                                         className="md:h-[190px] h-[150px] rounded-2xl"
                                     />
                                     <div>
-                                    <p className="text-center md:text-base text-[13px] ">{items?.name}</p>
-
+                                        <p className="text-center md:text-base text-[13px] ">
+                                            {items?.name}
+                                        </p>
                                     </div>
                                 </Link>
                             </div>
@@ -140,18 +148,19 @@ const HomeDefaultTopCategories = () => {
 
                 <div className="mt-40">
                     <div>
-                        <p className='mt-20 font-bold md:text-[22] text-[16px] text-black mb-4 '>New Arrival</p>
+                        <p className="mt-20 font-bold md:text-[22] text-[16px] text-black mb-4 ">
+                            New Arrival
+                        </p>
                     </div>
                     <div className="md:flex grid grid-cols-2 md:gap-0 gap-4 md:justify-between">
                         {allp?.slice(0, 4)?.map((data, index) => (
                             <motion.div
                                 key={data.id}
+                                onTouchStart={() => handleTouchStart(data?.id)}
+                                onTouchEnd={handleTouchEnd}
                                 whileHover={isMobile ? {} : 'hover'}
-                                whileTap={isMobile ? 'hover' : {}}
                                 initial="rest"
                                 animate="rest"
-                                onTouchStart={() => handleTouchStart(data.id)}
-                                onTouchEnd={() => handleTouchEnd(data.id)}
                                 className="  ">
                                 <div className="relative">
                                     <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800 p-3 md:p-9 mb-4 ">
@@ -169,11 +178,19 @@ const HomeDefaultTopCategories = () => {
 
                                         <motion.div
                                             className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
+                                            initial={{ opacity: 0, y: '10%' }}
                                             variants={{
                                                 rest: { opacity: 0, y: '10%' },
                                                 hover: { y: -37, opacity: 1 },
                                             }}
-                                            
+                                            animate={
+                                                isMobile &&
+                                                activeItem === data?.id
+                                                    ? { opacity: 1, y: -37 }
+                                                    : {}
+                                            }
+                                            // animate='rest'
+                                            // animate={showActions || !isMobile ? "hover" : "rest"}
                                             transition={{ duration: 0.3 }}>
                                             <div
                                                 onClick={() =>
@@ -252,7 +269,7 @@ const HomeDefaultTopCategories = () => {
                         <div key={index} className="mb-16 mt-32">
                             <div className="flex justify-between items-center w-full">
                                 <div className="">
-                                    <div className=' font-bold md:text-[22] text-[16px] text-black '>
+                                    <div className=" font-bold md:text-[22] text-[16px] text-black ">
                                         {items?.name}
                                     </div>
                                 </div>
@@ -266,12 +283,13 @@ const HomeDefaultTopCategories = () => {
                                 {items?.products?.slice(0, 6)?.map((data) => (
                                     <motion.div
                                         key={data.id}
+                                        onTouchStart={() =>
+                                            handleTouchStart(data?.id)
+                                        }
+                                        onTouchEnd={handleTouchEnd}
                                         whileHover={isMobile ? {} : 'hover'}
-                                        whileTap={isMobile ? 'hover' : {}}
                                         initial="rest"
                                         animate="rest"
-                                        onTouchStart={() => handleTouchStart(data.id)}
-                                        onTouchEnd={() => handleTouchEnd(data.id)}
                                         className="  ">
                                         <div className="relative">
                                             <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800 p-3 md:p-9 mb-4 ">
@@ -289,6 +307,10 @@ const HomeDefaultTopCategories = () => {
 
                                                 <motion.div
                                                     className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
+                                                    initial={{
+                                                        opacity: 0,
+                                                        y: '10%',
+                                                    }}
                                                     variants={{
                                                         rest: {
                                                             opacity: 0,
@@ -299,6 +321,17 @@ const HomeDefaultTopCategories = () => {
                                                             opacity: 1,
                                                         },
                                                     }}
+                                                    animate={
+                                                        isMobile &&
+                                                        activeItem === data?.id
+                                                            ? {
+                                                                  opacity: 1,
+                                                                  y: -37,
+                                                              }
+                                                            : {}
+                                                    }
+                                                    // animate='rest'
+                                                    // animate={showActions || !isMobile ? "hover" : "rest"}
                                                     transition={{
                                                         duration: 0.3,
                                                     }}>
@@ -378,7 +411,7 @@ const HomeDefaultTopCategories = () => {
                     ))}
 
                 <div className="flex justify-between mt-32">
-                    <div className='md:block hidden' >
+                    <div className="md:block hidden">
                         <img src="/static/ads4.png" alt="" />
                     </div>
                     <div>
@@ -390,8 +423,8 @@ const HomeDefaultTopCategories = () => {
                     ?.map((items, index) => (
                         <div key={index} className="mb-16 mt-32">
                             <div className="flex justify-between items-center  w-full">
-                                <div className=' '>
-                                    <div className=' font-bold md:text-[22] text-[16px] text-black '>
+                                <div className=" ">
+                                    <div className=" font-bold md:text-[22] text-[16px] text-black ">
                                         {items?.name}
                                     </div>
                                 </div>
@@ -404,13 +437,14 @@ const HomeDefaultTopCategories = () => {
                             <div className="md:flex md:space-x-12 grid grid-cols-2 md:gap-0 gap-4 mt-4">
                                 {items?.products?.slice(0, 6)?.map((data) => (
                                     <motion.div
-                                        key={data.id}
-                                        whileHover={isMobile ? {} : 'hover'}
-                                        whileTap={isMobile ? 'hover' : {}}
-                                        initial="rest"
-                                        animate="rest"
-                                        onTouchStart={() => handleTouchStart(data.id)}
-                                        onTouchEnd={() => handleTouchEnd(data.id)}
+                                    key={data.id}
+                                    onTouchStart={() =>
+                                        handleTouchStart(data?.id)
+                                    }
+                                    onTouchEnd={handleTouchEnd}
+                                    whileHover={isMobile ? {} : 'hover'}
+                                    initial="rest"
+                                    animate="rest"
                                         className="  ">
                                         <div className="relative">
                                             <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-3 md:p-9 mb-4 ">
@@ -428,6 +462,10 @@ const HomeDefaultTopCategories = () => {
 
                                                 <motion.div
                                                     className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
+                                                    initial={{
+                                                        opacity: 0,
+                                                        y: '10%',
+                                                    }}
                                                     variants={{
                                                         rest: {
                                                             opacity: 0,
@@ -438,6 +476,17 @@ const HomeDefaultTopCategories = () => {
                                                             opacity: 1,
                                                         },
                                                     }}
+                                                    animate={
+                                                        isMobile &&
+                                                        activeItem === data?.id
+                                                            ? {
+                                                                  opacity: 1,
+                                                                  y: -37,
+                                                              }
+                                                            : {}
+                                                    }
+                                                    // animate='rest'
+                                                    // animate={showActions || !isMobile ? "hover" : "rest"}
                                                     transition={{
                                                         duration: 0.3,
                                                     }}>
@@ -525,7 +574,7 @@ const HomeDefaultTopCategories = () => {
                         <div key={index} className="mb-16 mt-32">
                             <div className="flex justify-between items-center  w-full">
                                 <div className="">
-                                    <div className=' font-bold md:text-[22] text-[16px] text-black '>
+                                    <div className=" font-bold md:text-[22] text-[16px] text-black ">
                                         {items?.name}
                                     </div>
                                 </div>
@@ -538,13 +587,14 @@ const HomeDefaultTopCategories = () => {
                             <div className="md:flex md:space-x-12 grid grid-cols-2 md:gap-0 gap-4 mt-4">
                                 {items?.products?.slice(0, 6)?.map((data) => (
                                     <motion.div
-                                        key={data.id}
-                                        whileHover={isMobile ? {} : 'hover'}
-                                whileTap={isMobile ? 'hover' : {}}
-                                initial="rest"
-                                animate="rest"
-                                onTouchStart={() => handleTouchStart(data.id)}
-                                onTouchEnd={() => handleTouchEnd(data.id)}
+                                    key={data.id}
+                                    onTouchStart={() =>
+                                        handleTouchStart(data?.id)
+                                    }
+                                    onTouchEnd={handleTouchEnd}
+                                    whileHover={isMobile ? {} : 'hover'}
+                                    initial="rest"
+                                    animate="rest"
                                         className="  ">
                                         <div className="relative">
                                             <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-3 md:p-9 mb-4 ">
@@ -562,6 +612,10 @@ const HomeDefaultTopCategories = () => {
 
                                                 <motion.div
                                                     className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
+                                                    initial={{
+                                                        opacity: 0,
+                                                        y: '10%',
+                                                    }}
                                                     variants={{
                                                         rest: {
                                                             opacity: 0,
@@ -572,6 +626,17 @@ const HomeDefaultTopCategories = () => {
                                                             opacity: 1,
                                                         },
                                                     }}
+                                                    animate={
+                                                        isMobile &&
+                                                        activeItem === data?.id
+                                                            ? {
+                                                                  opacity: 1,
+                                                                  y: -37,
+                                                              }
+                                                            : {}
+                                                    }
+                                                    // animate='rest'
+                                                    // animate={showActions || !isMobile ? "hover" : "rest"}
                                                     transition={{
                                                         duration: 0.3,
                                                     }}>

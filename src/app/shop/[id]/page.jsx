@@ -56,7 +56,7 @@ export default function Page() {
     const data = singlecats?.results?.data?.data?.data;
     const getSingleProductData = singleproducts?.results?.data?.data?.data;
     const itemsPerPage = 10;
-
+    const [activeItem, setActiveItem] = useState(null);
     const router = useParams();
     const { id } = router;
 
@@ -88,24 +88,25 @@ export default function Page() {
     }, []);
     useEffect(() => {
         const checkMobile = () => {
-            setIsMobile(window.matchMedia('(max-width: 768px)').matches);
+          setIsMobile(window.matchMedia('(max-width: 768px)').matches);
         };
         checkMobile();
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
-    }, []);
-
-    const handleTouchStart = () => {
+      }, []);
+    
+      const handleTouchStart = (id) => {
         if (isMobile) {
-            setShowActions(true);
+          setActiveItem(id);
         }
-    };
-
-    const handleTouchEnd = () => {
+      };
+    
+      const handleTouchEnd = () => {
         if (isMobile) {
-            setTimeout(() => setShowActions(false), 3000); // Hide after 3 seconds
+          // Keep the actions visible for a short time after touch
+          setTimeout(() => setActiveItem(null), 3000);
         }
-    };
+      };
 
     const addToCart = (id) => {
         const data = {
@@ -150,15 +151,17 @@ export default function Page() {
                         {data?.map((data, index) => (
                             <motion.div
                                 key={data.id}
-                                whileHover={isMobile ? {} : 'hover'}
-                                whileTap={isMobile ? 'hover' : {}}
-                                initial="rest"
-                                animate="rest"
+                                onTouchStart={() => handleTouchStart(data?.id)}
+                                onTouchEnd={handleTouchEnd}
+                                whileHover={isMobile ? {} : "hover"}
+                                    initial="rest"
+                                    animate="rest"
                                 className=" mb-6 "
-                                onTouchStart={() => handleTouchStart(data.id)}
-                                onTouchEnd={() => handleTouchEnd(data.id)}>
+                             >
                                 <div
                                     className="relative"
+                                   
+
                                     onTouchStart={handleTouchStart}
                                     onTouchEnd={handleTouchEnd}>
                                     <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-8 ">
@@ -176,10 +179,12 @@ export default function Page() {
 
                                         <motion.div
                                             className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
+                                            initial={{ opacity: 0, y: '10%' }}
                                             variants={{
                                                 rest: { opacity: 0, y: '10%' },
                                                 hover: { y: -37, opacity: 1 },
                                             }}
+                                            animate={isMobile && activeItem === data?.id ? { opacity: 1, y: -37 } : {}}
                                             // animate='rest'
                                             // animate={showActions || !isMobile ? "hover" : "rest"}
                                             transition={{ duration: 0.3 }}>
