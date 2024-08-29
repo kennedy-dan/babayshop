@@ -47,7 +47,7 @@ export default function Page() {
     const { token } = useSelector((state) => state.auth);
     const [openTrack, setOpenTrack] = useState(false);
     const [loadingFavorites, setLoadingFavorites] = useState({});
-
+    const [isMobile, setIsMobile] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [quantity, setQuantity] = useState(1);
     const [currentItems, setCurrentItems] = useState([]);
@@ -85,6 +85,29 @@ export default function Page() {
             dispatch(getSingleCats(id));
         }
     }, []);
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        handleResize(); // Check on initial load
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    const handleTouchStart = (id) => {
+        if (isMobile) {
+            const element = document.getElementById(`item-${id}`);
+            element?.classList.add('mobile-hover');
+        }
+    };
+
+    const handleTouchEnd = (id) => {
+        if (isMobile) {
+            const element = document.getElementById(`item-${id}`);
+            element?.classList.remove('mobile-hover');
+        }
+    };
     const addToCart = (id) => {
         const data = {
             product_id: id,
@@ -131,11 +154,11 @@ export default function Page() {
                                 whileHover="hover"
                                 initial="rest"
                                 animate="rest"
-                                className=" mb-6 ">
+                                className=" mb-6 "
+                                onTouchStart={() => handleTouchStart(data.id)}
+                                onTouchEnd={() => handleTouchEnd(data.id)}>
                                 <div className="relative">
-                                    <div
-                                        className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-8 "
-                                        >
+                                    <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-8 ">
                                         <Image
                                             src={
                                                 data?.image_url
@@ -160,7 +183,10 @@ export default function Page() {
                                                     addToCart(data?.id)
                                                 }
                                                 className="cursor-pointer mr-2 h-14 w-14 flex justify-center items-center rounded-full bg-gray-600 ">
-                                                    <img src='/static/cartic.png' alt='' />
+                                                <img
+                                                    src="/static/cartic.png"
+                                                    alt=""
+                                                />
                                                 {/* <CiShoppingCart size={24} /> */}
                                             </div>
                                             <div
@@ -192,7 +218,7 @@ export default function Page() {
 
                                     <Link href={`/product/${data?.id}`}>
                                         <div className="text-center">
-                                            <p className="uppercase text-[18px]" >
+                                            <p className="uppercase text-[18px]">
                                                 {data?.name}
                                             </p>
                                         </div>
@@ -206,16 +232,16 @@ export default function Page() {
                                         </p>
                                     </div>
                                     <div className="text-black font-[500]  flex justify-center items-center">
-                                                <div>
-                                                    <img
-                                                        src="/static/Naira.png"
-                                                        alt=""
-                                                        className="mr-2"
-                                                    />
-                                                </div>
+                                        <div>
+                                            <img
+                                                src="/static/Naira.png"
+                                                alt=""
+                                                className="mr-2"
+                                            />
+                                        </div>
 
-                                                <>{Math.floor(data?.price)}</>
-                                            </div>
+                                        <>{Math.floor(data?.price)}</>
+                                    </div>
                                 </Link>
                             </motion.div>
                         ))}
