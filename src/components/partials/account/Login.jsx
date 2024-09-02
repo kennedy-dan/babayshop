@@ -206,7 +206,7 @@ export default function Login() {
                                 <div
                                     type="submit"
                                     onClick={login}
-                                    className="ps-btn text-enter text-white bg-[#F5128F] ps-btn--fullwidth">
+                                    className=" text-center py-4 text-white bg-[#F5128F] ">
                                     Login
                                 </div>
                             </div>
@@ -237,7 +237,7 @@ export default function Login() {
               style={{color:'white'}}
               className="w-[96%] bg-[#F5128F] text-white py-3 rounded-lg font-semibold text-[16px] "
             >
-              {loading ? <ClipLoader size={12} color="white" /> : <p>Reset</p>}
+              {loading ? <ClipLoader size={12} color="white" /> : <p className='text-white' >Reset</p>}
             </button>
           </div>
         </div>

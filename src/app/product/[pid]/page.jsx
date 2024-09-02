@@ -283,7 +283,7 @@ const ProductDefaultPage = () => {
                                         </p>
                                         <div className="flex space-x-4 items-center pt-2 w-full justify-between">
                                             <div className="w-full">
-                                                <button className="flex w-full border-2 rounded-md  px-2 py-4 justify-between border-gray-400 items-center">
+                                                <button className="flex w-full border-2 rounded-md  px-2 py-3 justify-between border-gray-400 items-center">
                                                     <button
                                                         onClick={
                                                             handleSubtract

@@ -4,7 +4,7 @@ import Link from 'next/link';
 const FooterWidgets = () => (
     <div className="ps-footer__widgets">
         <aside className="widget widget_footer widget_contact-us">
-            <h4 className="widget-title">Contact us</h4>
+            <h4 className="widget-title text-white">Contact us</h4>
             <div className="widget_content">
                
                 <ul className="ps-list--social">
@@ -32,8 +32,8 @@ const FooterWidgets = () => (
             </div>
         </aside>
         <aside className="widget widget_footer">
-            <h4 className="widget-title">Quick links</h4>
-            <ul className="ps-list--link">
+            <h4 className="widget-title text-white">Quick links</h4>
+            <ul className="ps-list--link text-white">
                 <li>
                     <Link href="/page/blank">Policy</Link>
                 </li>
@@ -53,9 +53,9 @@ const FooterWidgets = () => (
             </ul>
         </aside>
         <aside className="widget widget_footer">
-            <h4 className="widget-title">Company</h4>
-            <ul className="ps-list--link">
-                <li>
+            <h4 className="widget-title text-white">Company</h4>
+            <ul className="ps-list--link text-white">
+                <li className='text-white' >
                     <Link href="/page/about-us">About Us</Link>
                 </li>
                 <li>
@@ -70,7 +70,7 @@ const FooterWidgets = () => (
             </ul>
         </aside>
         <aside className="widget widget_footer">
-            <h4 className="widget-title">Bussiness</h4>
+            <h4 className="widget-title text-white">Bussiness</h4>
             <ul className="ps-list--link">
                 <li>
                     <Link href="/page/about-us">Our Press</Link>
