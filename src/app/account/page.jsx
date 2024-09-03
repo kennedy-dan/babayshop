@@ -119,11 +119,11 @@ export default function CartScreen() {
                         {users?.result?.data?.loyalty_points} Points
                     </p>
 
-                    <button
+                    {/* <button
                         onClick={handleModalOpen}
                         className="bg-[#ECECEC] py-3 px-6 rounded-3xl">
                         Redeem Points
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </div>
