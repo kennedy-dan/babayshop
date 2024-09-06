@@ -5,7 +5,7 @@ export const CREATOR_ID = 'Nouthemes';
 
 const mainHeadData = {
     '/': {
-        title: 'Martfury - React Ecommerce Template',
+        title: 'Royal Babies World',
         desc: "Elevate your online store with Martfury React Template. Customizable, SEO-friendly, and user-centric design. Secure payments, intuitive navigation. Unleash your store's potential.",
         canonical: SITE_URL,
         isIndexed: true,
