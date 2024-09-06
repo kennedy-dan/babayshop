@@ -67,7 +67,7 @@ const HeaderActions = ({ showDrawerAdv }) => {
             </buton>
 
             {!token && (
-                <div className="ps-block--user-header md:block hidden">
+                <div className=" md:block hidden">
                     {/* <div className="ps-block__left">
                         <i className="icon-user" />
                     </div> */}
