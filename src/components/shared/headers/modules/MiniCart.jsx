@@ -108,13 +108,16 @@ const MiniCart = () => {
 
     return (
         <>
-            <Link className="header__extra" href="/account/shopping-cart">
+              <div className="block">
+
+            <Link className="relative" href="/account/shopping-cart">
                 {/* <i className="icon-bag2" /> */}
-                <img src='/static/cart.png' alt='' />
-                <span>
-                    <i>{cart?.length}</i>
-                </span>
+                <img src='/static/cart.png' alt='' className='md:w-fit  w-8' />
+                <div className=' w-7 h-7 md:w-9 md:h-9 absolute md:text-base text-[12px] flex justify-center items-center left-4 md:left-7 md:top-7 text-white text-center   bg-[#F5128F] rounded-full' >
+                <div>{cart?.length}</div>
+                </div>
             </Link>
+            </div>
             {/* {cartItemsContent} */}
         </>
     );

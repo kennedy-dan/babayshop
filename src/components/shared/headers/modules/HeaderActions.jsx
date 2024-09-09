@@ -7,6 +7,7 @@ import { logOutCustomer } from '~/redux/features/authSlice';
 import { FaRegUser } from 'react-icons/fa';
 import { CiUser } from 'react-icons/ci';
 import { IoIosMenu } from 'react-icons/io';
+import { MdOutlineFavorite } from "react-icons/md";
 
 const HeaderActions = ({ showDrawerAdv }) => {
     const dispatch = useDispatch();
@@ -32,12 +33,12 @@ const HeaderActions = ({ showDrawerAdv }) => {
               <div className="block">
                         <Link
                             href="/account/wishlist"
-                            className="header__extra ">
+                            className="relative ">
                             {/* <i className="icon-heart" /> */}
-                            <img src="/static/fav.png" alt="" />
-                            <span>
-                                <i>{getfav ? fav?.length : 0}</i>
-                            </span>
+                            <img src="/static/fav.png" alt="" className='md:w-fit  w-8' />
+                            <div className=' w-7 h-7 md:w-9 md:h-9 md:text-base text-[12px] absolute left-4 md:left-7 md:top-7 flex justify-center items-center text-white text-center   bg-[#F5128F] rounded-full' >
+                                <div>{getfav ? fav?.length : 0}</div>
+                            </div>
                         </Link>
                     </div>
                     <div>
@@ -50,7 +51,7 @@ const HeaderActions = ({ showDrawerAdv }) => {
                     <div className="md:block hidden">
                         <Link
                             href="/account"
-                            className="header__extra md:block hidden">
+                            className=" md:block hidden">
                             <img src="/static/acc.png" alt="" />
                         </Link>
                     </div>
@@ -71,9 +72,15 @@ const HeaderActions = ({ showDrawerAdv }) => {
                     {/* <div className="ps-block__left">
                         <i className="icon-user" />
                     </div> */}
-                    <div className="ps-block__right text-white">
+                    <div className=" text-white">
+                        <div>
                         <Link href="/account/login">Login</Link>
+
+                        </div>
+                        <div>
                         <Link href="/account/register">Register</Link>
+
+                        </div>
                     </div>
                 </div>
             )}
