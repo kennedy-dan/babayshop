@@ -29,21 +29,21 @@ const HeaderActions = ({ showDrawerAdv }) => {
     console.log(token);
 
     return (
-        <div className="header__actions">
-              <div className="block">
+        <div className="header__actions space-x-10 md:space-x-16">
+              <div className="block relative">
                         <Link
                             href="/account/wishlist"
-                            className="relative ">
+                            className=" ">
                             {/* <i className="icon-heart" /> */}
-                            <img src="/static/fav.png" alt="" className='md:w-fit  w-8' />
+                            <img src="/static/fav.png" alt="" className='md:w-fit  w-8 ' />
                             <div className=' w-7 h-7 md:w-9 md:h-9 md:text-base text-[12px] absolute left-4 md:left-7 md:top-7 flex justify-center items-center text-white text-center   bg-[#F5128F] rounded-full' >
                                 <div>{getfav ? fav?.length : 0}</div>
                             </div>
                         </Link>
                     </div>
-                    <div>
+                    {/* <div> */}
                         <MiniCart />
-                    </div>
+                    {/* </div> */}
             {token && (
                 <>
                     {' '}

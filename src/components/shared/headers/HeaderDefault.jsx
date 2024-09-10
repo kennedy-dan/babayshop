@@ -67,16 +67,21 @@ const HeaderDefault = () => {
 
     return (
         <header
-            className="header header--1"
+            className="header header--1 pb-16"
             data-sticky="true"
             id="headerSticky">
-            <div className="header__top">
+            <div className="header__top ">
                 <div className="ps-container items-center ">
                     <div className="header__left">
                         <Link href="/">
                             <img
                                 src="/static/logo.png"
-                                className="w-40 h-28 mb-9 md:pb-0"
+                                className="md:w-40 md:h-28 mb-9 md:pb-0 md:block hidden"
+                                alt=""
+                            />
+                              <img
+                                src="/static/logomob.png"
+                                className=" md:hidden block"
                                 alt=""
                             />
                         </Link>
@@ -90,7 +95,7 @@ const HeaderDefault = () => {
                     </div>
                 </div>
 
-                <div className="bg-[#fffff0] py-3 px-[30px] md:hidden block ">
+                <div className="bg-[#fffff0] py-3 px-[30px] md:hidden block mt-8 ">
                     <Dropdown
                         menu={{
                             items: menuItems,
@@ -103,9 +108,10 @@ const HeaderDefault = () => {
                         </a>
                     </Dropdown>
                 </div>
-
+                <div className='mx-auto  overflow-x-scroll scrollcont'  >
+                <div className=' w-[310%] '>
                 <div className="w-full mt-4 bg-[#fffff0] space-x-5 pt-3 items-center md:justify-between hidden md:flex px-[30px] ">
-                    {catsData?.slice(0, 8)?.map((items, index) => (
+                    {catsData?.map((items, index) => (
                         <div key={index} className=" ">
                             <div className="">
                                 <Link href={`/shop/${items?.id}`}>
@@ -114,6 +120,8 @@ const HeaderDefault = () => {
                             </div>
                         </div>
                     ))}
+                </div>
+                </div>
                 </div>
             </div>
             <div className="header__center lg:hidden mx-[30px] mt-10 block">

@@ -30,7 +30,8 @@ import {
     getcartData,
     getSingleCats,
     favAction,
-    getFavorites
+    getFavorites,
+    getsizes
 } from '~/redux/features/productSlice';
 import { ClipLoader } from 'react-spinners';
 import WidgetProductFeatures from '~/components/shared/widgets/WidgetProductFeatures';
@@ -107,6 +108,11 @@ const ProductDefaultPage = () => {
     useEffect(() => {
         dispatch(getSingleProduct(pid));
     }, [pid]);
+    useEffect(() => {
+      
+    dispatch(getsizes())
+    }, [])
+    
 
     useEffect(() => {
         dispatch(getSingleCats(getSingleProductData?.category?.id));

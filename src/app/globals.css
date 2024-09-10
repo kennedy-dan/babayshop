@@ -14,3 +14,6 @@ body {
         transform: translateY(-37px);
     }
 }
+.scrollcont::-webkit-scrollbar {
+    display: none !important;
+  }

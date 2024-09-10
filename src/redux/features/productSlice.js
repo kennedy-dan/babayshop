@@ -38,6 +38,14 @@ export const getcartData = createAsyncThunk(
     }
 );
 
+export const getsizes = createAsyncThunk(
+    'customer/getsizes',
+    async (data) => {
+        const response = await axios.get(`sizes/list`);
+        return response.data;
+    }
+);
+
 export const RemoveFromCart = createAsyncThunk(
     'order/RemoveFromCart',
     async (data) => {
@@ -207,6 +215,10 @@ const initialState = {
     },
 
       getredeem: {
+        isLoading: false,
+        results: null,
+    },
+    sizes: {
         isLoading: false,
         results: null,
     },
@@ -382,6 +394,18 @@ export const productSlice = createSlice({
             })
             .addCase(getSingleCats.rejected, (state) => {
                 state.singlecats.isLoading = true;
+            });
+
+            builder
+            .addCase(getsizes.pending, (state) => {
+                state.sizes.isLoading = true;
+            })
+            .addCase(getsizes.fulfilled, (state, { payload }) => {
+                state.sizes.isLoading = false;
+                state.sizes.results = payload;
+            })
+            .addCase(getsizes.rejected, (state) => {
+                state.sizes.isLoading = true;
             });
 
             builder
