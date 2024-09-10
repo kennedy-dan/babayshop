@@ -303,7 +303,7 @@ const HomeDefaultTopCategories = () => {
                                     </Link>
                                 </div>
                             </div>
-                            <div className=" grid md:grid-cols-4 gap-4 mt-4">
+                            <div className=" grid md:grid-cols-4 grid-cols-2 gap-4 mt-4">
                                 {items?.products?.slice(0, 4)?.map((data) => (
                                     <motion.div
                                         key={data.id}
@@ -463,7 +463,7 @@ const HomeDefaultTopCategories = () => {
                                     </Link>
                                 </div>
                             </div>
-                            <div className=" grid md:grid-cols-4 gap-4 mt-4">
+                            <div className=" grid md:grid-cols-4 grid-cols-2 gap-4 mt-4">
                                 {items?.products?.slice(0, 4)?.map((data) => (
                                     <motion.div
                                         key={data.id}
@@ -618,7 +618,7 @@ const HomeDefaultTopCategories = () => {
                                     </Link>
                                 </div>
                             </div>
-                            <div className=" grid md:grid-cols-4 gap-4 mt-4">
+                            <div className=" grid md:grid-cols-4 grid-cols-2 gap-4 mt-4">
                                 {items?.products?.slice(0, 4)?.map((data) => (
                                     <motion.div
                                         key={data.id}
