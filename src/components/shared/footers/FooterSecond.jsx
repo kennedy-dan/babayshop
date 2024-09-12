@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 const FooterSecond = ({ classes }) => (
-    <footer className={`ps-footer ps-footer--2 ${classes}`}>
+    <footer className={`  ps-footer--2 ${classes}`}>
         <div className="container">
             <div className="ps-footer__content">
                 <div className="row">

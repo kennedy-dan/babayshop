@@ -34,8 +34,8 @@ const FooterWidgets = () => (
         <aside className="widget widget_footer">
             <h4 className="widget-title text-white">Quick links</h4>
             <ul className="ps-list--link text-white">
-                <li>
-                    <Link href="/page/blank">Policy</Link>
+                <li className='text-[#fafafa]' >
+                    <Link href="/page/blank"><div className='text-[#fafafa]' >Policy</div></Link>
                 </li>
 
                 <li>

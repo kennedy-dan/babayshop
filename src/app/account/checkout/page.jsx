@@ -278,6 +278,8 @@ export default function Page() {
                                                     <p className="font-[500] text-black text-[18px] w-[100%] ">
                                                         {items?.product?.name}
                                                     </p>
+                                                    {items?.selected_size?.size_name  && <p>size: {items?.selected_size?.size_name}</p>}
+                                                    
                                                 </div>
                                             </div>
                                             <div className="text-black font-[500]  flex justify-center items-center">

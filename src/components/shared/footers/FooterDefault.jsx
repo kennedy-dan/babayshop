@@ -4,7 +4,7 @@ import FooterLinks from './modules/FooterLinks';
 import FooterCopyright from './modules/FooterCopyright';
 
 const FooterDefault = () => (
-    <footer className="ps-footer">
+    <footer className="ps-footer bg-[#003057]">
         <div className="container">
             <FooterWidgets />
             {/* <FooterLinks /> */}

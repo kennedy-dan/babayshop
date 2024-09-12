@@ -4,7 +4,7 @@ import FooterLinks from './modules/FooterLinks';
 import FooterCopyright from './modules/FooterCopyright';
 
 const FooterMarketPlace2 = () => (
-    <footer className="ps-footer ps-footer--3">
+    <footer className="ps-footer bg-[#003057] ps-footer--3">
         <div className="container">
             <div className="ps-block--site-features ps-block--site-features-2">
                 <div className="ps-block__item">

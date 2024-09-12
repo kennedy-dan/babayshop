@@ -17,6 +17,7 @@ import { MdOutlineFavorite, MdFavorite } from 'react-icons/md';
 import { MdFavoriteBorder } from 'react-icons/md';
 import { CiShoppingCart } from 'react-icons/ci';
 import { toast } from 'react-toastify';
+import { Select, ConfigProvider } from 'antd';
 
 // import { MdFavoriteBorder } from 'react-icons/md';
 import { motion } from 'framer-motion';
@@ -40,18 +41,21 @@ const ProductDefaultPage = () => {
     const params = useParams();
     const dispatch = useDispatch();
     const { pid } = params;
-    const { loading, getStrapiProduct, product } = useGetProducts();
+    const { loading, getStrapiProduct, product,  } = useGetProducts();
     const [quantity, setQuantity] = useState(1);
+    const [selectedOptions, setSelectedOptions] = useState(null);
+
 
     const [desc, setDesc] = useState('description');
 
-    const { singlecats, singleproducts, addcart } = useSelector(
+    const { singlecats, singleproducts, addcart, sizes } = useSelector(
         (state) => state.product
     );
     const { token } = useSelector((state) => state.auth);
     const [loadingFavorites, setLoadingFavorites] = useState({});
 
     const getSingleProductData = singleproducts?.results?.data?.data;
+    const sizedata= singleproducts?.results?.data?.data?.product_sizes
 
     const handleFavoriteClick = async (id, isFavorite) => {
         if (!token) {
@@ -75,6 +79,9 @@ const ProductDefaultPage = () => {
         } finally {
             setLoadingFavorites((prev) => ({ ...prev, [id]: false }));
         }
+    };
+    const handleChange = (value) => {
+        setSelectedOptions(value);
     };
 
     const handleFavoriteClickProdd = async (id, isFavorite) => {
@@ -137,6 +144,7 @@ const ProductDefaultPage = () => {
         const data = {
             product_id: id,
             quantity: quantity,
+            size_id: selectedOptions
         };
         dispatch(addtocart(data));
     };
@@ -335,19 +343,51 @@ const ProductDefaultPage = () => {
                                                 <MdFavoriteBorder size={23} />
                                             </div> */}
                                         </div>
-                                        <div className="h-[1px] bg-gray-400 w-full mt-5 "></div>
-
+                                        <div className="h-[1px] bg-gray-400 w-full my-5 "></div>
                                         <p className="font-[600]">
+                                            Size
+                                        </p>
+                                        {sizedata?.length > 0 &&      <ConfigProvider
+                                                theme={{
+                                                    components: {
+                                                        Select: {
+                                                            optionSelectedFontWeight: 600,
+                                                        },
+                                                    },
+                                                    // ...customTheme,
+                                                    token: {
+                                                        borderRadius: 0,
+                                                        controlHeight: 60,
+                                                        colorBgContainer:
+                                                            '#f0f0f0',
+                                                        fontSize: 16,
+                                                        // optionSelectedFontWeight: 300
+                                                    },
+                                                }}>
+                                            <Select
+                                                // mode="multiple"
+                                                placeholder="Select Size"
+                                                style={{ width: '100%' }}
+                                                onChange={handleChange}>
+                                                {sizedata?.map(items => <Option value={items?.id}>
+                                                    {items?.size_name}
+                                                </Option>)}
+                                           
+                                            </Select>
+                                            </ConfigProvider> }
+                                   
+
+                                        <p className="font-[600] mt-3">
                                             Product details
                                         </p>
                                         <p>
                                             {getSingleProductData?.description}
                                         </p>
-                                        <p className="font-[600] pt-2">
+                                        <p className="font-[600] mt-3">
                                             category
                                         </p>
 
-                                        <p className=" text-[16px]">
+                                        <p className=" text-[16px] ">
                                             {
                                                 getSingleProductData?.category
                                                     ?.name
