@@ -31,7 +31,7 @@ export default function CartScreen() {
                         </div>
                     </div>
                 </div>
-                <Newletters layout="container" />
+                {/* <Newletters layout="container" /> */}
             </PageContainer>
         </>
     );

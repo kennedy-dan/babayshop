@@ -2,7 +2,7 @@ import React from 'react';
 
 const FooterCopyright = () => (
     <div className="ps-footer__copyright">
-        <p>&copy; 2024 Royal babies world. All Rights Reserved</p>
+       <div className="text-[#fafafa]">&copy; 2024 Royal babies world. All Rights Reserved</div>
      
     </div>
 );

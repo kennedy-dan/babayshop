@@ -109,7 +109,7 @@ const HeaderDefault = () => {
                     </Dropdown>
                 </div>
                 <div className='mx-auto  overflow-x-scroll scrollcont'  >
-                <div className=' w-[310%] '>
+                <div className=' w-[210%] '>
                 <div className="w-full mt-4 bg-[#fffff0] space-x-5 pt-3 items-center md:justify-between hidden md:flex px-[30px] ">
                     {catsData?.map((items, index) => (
                         <div key={index} className=" ">

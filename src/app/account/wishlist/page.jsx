@@ -30,7 +30,7 @@ export default function Page() {
                 </div>
                 </div>
             </div>
-            <Newletters layout="container" />
+            {/* <Newletters layout="container" /> */}
         </PageContainer>
     );
 }

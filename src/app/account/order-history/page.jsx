@@ -69,13 +69,13 @@ const Orderhistory = () => {
                                     </p>
                                 </div>
                             </div>
-                            <div>
+                            {/* <div>
                                 <button
                                     onClick={handleTrackOpen}
                                     className=" bg-secondary text-white py-4 px-4 rounded-lg font-semibold text-[16px] ">
                                     Tracking Order
                                 </button>
-                            </div>
+                            </div> */}
                         </div>
                         {items?.items?.map((item, index) => (
                             <div key={index}>
@@ -87,6 +87,7 @@ const Orderhistory = () => {
                                                 : '/static/deliv.png'
                                         }
                                         alt=""
+                                        className='md:h-[300px]md: w-[300px] h-[100px] w-[100px] object-contain'
                                     />
                                     <div className="md:flex text-[17px] justify-between w-full font-[500] ">
                                         <div>
@@ -110,7 +111,7 @@ const Orderhistory = () => {
                     </div>
                 ))}
             </section>
-            <Newletters layout="container" />
+            {/* <Newletters layout="container" /> */}
 
             <Modal open={openTrack} onCancel={handleTrackClose} footer={false}>
                 <img src="/images/tracking.png" alt="" />

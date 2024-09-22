@@ -165,6 +165,8 @@ export default function Page() {
                                     onTouchStart={handleTouchStart}
                                     onTouchEnd={handleTouchEnd}>
                                     <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-8 ">
+                                    <Link href={`/product/${data?.id}`}>
+
                                         <Image
                                             src={
                                                 data?.image_url
@@ -176,15 +178,16 @@ export default function Page() {
                                             alt=""
                                             className="h-[230px] w-[250px] object-cover rounded-lg cursor-pointer"
                                         />
+                                        </Link>
 
                                         <motion.div
                                             className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
                                             initial={{ opacity: 0, y: '10%' }}
                                             variants={{
                                                 rest: { opacity: 0, y: '10%' },
-                                                hover: { y: -37, opacity: 1 },
+                                                hover: { y: -55, opacity: 1 },
                                             }}
-                                            animate={isMobile && activeItem === data?.id ? { opacity: 1, y: -37 } : {}}
+                                            animate={isMobile && activeItem === data?.id ? { opacity: 1, y: -55 } : {}}
                                             // animate='rest'
                                             // animate={showActions || !isMobile ? "hover" : "rest"}
                                             transition={{ duration: 0.3 }}>
@@ -358,7 +361,7 @@ export default function Page() {
                     </div> */}
                 </div>
             </div>
-            <Newletters />
+            {/* <Newletters /> */}
         </PageContainer>
     );
 }

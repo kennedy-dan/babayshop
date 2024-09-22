@@ -6,7 +6,6 @@ const FooterWidgets = () => (
         <aside className="widget widget_footer widget_contact-us">
             <h4 className="widget-title text-white">Contact us</h4>
             <div className="widget_content">
-               
                 <ul className="ps-list--social">
                     <li>
                         <a className="facebook" href="#">
@@ -34,55 +33,34 @@ const FooterWidgets = () => (
         <aside className="widget widget_footer">
             <h4 className="widget-title text-white">Quick links</h4>
             <ul className="ps-list--link text-white">
-                <li className='text-[#fafafa]' >
-                    <Link href="/page/blank"><div className='text-[#fafafa]' >Policy</div></Link>
+                <li className="text-[#fafafa]">
+                    <Link href="/page/blank">
+                        <div className="text-[#fafafa]">Policy</div>
+                    </Link>
                 </li>
 
                 <li>
-                    <Link href="/page/blank">Term & Condition</Link>
+                    <Link href="/page/blank"><div className="text-[#fafafa]">Term & Condition</div></Link>
                 </li>
+             
                 <li>
-                    <Link href="/page/blank">Shipping</Link>
-                </li>
-                <li>
-                    <Link href="/page/blank">Return</Link>
-                </li>
-                <li>
-                    <Link href="/page/faqs">FAQs</Link>
+                    <Link href="/page/faqs"><div className="text-[#fafafa]">return</div></Link>
                 </li>
             </ul>
         </aside>
-        <aside className="widget widget_footer">
-            <h4 className="widget-title text-white">Company</h4>
-            <ul className="ps-list--link text-white">
-                <li className='text-white' >
-                    <Link href="/page/about-us">About Us</Link>
-                </li>
-                <li>
-                    <Link href="/page/blank">Affilate</Link>
-                </li>
-                <li>
-                    <Link href="/page/blank">Career</Link>
-                </li>
-                <li>
-                    <Link href="/page/contact-us">Contact</Link>
-                </li>
-            </ul>
-        </aside>
+
         <aside className="widget widget_footer">
             <h4 className="widget-title text-white">Bussiness</h4>
             <ul className="ps-list--link">
+               
                 <li>
-                    <Link href="/page/about-us">Our Press</Link>
+                    <Link href="/account/checkout"><div className="text-[#fafafa]">Checkout</div></Link>
                 </li>
                 <li>
-                    <Link href="/account/checkout">Checkout</Link>
+                    <Link href="/account"><div className="text-[#fafafa]">My account</div></Link>
                 </li>
                 <li>
-                    <Link href="/account/user-information">My account</Link>
-                </li>
-                <li>
-                    <Link href={'/shop'}>Shop</Link>
+                    <Link href={'/shop/1'}><div className="text-[#fafafa]">Shop</div></Link>
                 </li>
             </ul>
         </aside>
