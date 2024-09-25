@@ -13,6 +13,8 @@ import {
 } from '~/redux/features/productSlice';
 import { FaShoppingCart } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { Carousel as AntCarousel, Select, ConfigProvider } from "antd";
+
 import { CiShoppingCart } from 'react-icons/ci';
 import { motion } from 'framer-motion';
 import { MdOutlineFavorite, MdFavorite } from 'react-icons/md';
@@ -109,11 +111,16 @@ const HomeDefaultTopCategories = () => {
     return (
         <div className="ps-top-categories">
             <div className="ps-container">
-                {sectionpage?.section_files?.map((img) => (
-                    <div className="w-full">
+            <AntCarousel autoplay effect="fade" speed={1500}>
+
+                {sectionpage?.section_files?.map((img, index) => (
+                    <div key={index} className="w-full">
                         <Image objectFit="cover"  height={2500} width={2500} src={img?.url} priority  alt="" className="w-full " />
                     </div>
                 ))}
+              </AntCarousel>
+
+             
                 <p className="mt-20 font-bold md:text-[22] text-[16px] text-black mb-3 ">
                     Top categories{' '}
                 </p>
