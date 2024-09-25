@@ -14,12 +14,40 @@ import {
 import { FaShoppingCart } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { Carousel as AntCarousel, Select, ConfigProvider } from "antd";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 import { CiShoppingCart } from 'react-icons/ci';
 import { motion } from 'framer-motion';
 import { MdOutlineFavorite, MdFavorite } from 'react-icons/md';
 import { MdFavoriteBorder } from 'react-icons/md';
 import Image from 'next/image';
+
+const CustomArrow = ({ type, onClick }) => (
+    <div
+      onClick={onClick}
+      style={{
+        background: 'rgba(0, 0, 0, 0.5)',
+        borderRadius: '50%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '40px',
+        height: '40px',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        zIndex: 2,
+        cursor: 'pointer',
+        [type === 'prev' ? 'left' : 'right']: '10px',
+      }}
+    >
+      {type === 'prev' ? (
+        <IoIosArrowBack style={{ color: 'white', fontSize: '20px' }} />
+      ) : (
+        <IoIosArrowForward style={{ color: 'white', fontSize: '20px' }} />
+      )}
+    </div>
+  );
 
 const HomeDefaultTopCategories = () => {
     const dispatch = useDispatch();
@@ -111,11 +139,12 @@ const HomeDefaultTopCategories = () => {
     return (
         <div className="ps-top-categories">
             <div className="ps-container">
-            <AntCarousel autoplay effect="fade" speed={1500}>
+            <AntCarousel arrows  autoplay effect="fade" speed={1500}    prevArrow={<CustomArrow type="prev" />}
+                    nextArrow={<CustomArrow type="next" />}>
 
                 {sectionpage?.section_files?.map((img, index) => (
-                    <div key={index} className="w-full">
-                        <Image objectFit="cover"  height={2500} width={2500} src={img?.url} priority  alt="" className="w-full " />
+                    <div key={index} className="w-full md:h-screen h-[400px]">
+                        <Image objectFit="cover"  height={2500} width={2500} src={img?.url} priority  alt="" className="w-full h-full object-cover object-center " />
                     </div>
                 ))}
               </AntCarousel>
@@ -185,7 +214,7 @@ const HomeDefaultTopCategories = () => {
                                       width={500}
                                       height={500}
                                       alt=""
-                                      className="h-[250px] w-full object-cover rounded-lg cursor-pointer"
+                                      className="h-[250px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
                                   />
                               </Link>
 
@@ -336,7 +365,7 @@ const HomeDefaultTopCategories = () => {
                                                     width={500}
                                                     height={500}
                                                     alt=""
-                                                    className="h-[250px] w-full object-cover rounded-lg cursor-pointer"
+                                                    className="h-[250px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
                                                 />
                                             </Link>
 
@@ -496,7 +525,7 @@ const HomeDefaultTopCategories = () => {
                                                     width={500}
                                                     height={500}
                                                     alt=""
-                                                    className="h-[250px] w-full object-cover rounded-lg cursor-pointer"
+                                                    className="h-[250px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
                                                 />
                                             </Link>
 
@@ -651,7 +680,7 @@ const HomeDefaultTopCategories = () => {
                                                     width={500}
                                                     height={500}
                                                     alt=""
-                                                    className="h-[250px] w-full object-cover rounded-lg cursor-pointer"
+                                                    className="h-[250px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
                                                 />
                                             </Link>
 
