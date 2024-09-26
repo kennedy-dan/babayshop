@@ -164,7 +164,7 @@ export default function Page() {
 
                                     onTouchStart={handleTouchStart}
                                     onTouchEnd={handleTouchEnd}>
-                                    <div style={{background:'white'}} className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-8 ">
+                                    <div style={{background:'white'}} className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  md:p-8 p-3 ">
                                     <Link href={`/product/${data?.id}`}>
 
                                         <Image
@@ -176,7 +176,7 @@ export default function Page() {
                                             width={500}
                                             height={500}
                                             alt=""
-                                            className="h-[230px] w-[250px] object-cover rounded-lg cursor-pointer"
+                                            className="md:h-[230px] h-[150px] w-[250px] object-contain md:object-cover rounded-lg cursor-pointer"
                                         />
                                         </Link>
 

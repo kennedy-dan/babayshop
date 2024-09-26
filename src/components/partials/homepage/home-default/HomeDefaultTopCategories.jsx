@@ -143,12 +143,11 @@ const HomeDefaultTopCategories = () => {
                     autoplay
                     effect="fade"
                     speed={1500}
-                    prevArrow={<CustomArrow type="prev" />}
-                    nextArrow={<CustomArrow type="next" />}>
+                 >
                     {sectionpage?.section_files?.map((img, index) => (
                         <div
                             key={index}
-                            className="w-full md:h-screen h-[400px]">
+                            className="w-full md:h-screen h-[250px]">
                             <Image
                                 objectFit="cover"
                                 height={2500}
@@ -156,7 +155,7 @@ const HomeDefaultTopCategories = () => {
                                 src={img?.url}
                                 priority
                                 alt=""
-                                className="w-full h-full object-cover object-center "
+                                className="w-full h-full md:object-cover  object-center "
                             />
                         </div>
                     ))}
@@ -211,7 +210,7 @@ const HomeDefaultTopCategories = () => {
                                 animate="rest"
                                 className="  ">
                                 <div className="relative  ">
-                                    <div style={{background:'white'}} className="justify-center items-center flex rounded-3xl bg-white  md:p-8 p-3 hover:bg-gray-800  mb-4 ">
+                                    <div style={{background:'white'}} className="justify-center items-center flex rounded-3xl bg-white  md:p-8 p-3 hover:bg-gray-800 mb-2 md:mb-4 ">
                                         <Link href={`/product/${data?.id}`}>
                                             <Image
                                                 src={
@@ -222,7 +221,7 @@ const HomeDefaultTopCategories = () => {
                                                 width={500}
                                                 height={500}
                                                 alt=""
-                                                className="h-[250px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
+                                                className="md:h-[250px] w-full h-[150px] object-contain sm:object-cover rounded-lg cursor-pointer"
                                             />
                                         </Link>
 
@@ -368,7 +367,7 @@ const HomeDefaultTopCategories = () => {
                                                         width={500}
                                                         height={500}
                                                         alt=""
-                                                        className="h-[250px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
+                                                        className="sm:h-[250px] h-[150px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
                                                     />
                                                 </Link>
 
@@ -538,7 +537,7 @@ const HomeDefaultTopCategories = () => {
                                                         width={500}
                                                         height={500}
                                                         alt=""
-                                                        className="h-[250px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
+                                                        className="sm:h-[250px] h-[150px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
                                                     />
                                                 </Link>
 
@@ -696,7 +695,7 @@ const HomeDefaultTopCategories = () => {
                                                         width={500}
                                                         height={500}
                                                         alt=""
-                                                        className="h-[250px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
+                                                        className="md:h-[250px] h-[150px] w-full object-contain  rounded-lg cursor-pointer"
                                                     />
                                                 </Link>
 

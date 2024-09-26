@@ -175,7 +175,7 @@ const SearchResult = ({ name }) => {
                                             width={500}
                                             height={500}
                                             alt=""
-                                            className="md:h-[230px] md:w-[250px] w-[190px] h-[190px] object-cover rounded-lg cursor-pointer"
+                                            className="md:h-[230px] md:w-[250px] w-[190px] h-[150px] object-contain sm:object-cover rounded-lg cursor-pointer"
                                         />
                                     </Link>
                                     <motion.div

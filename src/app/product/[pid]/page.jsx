@@ -219,7 +219,7 @@ const ProductDefaultPage = () => {
                         {!singleproducts?.isLoading && (
                             <div>
                                 <div className="md:flex my-20 w-full md:space-x-12   font-montserrat">
-                                    <div style={{background:'white'}} className=" bg-white rounded-lg h-fit  p-4">
+                                    <div style={{background:'white'}} className="  rounded-lg h-fit  p-4">
                                         <img
                                             src={
                                                 getSingleProductData?.image_url
@@ -227,12 +227,12 @@ const ProductDefaultPage = () => {
                                                     : '/static/toy.jpg'
                                             }
                                             alt=""
-                                            className="w-[70px] h-[70px] object-cover rounded-lg "
+                                            className="w-[70px] h-[70px] object-contain  rounded-lg "
                                             // width={500}
                                             // height={500}
                                         />
                                     </div>
-                                    <div style={{background:'white'}} className=" bg-white rounded-lg h-fit  p-4">
+                                    <div style={{background:'red'}} className="  rounded-lg h-fit  p-4">
                                         <img
                                             src={
                                                 getSingleProductData?.image_url
@@ -240,7 +240,7 @@ const ProductDefaultPage = () => {
                                                     : '/static/toy.jpg'
                                             }
                                             alt=""
-                                            className="w-[430px] h-[400px] object-cover rounded-lg "
+                                            className="w-[430px] h-[400px] object-contain  rounded-lg "
                                             // width={500}
                                             // height={800}
                                         />
@@ -443,7 +443,7 @@ const ProductDefaultPage = () => {
                                                         width={500}
                                                         height={500}
                                                         alt=""
-                                                        className="h-[230px] w-[250px] object-cover rounded-lg cursor-pointer"
+                                                        className="h-[230px] w-[250px] object-contain sm:object-cover rounded-lg cursor-pointer"
                                                     />
 
                                                     <motion.div
