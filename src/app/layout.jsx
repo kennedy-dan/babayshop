@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
                 <head>
     <link rel="icon" href="/favicon.ico" sizes="any" />
   </head>
-        <body className={poppins.className}>
+        <body style={{background: '#FAFAFA'}} className={`${poppins.className} 'bg-[#FAFAFA]' `}>
         <Providers>
            <ToastContainer
             position="top-center"

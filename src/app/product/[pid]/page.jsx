@@ -232,7 +232,7 @@ const ProductDefaultPage = () => {
                                             // height={500}
                                         />
                                     </div>
-                                    <div style={{background:'red'}} className="  rounded-lg h-fit  p-4">
+                                    <div style={{background:'white'}} className="  rounded-lg h-fit  p-4">
                                         <img
                                             src={
                                                 getSingleProductData?.image_url
