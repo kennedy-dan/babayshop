@@ -99,7 +99,7 @@ export default function CartScreen() {
         <div className="md:flex w-full md:space-x-8 ">
             <div className="w-[70%]">
                 <p>My Account</p>
-                <div className="bg-white px-3 py-6 rounded-2xl">
+                <div style={{background:'white'}} className="bg-white px-3 py-6 rounded-2xl">
                     <div className="pb-4">
                         <p className="pb-3">Personal Information </p>
                         <p className="text-black">
@@ -113,7 +113,7 @@ export default function CartScreen() {
                 </div>
             </div>
             <div className=" md:w-[30%] mt-4 ">
-                <div className="bg-white border-[#F5128F] border-2 px-3 py-6  h-fit rounded-2xl">
+                <div style={{background:'white'}} className="bg-white border-[#F5128F] border-2 px-3 py-6  h-fit rounded-2xl">
                     <p>My Loyalty Point</p>
                     <p className="text-[#F5128F] py-4">
                         {users?.result?.data?.loyalty_points} Points
@@ -130,7 +130,7 @@ export default function CartScreen() {
     );
     const loyalty = (
         <div>
-            <div className="bg-white border-[#F5128F] border-2 px-3 h-[80px] items-center flex justify-between  rounded-2xl">
+            <div style={{background:'white'}} className="bg-white border-[#F5128F] border-2 px-3 h-[80px] items-center flex justify-between  rounded-2xl">
                 <p>
                     My Loyalty Point:{' '}
                     <span className="text-[#F5128F] pl-6">
@@ -144,7 +144,7 @@ export default function CartScreen() {
                 </button>
             </div>
 
-            <div className="rounded-2xl md:text-base text-[12px] mt-5 bg-white ">
+            <div style={{background:'white'}} className="rounded-2xl md:text-base text-[12px] mt-5 bg-white ">
                 <div className="grid grid-cols-3 bg-[#003057] py-4 px-4 rounded-t-2xl text-white ">
                     <div>Voucher</div>
                     <div>Status</div>
@@ -302,7 +302,7 @@ export default function CartScreen() {
                     <div className="ps-section--shopping ps-shopping-cart">
                         <div className="container">
                             <div className="md:flex md:space-x-8 w-full ">
-                                <div className="bg-white h-fit rouded-lg p-4 md:block md:mb-0 mb-6 flex justify-between md:w-[20%]">
+                                <div style={{background:'white'}} className="bg-white h-fit rouded-lg p-4 md:block md:mb-0 mb-6 flex justify-between md:w-[20%]">
                                     {nav.map((items, index) => (
                                         <div
                                             key={index}

@@ -219,7 +219,7 @@ const ProductDefaultPage = () => {
                         {!singleproducts?.isLoading && (
                             <div>
                                 <div className="md:flex my-20 w-full md:space-x-12   font-montserrat">
-                                    <div className=" bg-white rounded-lg h-fit  p-4">
+                                    <div style={{background:'white'}} className=" bg-white rounded-lg h-fit  p-4">
                                         <img
                                             src={
                                                 getSingleProductData?.image_url
@@ -232,7 +232,7 @@ const ProductDefaultPage = () => {
                                             // height={500}
                                         />
                                     </div>
-                                    <div className=" bg-white rounded-lg h-fit  p-4">
+                                    <div style={{background:'white'}} className=" bg-white rounded-lg h-fit  p-4">
                                         <img
                                             src={
                                                 getSingleProductData?.image_url
@@ -433,7 +433,7 @@ const ProductDefaultPage = () => {
                                             animate="rest"
                                             className=" mb-6 ">
                                             <div className="relative">
-                                                <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-8 ">
+                                                <div style={{background:'white'}} className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-8 ">
                                                     <Image
                                                         src={
                                                             data?.image_url

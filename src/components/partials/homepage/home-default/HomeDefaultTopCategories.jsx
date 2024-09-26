@@ -13,8 +13,8 @@ import {
 } from '~/redux/features/productSlice';
 import { FaShoppingCart } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import { Carousel as AntCarousel, Select, ConfigProvider } from "antd";
-import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import { Carousel as AntCarousel, Select, ConfigProvider } from 'antd';
+import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 
 import { CiShoppingCart } from 'react-icons/ci';
 import { motion } from 'framer-motion';
@@ -24,30 +24,29 @@ import Image from 'next/image';
 
 const CustomArrow = ({ type, onClick }) => (
     <div
-      onClick={onClick}
-      style={{
-        background: 'rgba(0, 0, 0, 0.5)',
-        borderRadius: '50%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '40px',
-        height: '40px',
-        position: 'absolute',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        zIndex: 2,
-        cursor: 'pointer',
-        [type === 'prev' ? 'left' : 'right']: '10px',
-      }}
-    >
-      {type === 'prev' ? (
-        <IoIosArrowBack style={{ color: 'white', fontSize: '20px' }} />
-      ) : (
-        <IoIosArrowForward style={{ color: 'white', fontSize: '20px' }} />
-      )}
+        onClick={onClick}
+        style={{
+            background: 'rgba(0, 0, 0, 0.5)',
+            borderRadius: '50%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '40px',
+            height: '40px',
+            position: 'absolute',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            zIndex: 2,
+            cursor: 'pointer',
+            [type === 'prev' ? 'left' : 'right']: '10px',
+        }}>
+        {type === 'prev' ? (
+            <IoIosArrowBack style={{ color: 'white', fontSize: '20px' }} />
+        ) : (
+            <IoIosArrowForward style={{ color: 'white', fontSize: '20px' }} />
+        )}
     </div>
-  );
+);
 
 const HomeDefaultTopCategories = () => {
     const dispatch = useDispatch();
@@ -139,17 +138,30 @@ const HomeDefaultTopCategories = () => {
     return (
         <div className="ps-top-categories">
             <div className="ps-container">
-            <AntCarousel arrows  autoplay effect="fade" speed={1500}    prevArrow={<CustomArrow type="prev" />}
+                <AntCarousel
+                    arrows
+                    autoplay
+                    effect="fade"
+                    speed={1500}
+                    prevArrow={<CustomArrow type="prev" />}
                     nextArrow={<CustomArrow type="next" />}>
+                    {sectionpage?.section_files?.map((img, index) => (
+                        <div
+                            key={index}
+                            className="w-full md:h-screen h-[400px]">
+                            <Image
+                                objectFit="cover"
+                                height={2500}
+                                width={2500}
+                                src={img?.url}
+                                priority
+                                alt=""
+                                className="w-full h-full object-cover object-center "
+                            />
+                        </div>
+                    ))}
+                </AntCarousel>
 
-                {sectionpage?.section_files?.map((img, index) => (
-                    <div key={index} className="w-full md:h-screen h-[400px]">
-                        <Image objectFit="cover"  height={2500} width={2500} src={img?.url} priority  alt="" className="w-full h-full object-cover object-center " />
-                    </div>
-                ))}
-              </AntCarousel>
-
-             
                 <p className="mt-20 font-bold md:text-[22] text-[16px] text-black mb-3 ">
                     Top categories{' '}
                 </p>
@@ -190,135 +202,127 @@ const HomeDefaultTopCategories = () => {
                     </div>
                     <div className=" grid md:grid-cols-4 grid-cols-2  gap-4 ">
                         {allp?.slice(0, 4)?.map((data, index) => (
-                          <motion.div
-                          key={data.id}
-                          onTouchStart={() =>
-                              handleTouchStart(data?.id)
-                          }
-                          onTouchEnd={handleTouchEnd}
-                          whileHover={isMobile ? {} : 'hover'}
-                          initial="rest"
-                          animate="rest"
-                          className="  ">
-                          <div className="relative  ">
-
-                              <div className="justify-center items-center flex rounded-3xl bg-white  md:p-8 p-3 hover:bg-gray-800  mb-4 ">
-                          <Link href={`/product/${data?.id}`}>
-
-                                  <Image
-                                      src={
-                                          data?.image_url
-                                              ? data?.image_url
-                                              : '/static/toy.jpg'
-                                      }
-                                      width={500}
-                                      height={500}
-                                      alt=""
-                                      className="h-[250px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
-                                  />
-                              </Link>
-
-                                  <motion.div
-                                      className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
-                                      initial={{
-                                          opacity: 0,
-                                          y: '10%',
-                                      }}
-                                      variants={{
-                                          rest: {
-                                              opacity: 0,
-                                              y: '10%',
-                                          },
-                                          hover: {
-                                              y: -37,
-                                              opacity: 1,
-                                          },
-                                      }}
-                                      animate={
-                                          isMobile &&
-                                          activeItem === data?.id
-                                              ? {
-                                                    opacity: 1,
-                                                    y: -37,
+                            <motion.div
+                                key={data.id}
+                                onTouchStart={() => handleTouchStart(data?.id)}
+                                onTouchEnd={handleTouchEnd}
+                                whileHover={isMobile ? {} : 'hover'}
+                                initial="rest"
+                                animate="rest"
+                                className="  ">
+                                <div className="relative  ">
+                                    <div style={{background:'white'}} className="justify-center items-center flex rounded-3xl bg-white  md:p-8 p-3 hover:bg-gray-800  mb-4 ">
+                                        <Link href={`/product/${data?.id}`}>
+                                            <Image
+                                                src={
+                                                    data?.image_url
+                                                        ? data?.image_url
+                                                        : '/static/toy.jpg'
                                                 }
-                                              : {}
-                                      }
-                                      // animate='rest'
-                                      // animate={showActions || !isMobile ? "hover" : "rest"}
-                                      transition={{
-                                          duration: 0.3,
-                                      }}>
-                                      <div
-                                          onClick={() =>
-                                              addToCart(data?.id)
-                                          }
-                                          className="cursor-pointer mr-2 h-14 w-14 flex justify-center items-center rounded-full bg-gray-600 ">
-                                          <img
-                                              src="/static/cartic.png"
-                                              alt=""
-                                          />
-                                          {/* <CiShoppingCart size={24} /> */}
-                                      </div>
-                                      <div
-                                          className="cursor-pointer bg-gray-600 h-14 w-14 flex justify-center items-center  rounded-full"
-                                          onClick={(e) => {
-                                              e.stopPropagation();
-                                              handleFavoriteClick(
-                                                  data?.id,
-                                                  data?.is_favorite,
-                                                  data?.category
-                                                      ?.id
-                                              );
-                                          }}>
-                                          {loadingFavorites[
-                                              data?.id
-                                          ] ? (
-                                              // <ClipLoader size={20} color="#000000" />
-                                              <p></p>
-                                          ) : data?.is_favorite ? (
-                                              <MdFavorite
-                                                  size={24}
-                                                  color="red"
-                                              />
-                                          ) : (
-                                              <MdFavoriteBorder
-                                                  size={24}
-                                                  color="white"
-                                              />
-                                          )}
-                                      </div>
-                                  </motion.div>
-                              </div>
+                                                width={500}
+                                                height={500}
+                                                alt=""
+                                                className="h-[250px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
+                                            />
+                                        </Link>
 
+                                        <motion.div
+                                            className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
+                                            initial={{
+                                                opacity: 0,
+                                                y: '10%',
+                                            }}
+                                            variants={{
+                                                rest: {
+                                                    opacity: 0,
+                                                    y: '10%',
+                                                },
+                                                hover: {
+                                                    y: -37,
+                                                    opacity: 1,
+                                                },
+                                            }}
+                                            animate={
+                                                isMobile &&
+                                                activeItem === data?.id
+                                                    ? {
+                                                          opacity: 1,
+                                                          y: -37,
+                                                      }
+                                                    : {}
+                                            }
+                                            // animate='rest'
+                                            // animate={showActions || !isMobile ? "hover" : "rest"}
+                                            transition={{
+                                                duration: 0.3,
+                                            }}>
+                                            <div
+                                                onClick={() =>
+                                                    addToCart(data?.id)
+                                                }
+                                                className="cursor-pointer mr-2 h-14 w-14 flex justify-center items-center rounded-full bg-gray-600 ">
+                                                <img
+                                                    src="/static/cartic.png"
+                                                    alt=""
+                                                />
+                                                {/* <CiShoppingCart size={24} /> */}
+                                            </div>
+                                            <div
+                                                className="cursor-pointer bg-gray-600 h-14 w-14 flex justify-center items-center  rounded-full"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    handleFavoriteClick(
+                                                        data?.id,
+                                                        data?.is_favorite,
+                                                        data?.category?.id
+                                                    );
+                                                }}>
+                                                {loadingFavorites[data?.id] ? (
+                                                    // <ClipLoader size={20} color="#000000" />
+                                                    <p></p>
+                                                ) : data?.is_favorite ? (
+                                                    <MdFavorite
+                                                        size={24}
+                                                        color="red"
+                                                    />
+                                                ) : (
+                                                    <MdFavoriteBorder
+                                                        size={24}
+                                                        color="white"
+                                                    />
+                                                )}
+                                            </div>
+                                        </motion.div>
+                                    </div>
 
-                              <Link href={`/product/${data?.id}`}>
-                                  <div className="text-center">
-                                      <p className="uppercase text-[14px] md:text-[18px]">
-                                          {data?.name}
-                                      </p>
-                                  </div>
-                              </Link>
-                          </div>
-                          <Link href={`/product/${data?.id}`}>
-                              <hr className="my-2" />
-                              <div className="text-center">
-                                  <p className="text-blue-600 truncate ...   text-[13px] md:text-[16px]">
-                                      {data?.description}
-                                  </p>
-                              </div>
-                              <div className="text-black font-[500]  flex justify-center items-center">
-                                  <div>
-                                      <img
-                                          src="/static/Naira.png"
-                                          alt=""
-                                          className="mr-2"
-                                      />
-                                  </div>
+                                    <Link href={`/product/${data?.id}`}>
+                                        <div className="text-center">
+                                            <p className="uppercase text-[14px] md:text-[18px]">
+                                                {data?.name}
+                                            </p>
+                                        </div>
+                                    </Link>
+                                </div>
+                                <Link href={`/product/${data?.id}`}>
+                                    <hr className="my-2" />
+                                    <div className="text-center">
+                                        <p className="text-blue-600 truncate ...   text-[13px] md:text-[16px]">
+                                            {data?.description}
+                                        </p>
+                                    </div>
+                                    <div className="text-black font-[500]  flex justify-center items-center">
+                                        <div>
+                                            <img
+                                                src="/static/Naira.png"
+                                                alt=""
+                                                className="mr-2"
+                                            />
+                                        </div>
 
-                                  <>{Math.floor(data?.price)}</>
-                              </div>
-                          </Link>
-                      </motion.div>
+                                        <>{Math.floor(data?.price)}</>
+                                    </div>
+                                </Link>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
@@ -352,22 +356,21 @@ const HomeDefaultTopCategories = () => {
                                         animate="rest"
                                         className="  ">
                                         <div className="relative  ">
-
-                                            <div className="justify-center items-center flex rounded-3xl bg-white  md:p-8 p-3 hover:bg-gray-800  mb-4 ">
-                                        <Link href={`/product/${data?.id}`}>
-
-                                                <Image
-                                                    src={
-                                                        data?.image_url
-                                                            ? data?.image_url
-                                                            : '/static/toy.jpg'
-                                                    }
-                                                    width={500}
-                                                    height={500}
-                                                    alt=""
-                                                    className="h-[250px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
-                                                />
-                                            </Link>
+                                            <div style={{background:'white'}} className="justify-center items-center flex rounded-3xl bg-white  md:p-8 p-3 hover:bg-gray-800  mb-4 ">
+                                                <Link
+                                                    href={`/product/${data?.id}`}>
+                                                    <Image
+                                                        src={
+                                                            data?.image_url
+                                                                ? data?.image_url
+                                                                : '/static/toy.jpg'
+                                                        }
+                                                        width={500}
+                                                        height={500}
+                                                        alt=""
+                                                        className="h-[250px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
+                                                    />
+                                                </Link>
 
                                                 <motion.div
                                                     className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
@@ -440,7 +443,6 @@ const HomeDefaultTopCategories = () => {
                                                     </div>
                                                 </motion.div>
                                             </div>
-
 
                                             <Link href={`/product/${data?.id}`}>
                                                 <div className="text-center">
@@ -477,10 +479,22 @@ const HomeDefaultTopCategories = () => {
 
                 <div className="flex justify-between mt-32">
                     <div className="md:block hidden">
-                        <Image height={1000} width={1000} className='w-full' src="/static/ads4.png" alt="" />
+                        <Image
+                            height={1000}
+                            width={1000}
+                            className="w-full"
+                            src="/static/ads4.png"
+                            alt=""
+                        />
                     </div>
                     <div>
-                        <Image height={1000} width={1000} className='w-full' src="/static/ads5.png" alt="" />
+                        <Image
+                            height={1000}
+                            width={1000}
+                            className="w-full"
+                            src="/static/ads5.png"
+                            alt=""
+                        />
                     </div>
                 </div>
                 {categoriesWithProducts?.results
@@ -512,22 +526,21 @@ const HomeDefaultTopCategories = () => {
                                         animate="rest"
                                         className="  ">
                                         <div className="relative  ">
-
-                                            <div className="justify-center items-center flex rounded-3xl bg-white  md:p-8 p-3 hover:bg-gray-800  mb-4 ">
-                                        <Link href={`/product/${data?.id}`}>
-
-                                                <Image
-                                                    src={
-                                                        data?.image_url
-                                                            ? data?.image_url
-                                                            : '/static/toy.jpg'
-                                                    }
-                                                    width={500}
-                                                    height={500}
-                                                    alt=""
-                                                    className="h-[250px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
-                                                />
-                                            </Link>
+                                            <div style={{background:'white'}} className="justify-center items-center flex rounded-3xl bg-white  md:p-8 p-3 hover:bg-gray-800  mb-4 ">
+                                                <Link
+                                                    href={`/product/${data?.id}`}>
+                                                    <Image
+                                                        src={
+                                                            data?.image_url
+                                                                ? data?.image_url
+                                                                : '/static/toy.jpg'
+                                                        }
+                                                        width={500}
+                                                        height={500}
+                                                        alt=""
+                                                        className="h-[250px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
+                                                    />
+                                                </Link>
 
                                                 <motion.div
                                                     className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
@@ -600,7 +613,6 @@ const HomeDefaultTopCategories = () => {
                                                     </div>
                                                 </motion.div>
                                             </div>
-
 
                                             <Link href={`/product/${data?.id}`}>
                                                 <div className="text-center">
@@ -635,7 +647,12 @@ const HomeDefaultTopCategories = () => {
                         </div>
                     ))}
                 <div className="w-full mt-32">
-                    <Image height={1500} width={1500}  src="/static/ads1.png" className="w-" />
+                    <Image
+                        height={1500}
+                        width={1500}
+                        src="/static/ads1.png"
+                        className="w-"
+                    />
                 </div>
 
                 {categoriesWithProducts?.results
@@ -667,22 +684,21 @@ const HomeDefaultTopCategories = () => {
                                         animate="rest"
                                         className="  ">
                                         <div className="relative  ">
-
-                                            <div className="justify-center items-center flex rounded-3xl bg-white  md:p-8 p-3 hover:bg-gray-800  mb-4 ">
-                                        <Link href={`/product/${data?.id}`}>
-
-                                                <Image
-                                                    src={
-                                                        data?.image_url
-                                                            ? data?.image_url
-                                                            : '/static/toy.jpg'
-                                                    }
-                                                    width={500}
-                                                    height={500}
-                                                    alt=""
-                                                    className="h-[250px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
-                                                />
-                                            </Link>
+                                            <div style={{background:'white'}} className="justify-center items-center flex rounded-3xl bg-white  md:p-8 p-3 hover:bg-gray-800  mb-4 ">
+                                                <Link
+                                                    href={`/product/${data?.id}`}>
+                                                    <Image
+                                                        src={
+                                                            data?.image_url
+                                                                ? data?.image_url
+                                                                : '/static/toy.jpg'
+                                                        }
+                                                        width={500}
+                                                        height={500}
+                                                        alt=""
+                                                        className="h-[250px] w-full object-contain sm:object-cover rounded-lg cursor-pointer"
+                                                    />
+                                                </Link>
 
                                                 <motion.div
                                                     className="flex absolute bottom-0 left-0 justify-center right-0  bg-opacity-80 p-2"
@@ -755,7 +771,6 @@ const HomeDefaultTopCategories = () => {
                                                     </div>
                                                 </motion.div>
                                             </div>
-
 
                                             <Link href={`/product/${data?.id}`}>
                                                 <div className="text-center">

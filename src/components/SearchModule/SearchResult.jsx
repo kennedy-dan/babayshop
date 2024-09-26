@@ -164,7 +164,7 @@ const SearchResult = ({ name }) => {
                             animate="rest"
                             className=" mb-6 ">
                             <div className="relative">
-                                <div className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-3 md:p-8 ">
+                                <div style={{background:'white'}} className="justify-cente flex rounded-3xl bg-white hover:bg-gray-800  p-3 md:p-8 ">
                                     <Link href={`/product/${data?.id}`}>
                                         <Image
                                             src={
