@@ -479,8 +479,8 @@ const HomeDefaultTopCategories = () => {
                 <div className="flex justify-between mt-32">
                     <div className="md:block hidden">
                         <Image
-                            height={1000}
-                            width={1000}
+                            height={1500}
+                            width={1500}
                             className="w-full"
                             src="/static/ads4.png"
                             alt=""
@@ -488,8 +488,8 @@ const HomeDefaultTopCategories = () => {
                     </div>
                     <div>
                         <Image
-                            height={1000}
-                            width={1000}
+                            height={1500}
+                            width={1500}
                             className="w-full"
                             src="/static/ads5.png"
                             alt=""
