@@ -157,12 +157,12 @@ const HeaderDefault = () => {
                     </div>
                     <div className="space-y-6 font-[500] text-[19px]">
                      
-
+{/* 
                         <div>
                             <Link href="/contact">
                                 <div className="text-black">Contact us</div>
                             </Link>
-                        </div>
+                        </div> */}
 
                         {/* <div>
                             <Link href="/location">

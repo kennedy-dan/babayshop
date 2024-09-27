@@ -185,7 +185,7 @@ export default function CartScreen() {
             {data?.map((items, index) => (
                 <div key={index} className="   md:px-[50px] px-[15px] ">
                     <div className=" md:px-9 px-3 md:space-y-0 space-y-4 py-4 md:flex justify-between border-b-2 border-b-[#EBF6F6] ">
-                        <div className="md:flex md:space-y-0 space-y-4">
+                        <div className="flex md:space-y-0  md:space-x-16 space-x-10 items-center ">
                             <div>
                                 <p className="text-black  font-[500] text-[17px] ">
                                     Order number
@@ -194,7 +194,7 @@ export default function CartScreen() {
                                     {items?.reference}
                                 </p>
                             </div>
-                            <div className="md:ml-16">
+                            <div className="md:ml-16 hidden sm:block">
                                 <p className="text-black font-[500] text-[17px] ">
                                     Date
                                 </p>
@@ -228,7 +228,7 @@ export default function CartScreen() {
                     {items?.items?.map((item, index) => (
                         <div key={index}>
                             <>
-                                <div className="md:flex py-4 md:space-x-3">
+                                <div className="flex py-4 space-x-3">
                                     <img
                                         src={
                                             item?.image_url
@@ -238,7 +238,7 @@ export default function CartScreen() {
                                         className="h-24 w-24 object-"
                                         alt=""
                                     />
-                                    <div className="md:flex text-[17px] justify-between w-full font-[500] ">
+                                    <div className="md:flex text-[13px] md:text-[17px] justify-between w-full font-[500] ">
                                         <div>
                                             <p className="font-[500] text-black">
                                                 {item?.product_name}
@@ -347,7 +347,7 @@ export default function CartScreen() {
                         <div className="container">
                             <div className="md:flex md:space-x-8 w-full ">
                                 <div className="mx-auto  md:mx-0 md:overflow-x-visible  overflow-x-scroll scrollcont">
-                                    <div className=" w-[210%] md:w-full ">
+                                    <div className=" w-[240%] md:w-full ">
                                         <div
                                             style={{ background: 'white' }}
                                             className="bg-white md:h-fit h-[70px] rouded-lg md:p-4 md:block md:mb-0 mb-6 items-center flex justify-between md:w-full">
