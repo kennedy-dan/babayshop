@@ -146,14 +146,14 @@ const ProductDefaultPage = () => {
             quantity: quantity,
             size_id: selectedOptions
         };
-        dispatch(addtocart(data));
+        dispatch(addtocart(data)).then(() => dispatch(getcartData()))
     };
 
-    useEffect(() => {
-        if (token) {
-            dispatch(getcartData());
-        }
-    }, [addcart, token]);
+    // useEffect(() => {
+    //     if (token) {
+    //         dispatch(getcartData());
+    //     }
+    // }, [addcart, token]);
 
     const breadCrumb = [
         {

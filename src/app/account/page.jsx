@@ -17,6 +17,7 @@ import { Modal } from 'antd';
 import { toast } from 'react-toastify';
 import { IoReturnDownBack } from 'react-icons/io5';
 import { getUsers } from '~/redux/features/authSlice';
+import { IoIosCloseCircle } from 'react-icons/io';
 
 export default function CartScreen() {
     const dispatch = useDispatch();
@@ -99,7 +100,9 @@ export default function CartScreen() {
         <div className="md:flex w-full md:space-x-8 ">
             <div className="w-[70%]">
                 <p>My Account</p>
-                <div style={{background:'white'}} className="bg-white px-3 py-6 rounded-2xl">
+                <div
+                    style={{ background: 'white' }}
+                    className="bg-white px-3 py-6 rounded-2xl">
                     <div className="pb-4">
                         <p className="pb-3">Personal Information </p>
                         <p className="text-black">
@@ -113,7 +116,9 @@ export default function CartScreen() {
                 </div>
             </div>
             <div className=" md:w-[30%] mt-4 ">
-                <div style={{background:'white'}} className="bg-white border-[#F5128F] border-2 px-3 py-6  h-fit rounded-2xl">
+                <div
+                    style={{ background: 'white' }}
+                    className="bg-white border-[#F5128F] border-2 px-3 py-6  h-fit rounded-2xl">
                     <p>My Loyalty Point</p>
                     <p className="text-[#F5128F] py-4">
                         {users?.result?.data?.loyalty_points} Points
@@ -130,7 +135,9 @@ export default function CartScreen() {
     );
     const loyalty = (
         <div>
-            <div style={{background:'white'}} className="bg-white border-[#F5128F] border-2 px-3 h-[80px] items-center flex justify-between  rounded-2xl">
+            <div
+                style={{ background: 'white' }}
+                className="bg-white border-[#F5128F] border-2 px-3 h-[80px] items-center flex justify-between  rounded-2xl">
                 <p>
                     My Loyalty Point:{' '}
                     <span className="text-[#F5128F] pl-6">
@@ -144,7 +151,9 @@ export default function CartScreen() {
                 </button>
             </div>
 
-            <div style={{background:'white'}} className="rounded-2xl md:text-base text-[12px] mt-5 bg-white ">
+            <div
+                style={{ background: 'white' }}
+                className="rounded-2xl md:text-base text-[12px] mt-5 bg-white ">
                 <div className="grid grid-cols-3 bg-[#003057] py-4 px-4 rounded-t-2xl text-white ">
                     <div>Voucher</div>
                     <div>Status</div>
@@ -218,35 +227,52 @@ export default function CartScreen() {
                     </div>
                     {items?.items?.map((item, index) => (
                         <div key={index}>
-                            <div className="md:flex py-4 md:space-x-3">
-                                <img
-                                    src={
-                                        item?.image_url
-                                            ? item?.image_url
-                                            : '/static/deliv.png'
-                                    }
-                                    className="h-24 w-24 object-"
-                                    alt=""
-                                />
-                                <div className="md:flex text-[17px] justify-between w-full font-[500] ">
-                                    <div>
-                                        <p className="font-[500] text-black">
-                                            {item?.product_name}
-                                        </p>
-                                        <p className="font-[400] py-1">
-                                            QTY: {item?.quantity}
+                            <>
+                                <div className="md:flex py-4 md:space-x-3">
+                                    <img
+                                        src={
+                                            item?.image_url
+                                                ? item?.image_url
+                                                : '/static/deliv.png'
+                                        }
+                                        className="h-24 w-24 object-"
+                                        alt=""
+                                    />
+                                    <div className="md:flex text-[17px] justify-between w-full font-[500] ">
+                                        <div>
+                                            <p className="font-[500] text-black">
+                                                {item?.product_name}
+                                            </p>
+                                            <p className="font-[400] py-1">
+                                                QTY: {item?.quantity}
+                                            </p>
+                                        </div>
+                                        <p className="text-green-400 mt-3 md:mt-0 text-[14px] font-[500] ">
+                                            <p className=" text-black">
+                                                N {item?.unit_price}
+                                            </p>
                                         </p>
                                     </div>
-                                    <p className="text-green-400 mt-3 md:mt-0 text-[14px] font-[500] ">
-                                        <p className=" text-black">
-                                            N {item?.unit_price}
-                                        </p>
-                                    </p>
                                 </div>
-                            </div>
+                            </>
+
                             {/* <hr className='' /> */}
                         </div>
                     ))}
+
+                    {items?.payment?.status === 'Completed' && (
+                        <div className="flex space-x-3 items-center ">
+                            <img src="/static/suc.png" alt="" /> <p>Paid</p>{' '}
+                        </div>
+                    )}
+                    {items?.payment?.status !== 'Completed' && (
+                        <div className="flex space-x-3 items-center ">
+                            <IoIosCloseCircle color="red" />{' '}
+                            <p className="text-red-700">not paid</p>{' '}
+                        </div>
+                    )}
+
+                    {/* <div className='flex space-x-3 items-center ' ><p>Status:</p>  <p className={items?.payment?.status ==='Completed'? 'text-green-600':' text-red-700'} >{items?.payment?.status}</p> </div> */}
 
                     <div className="h-[2px] bg-gray-400 w-full my-[50px]"></div>
 
@@ -259,35 +285,53 @@ export default function CartScreen() {
     const account = (
         <div>
             <div className="md:flex">
-                <div className='md:w-1/2' >
+                <div className="md:w-1/2">
                     <p>Personal Information</p>
-                    <p className='text-[11px]'>Please provide your personal information</p>
+                    <p className="text-[11px]">
+                        Please provide your personal information
+                    </p>
                 </div>
-                <div className='md:w-1/2 md:mt-0 mt-8'>
+                <div className="md:w-1/2 md:mt-0 mt-8">
                     <p>Name</p>
-                    <input value={user?.first_name + ' ' + user?.last_name} className="border w-[80%] border-1 px-4 py-3 border-gray-500" />
+                    <input
+                        value={user?.first_name + ' ' + user?.last_name}
+                        className="border w-[80%] border-1 px-4 py-3 border-gray-500"
+                    />
 
-                    <div className='mt-5' >
+                    <div className="mt-5">
                         {' '}
                         <p>Email</p>
-                        <input value={user?.email} className="border w-[80%] border-1 px-4 py-3 border-gray-500" />
+                        <input
+                            value={user?.email}
+                            className="border w-[80%] border-1 px-4 py-3 border-gray-500"
+                        />
                     </div>
+
+                    <button className="bg-gray-400 text-white font-semibold w-[80%] py-4 mt-6  ">
+                        Save
+                    </button>
                 </div>
             </div>
             <div className="md:flex justify-between mt-10">
-                <div className='md:w-1/2'>
+                <div className="md:w-1/2">
                     <p>Address Details</p>
-                    <p className='text-[11px]' >Default shipping address</p>
+                    <p className="text-[11px]">Default shipping address</p>
                 </div>
-                <div className='md:w-1/2 md:mt-0 mt-8'>
+                <div className="md:w-1/2 md:mt-0 mt-8">
                     <p>Phone Number</p>
-                    <input  className="border w-[80%] mt-1 border-1 px-4 py-3 border-gray-500" />
+                    <input className="border w-[80%] mt-1 border-1 px-4 py-3 border-gray-500" />
 
-                    <div className='mt-5' >
+                    <div className="mt-5">
                         {' '}
                         <p>Address</p>
-                        <textarea rews={18}  className="border w-[80%] mt-1 border-1 px-4 py-3 border-gray-500" />
+                        <textarea
+                            rews={18}
+                            className="border w-[80%] mt-1 border-1 px-4 py-3 border-gray-500"
+                        />
                     </div>
+                    <button className="bg-gray-400 text-white font-semibold w-[80%] py-4 mt-6  ">
+                        Save
+                    </button>
                 </div>
             </div>
         </div>
@@ -302,28 +346,37 @@ export default function CartScreen() {
                     <div className="ps-section--shopping ps-shopping-cart">
                         <div className="container">
                             <div className="md:flex md:space-x-8 w-full ">
-                                <div style={{background:'white'}} className="bg-white h-fit rouded-lg p-4 md:block md:mb-0 mb-6 flex justify-between md:w-[20%]">
-                                    {nav.map((items, index) => (
+                                <div className="mx-auto  md:mx-0 md:overflow-x-visible  overflow-x-scroll scrollcont">
+                                    <div className=" w-[210%] md:w-full ">
                                         <div
-                                            key={index}
-                                            onClick={() => setIndexValue(index)}
-                                            className="mb-8 cursor-pointer ">
-                                            <div className="flex items-center space-x-4">
-                                                <div className="md:block hidden">
-                                                    <img
-                                                        alt=""
-                                                        src={items.img}
-                                                    />
-                                                </div>
+                                            style={{ background: 'white' }}
+                                            className="bg-white md:h-fit h-[70px] rouded-lg md:p-4 md:block md:mb-0 mb-6 items-center flex justify-between md:w-full">
+                                            {nav.map((items, indexx) => (
+                                                <div
+                                                    key={indexx}
+                                                    onClick={() =>
+                                                        setIndexValue(indexx)
+                                                    }
+                                                    className="mb-8 cursor-pointer ">
+                                                    <div
+                                                        className={`${indexx === index ? 'bg-[#feeafa] md:py-3 ' : ''} flex items-center md:mx-0 mx-5 px-2 md:pl-3 md:space-x-4`}>
+                                                        <div className="md:block hidden">
+                                                            <img
+                                                                alt=""
+                                                                src={items.img}
+                                                            />
+                                                        </div>
 
-                                                <div>
-                                                    <div className="text-black md:font-[500] font-semibold md:text-[13px] text-[9px]">
-                                                        {items.name}
+                                                        <div>
+                                                            <div className="text-black md:font-[500] font-semibold md:text-[13px] text-[13px]">
+                                                                {items.name}
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            ))}
                                         </div>
-                                    ))}
+                                    </div>
                                 </div>
                                 {index === 0 && (
                                     <div className="w-full md:w-[90%]">
@@ -348,7 +401,7 @@ export default function CartScreen() {
                                         {loyalty}
                                     </div>
                                 )}
-                                    {index === 4 && (
+                                {index === 4 && (
                                     <div className="w-full md:w-[90%]">
                                         {account}
                                     </div>
