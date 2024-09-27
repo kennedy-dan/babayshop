@@ -18,6 +18,7 @@ import { toast } from 'react-toastify';
 import { IoReturnDownBack } from 'react-icons/io5';
 import { getUsers } from '~/redux/features/authSlice';
 import { IoIosCloseCircle } from 'react-icons/io';
+import { MdPending } from "react-icons/md";
 
 export default function CartScreen() {
     const dispatch = useDispatch();
@@ -267,8 +268,8 @@ export default function CartScreen() {
                     )}
                     {items?.payment?.status !== 'Completed' && (
                         <div className="flex space-x-3 items-center ">
-                            <IoIosCloseCircle color="red" />{' '}
-                            <p className="text-red-700">not paid</p>{' '}
+                            <MdPending color="gray" size={14} />{' '}
+                            <p className="text-red-700">Pending</p>{' '}
                         </div>
                     )}
 
