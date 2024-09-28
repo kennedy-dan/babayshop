@@ -239,7 +239,7 @@ export default function CartScreen() {
                                         className="h-24 w-24 object-"
                                         alt=""
                                     />
-                                    <div className="md:flex text-[13px] md:text-[17px] justify-between w-full font-[500] ">
+                                    <div className="flex text-[13px] md:text-[17px] justify-between w-full font-[500] ">
                                         <div>
                                             <p className="font-[500] text-black">
                                                 {item?.product_name}
@@ -268,8 +268,8 @@ export default function CartScreen() {
                     )}
                     {items?.payment?.status !== 'Completed' && (
                         <div className="flex space-x-3 items-center ">
-                            <MdPending color="gray" size={14} />{' '}
-                            <p className="text-red-700">Pending</p>{' '}
+                            <IoIosCloseCircle color="red" size={14} />{' '}
+                            <p className="text-red-700">not paid</p>{' '}
                         </div>
                     )}
 
