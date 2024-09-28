@@ -268,7 +268,7 @@ export default function CartScreen() {
                     )}
                     {items?.payment?.status !== 'Completed' && (
                         <div className="flex space-x-3 items-center ">
-                            <IoIosCloseCircle color="red" size={14} />{' '}
+                            <IoIosCloseCircle color="red" size={18} />{' '}
                             <p className="text-red-700">not paid</p>{' '}
                         </div>
                     )}
@@ -348,7 +348,7 @@ export default function CartScreen() {
                         <div className="container">
                             <div className="md:flex md:space-x-8 w-full ">
                                 <div className="mx-auto  md:mx-0 md:overflow-x-visible  overflow-x-scroll scrollcont">
-                                    <div className=" w-[240%] md:w-full ">
+                                    <div className=" w-[290%] md:w-full ">
                                         <div
                                             style={{ background: 'white' }}
                                             className="bg-white md:h-fit h-[70px] rouded-lg md:p-4 md:block md:mb-0 mb-6 items-center flex justify-between md:w-full">
@@ -360,7 +360,7 @@ export default function CartScreen() {
                                                     }
                                                     className="mb-8 cursor-pointer ">
                                                     <div
-                                                        className={`${indexx === index ? 'bg-[#feeafa] md:py-3 ' : ''} flex items-center md:mx-0 mx-5 px-2 md:pl-3 md:space-x-4`}>
+                                                        className={`${indexx === index ? 'bg-[#feeafa] md:py-3 py-2 ' : ''} flex items-center md:mx-0 mx-5 px-9 md:px-2 md:pl-3 md:space-x-4`}>
                                                         <div className="md:block hidden">
                                                             <img
                                                                 alt=""
