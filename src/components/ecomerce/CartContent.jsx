@@ -130,28 +130,31 @@ export default function CartContent() {
     }, [cartItems]);
 
     return (
-        <div className=" justify-between py-20 px-6 lg:px-[20px] lg:py-[20px] xl:px-[20px] xl:py-[100px] md:space-x-10">
+        <div className=" justify-between py-16 px-6 lg:px-[20px] lg:py-[20px] xl:px-[20px] xl:py-[40px] md:space-x-10">
             <div className="w-full md:flex md:justify-between md:space-x-12 ">
                 <div className="md:w-[60%]">
-                    <div className="grid gap-5 grid-cols-4 font-semibold  px-3 bg-[#003057] mb-5 py-4 ">
+                    <div className="grid gap-5 grid-cols-5 font-semibold  px-3 bg-[#003057] mb-5 py-4 ">
                         <div className="col-span-2 ">
                             <p className="text-white font-bold">PRODUCT</p>
                         </div>
                         <div>
                             <p className="text-white font-bold">PRICE</p>
                         </div>{' '}
-                        <div className="flex justify-end">
+                        <div className="flex ">
                             <p className="text-white font-bold">QUANTITY</p>
+                        </div>
+                        <div className="flex justify-end">
+                            <p className="text-white font-bold">SIZE</p>
                         </div>
                     </div>
                     <div className="">
                         {cartItems?.map((items, index) => (
                             <div
                                 key={index}
-                                className="w-full grid gap-5 mb-5 grid-cols-4">
+                                className="w-full grid gap-5 mb-5 grid-cols-5">
                                 <div className="flex col-span-2 space-  ">
                                     <div className="flex space-x-3  ">
-                                        <div className="md:bg-white md:p-9 rounded-2xl">
+                                        <div className="md:bg-white  rounded-2xl">
                                             <Image
                                                 src={
                                                     items?.product?.image_url
@@ -194,7 +197,7 @@ export default function CartContent() {
                                    
                                     </div> */}
                                 </div>
-                                <div>
+                                <div className='flex justify-start items-start ' >
                                     {getcart?.isLoading ||
                                     (addcart?.isLoading &&
                                         updatingItemId === items.id) ? (
@@ -213,8 +216,8 @@ export default function CartContent() {
                                     </div>
                                     )}
                                 </div>
-                                <div className="flex justify-end items-start">
-                                    <div className="w-full flex justify-end">
+                                <div className="flex  items-start">
+                                    <div className="w-full ">
                                         <button className="flex md:w-[50%] w-[100%] border-2 rounded-md  px-2 py-2 justify-between border-gray-400 items-center">
                                             <button
                                                 onClick={() =>
@@ -239,6 +242,12 @@ export default function CartContent() {
                                             </button>
                                         </button>
                                     </div>
+                                </div>
+
+                                <div className='flex justify-end' > 
+                                <p className=" text-black md:text-[16px] text-[12px] w-[] ">
+                                                {items?.selected_size?.size_name}
+                                            </p>
                                 </div>
 
                                 {/* <br /> */}

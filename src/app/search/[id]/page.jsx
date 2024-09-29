@@ -3,7 +3,7 @@
 import SearchResult from '~/components/SearchModule/SearchResult'
 import { getAllProducts } from '~/redux/features/productSlice'
 import { useParams } from 'next/navigation'
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import PageContainer from '~/components/layouts/PageContainer';
 import FooterDefault from '~/components/shared/footers/FooterDefault';
@@ -15,20 +15,26 @@ const Search = () => {
   const {token} = useSelector(state => state.auth)
 
   const {id} = params
+  const [searchTerm, setSearchTerm] = useState('');
   console.log(id)
   useEffect(() => {
     if(id) {
+      setSearchTerm(decodeURIComponent(id));
+      console.log(searchTerm)
       const data = {
-        search: id
+        search: searchTerm
       }
-      dispatch(getAllProducts(data))
+      if(searchTerm){
+        dispatch(getAllProducts(data))
+
+      }
 
     }
-  }, [id])
+  }, [id, searchTerm])
   
   return (
     <PageContainer footer={<FooterDefault />} title="Shopping Cart">
-        <SearchResult name={id} />
+        <SearchResult name={searchTerm} />
         </PageContainer>
   )
 }
