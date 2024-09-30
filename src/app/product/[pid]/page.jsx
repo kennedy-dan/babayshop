@@ -44,6 +44,7 @@ const ProductDefaultPage = () => {
     const { loading, getStrapiProduct, product,  } = useGetProducts();
     const [quantity, setQuantity] = useState(1);
     const [selectedOptions, setSelectedOptions] = useState(null);
+    const [sizeLength, setSizeLength] = useState(false);
 
 
     const [desc, setDesc] = useState('description');
@@ -80,6 +81,14 @@ const ProductDefaultPage = () => {
             setLoadingFavorites((prev) => ({ ...prev, [id]: false }));
         }
     };
+
+    useEffect(() => {
+        if(sizedata?.length > 0){
+            setSizeLength(true)
+
+        }
+    }, [sizedata])
+    
     const handleChange = (value) => {
         setSelectedOptions(value);
     };
@@ -141,6 +150,10 @@ const ProductDefaultPage = () => {
     };
 
     const addToCart = (id) => {
+        if(sizedata?.length > 0  && !selectedOptions  ){
+            toast.error('select size')
+            return
+        }
         const data = {
             product_id: id,
             quantity: quantity,

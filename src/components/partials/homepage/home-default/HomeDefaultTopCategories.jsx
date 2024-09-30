@@ -153,7 +153,7 @@ const HomeDefaultTopCategories = () => {
                                 height={2500}
                                 width={2500}
                                 src={img?.url}
-                                priority
+                                // priority
                                 alt=""
                                 className="w-full h-full md:object-cover  object-center "
                             />

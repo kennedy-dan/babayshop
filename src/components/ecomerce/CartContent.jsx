@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import Image from 'next/image';
 import { unwrapResult } from "@reduxjs/toolkit";
+import { toast } from 'react-toastify';
 
 import {
     addtocart,
@@ -29,6 +30,7 @@ export default function CartContent() {
     const [coupon, setCoupon] = useState('')
     const [prod, setprod] = useState(null);
     const [total, setTotal] = useState(0);
+    const [sizeId, setSizeId] = useState(null);
     useEffect(() => {
         if (getcart?.results?.data?.data?.items) {
             setCartItems(getcart.results.data.data.items);
@@ -42,6 +44,8 @@ export default function CartContent() {
                 if (item.id === itemId.id) {
                     setquant(item.quantity + 1);
                     setprod(itemId?.product?.id);
+                    setSizeId(itemId?.selected_size?.id)
+
                     return { ...item, quantity: item.quantity + 1 };
                 }
                 return item;
@@ -56,6 +60,7 @@ export default function CartContent() {
                 if (item.id === itemId.id && item.quantity > 1) {
                     setquant(item.quantity - 1);
                     setprod(itemId?.product?.id);
+                    setSizeId(itemId?.selected_size?.id)
                     return { ...item, quantity: item.quantity - 1 };
                 }
                 return item;
@@ -93,6 +98,8 @@ export default function CartContent() {
             const data = {
                 product_id: prod,
                 quantity: quant,
+                size_id: sizeId
+
             };
 
             dispatch(addtocart(data)).then(({ error }) => {
