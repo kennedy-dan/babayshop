@@ -52,24 +52,28 @@ export default function Page() {
     const [quantity, setQuantity] = useState(1);
     const [showActions, setShowActions] = useState(false);
     const [currentItems, setCurrentItems] = useState([]);
-    const metaData = singlecats?.results?.data?.metadata;
+    // const metaData = singlecats?.results?.data?.metadata;
     const data = singlecats?.results?.data?.data?.data;
     const getSingleProductData = singleproducts?.results?.data?.data?.data;
-    const itemsPerPage = 10;
+  const metaData = singlecats?.results?.data?.data?.pagination_meta?.total;
+
+    const itemsPerPage = singlecats?.results?.data?.data?.pagination_meta?.per_page;
     const [activeItem, setActiveItem] = useState(null);
     const router = useParams();
     const { id } = router;
 
     const routerId = id;
 
-    useEffect(() => {
-        const indexOfLastItem = currentPage * itemsPerPage;
-        const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-        setCurrentItems(data?.slice(indexOfFirstItem, indexOfLastItem) || []);
-    }, [currentPage, data]);
+    // useEffect(() => {
+    //     const indexOfLastItem = currentPage * itemsPerPage;
+    //     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    //     setCurrentItems(data?.slice(indexOfFirstItem, indexOfLastItem) || []);
+    // }, [currentPage, data]);
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
+        dispatch(getSingleCats({id:id, page:page}));
+
     };
 
     const handleTrackClose = () => {
@@ -78,12 +82,11 @@ export default function Page() {
 
     const handleTrackOpen = (id) => {
         setOpenTrack(true);
-        dispatch(getSingleProduct(id));
     };
 
     useEffect(() => {
         if (id) {
-            dispatch(getSingleCats(id));
+            dispatch(getSingleCats({id:id}));
         }
     }, []);
     useEffect(() => {
@@ -131,7 +134,7 @@ export default function Page() {
             );
             dispatch(getFavorites()); // Refresh the favorites list
 
-            dispatch(getSingleCats(routerId));
+            dispatch(getSingleCats({id:routerId}));
         } catch (error) {
             toast.error(`Failed to ${action} favorite: ${error.message}`);
         } finally {
@@ -341,6 +344,17 @@ export default function Page() {
                             </motion.div>
                         ))} */}
                     </div>
+
+                    <div className="flex py-20 justify-center">
+            <div className="flex justify-center">
+              <Pagination
+                current={currentPage}
+                total={metaData || 0}
+                pageSize={itemsPerPage}
+                onChange={handlePageChange}
+              />
+            </div>
+          </div>
                     {/* <div className="ps-layout--shop">
                         <div className="ps-layout__left">
                             <WidgetShopCategories />

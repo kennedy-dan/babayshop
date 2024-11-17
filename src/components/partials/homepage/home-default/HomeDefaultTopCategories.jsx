@@ -147,7 +147,7 @@ const HomeDefaultTopCategories = () => {
                     {sectionpage?.section_files?.map((img, index) => (
                         <div
                             key={index}
-                            className="w-full md:h-screen h-[250px]">
+                            className="w-screen md:h-[80vh] h-[250px]">
                             <Image
                                 objectFit="cover"
                                 height={2500}
@@ -155,7 +155,7 @@ const HomeDefaultTopCategories = () => {
                                 src={img?.url}
                                 // priority
                                 alt=""
-                                className="w-full h-full md:object-cover  object-center "
+                                className="w-screen md:h-[80vh]  object-center "
                             />
                         </div>
                     ))}

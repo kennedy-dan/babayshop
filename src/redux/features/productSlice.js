@@ -64,7 +64,13 @@ export const getcategories = createAsyncThunk(
 export const getSingleCats = createAsyncThunk(
     `customer/getSingleCats`,
     async (id) => {
-        const response = await axios.get(`products/list?category_id=${id}`);
+        const response = await axios.get(`products/list?category_id=${id?.id}`,  {
+            params: {
+            page: id?.page,
+      
+            }
+        
+            });
         return response;
     }
 );
@@ -139,8 +145,10 @@ export const getCategoriesWithProducts = createAsyncThunk(
 
         const categoriesWithProducts = await Promise.all(
             categories?.data?.slice(0,8)?.map(async (category) => {
+                console.log(category)
                 const productsResponse = await dispatch(
-                    getSingleCats(category.id)
+                    getSingleCats({id:category.id})
+                    
                 );
                 console.log(productsResponse)
 
