@@ -229,6 +229,10 @@ export default function Page() {
                 <BreadCrumb breacrumb={breadCrumb} />
                 <section className="py-20 px-10 lg:px-[20px] font-montserrat lg:py-[20px] xl:px-[100px] xl:py-[100px]">
                     <p className="font-bold text-[24px] pb-5">Checkout</p>
+
+                    <div className='bg-[#FFE2F9] px-3 py-2 rounded-md w-fit mb-12' >
+                        <p className='text-[#5A5959] uppercase' >NB: If your order exceeds 4kg, additional delivery charges may apply. We’ll let you know the exact amount during shipping</p>
+                    </div>
                     <div className="md:flex justify-between">
                         <div className="md:w-1/2">
                             <p>Door delivery</p>
