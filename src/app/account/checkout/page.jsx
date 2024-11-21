@@ -16,6 +16,8 @@ import {
     getcartData,
     RemoveFromCart,
     getStores,
+    getstate,
+    getLoca,
 } from '~/redux/features/productSlice';
 import { payStackConfig } from '~/utils/paystackConfig';
 import { ClipLoader } from 'react-spinners';
@@ -45,7 +47,10 @@ export default function Page() {
     const [disabled, setDisabled] = useState(false);
     const [country, setCountry] = useState('');
     const [address, setAddress] = useState('');
+    const [loc, setLoc] = useState(null);
+    const {statess} = useSelector(state => state.product)
     const [city, setCity] = useState('');
+    const [cities, setCities] = useState(null);
     const [state, setState] = useState('');
     const { user } = useSelector((state) => state.auth);
     const [phone, setPhone] = useState('');
@@ -68,7 +73,14 @@ export default function Page() {
         console.log('checked = ', e.target.checked);
         setChecked(e.target.checked);
     };
+     
+    useEffect(() => {
+        if(statess?.results?.data){
+            setLoc(statess?.results?.data)
+            // const locations = loc.sort(compare);
 
+        }
+      }, [statess?.results?.data])
     useEffect(() => {
         if (token) {
             dispatch(getcartData());
@@ -79,11 +91,69 @@ export default function Page() {
     }, []);
 
     console.log(coupon)
+    console.log(loc)
 
-   
+    useEffect(() => {
+        if (state) {
+            // Find the selected state in the data
+            const selectedState = loc?.find(stateid => stateid?.id === state);
+            console.log(loc)
+
+            console.log(selectedState)
+            console.log(state)
+            
+            // Set cities for the selected state
+            if (selectedState) {
+                setCities(selectedState?.cities.map(city => city));
+            } else {
+                setCities(null);
+            }
+        } else {
+            setCities(null);
+        }
+    }, [state, loc]);
 
     const data = getcart?.results?.data?.data?.items;
-
+    const customSelectStyles = {
+        control: () => ({
+            display: 'flex',
+            border: '1px solid #ccc',
+            height: '4rem',
+            borderRadius: 24.2162,
+            background: '#f0f0f0',
+        }),
+        menuList: (provided) => ({
+            ...provided,
+            textTransform: 'capitalize',
+        }),
+        input: (provided) => ({
+            ...provided,
+            margin: 0,
+        }),
+        singleValue: (provided) => ({
+            ...provided,
+            textTransform: 'capitalize',
+            margin: 0,
+        }),
+        multiValue: (provided) => ({
+            ...provided,
+            textTransform: 'capitalize',
+        }),
+        menu: (provided) => ({
+            ...provided,
+            fontSize: 13,
+        }),
+        valueContainer: (provided) => ({
+            ...provided,
+            fontSize: '100%',
+            padding: '0 22.7027px',
+        }),
+        placeholder: (provided) => ({
+            ...provided,
+            margin: 0,
+            color: '#9BA3AF',
+        }),
+    };
     const calculateTotal = () => {
         return data?.reduce((total, item) => {
             return total + item.price;
@@ -94,6 +164,10 @@ export default function Page() {
         setTotal(calculateTotal());
     }, [data]);
 
+    useEffect(() => {
+        dispatch(getstate())
+    }, [])
+
     const handleCheckout = async () => {
         const data = {
             name: user?.first_name,
@@ -103,7 +177,7 @@ export default function Page() {
             address: address,
             gateway: 'Paystack',
             country: country,
-            city: city,
+            city_id: city,
             payment_method: 'Card',
             coupon_code: coupon
         };
@@ -125,7 +199,7 @@ export default function Page() {
         } catch (err) {}
     };
 
-    console.log(finalamount)
+    console.log(cities)
 
     let customDetails = {
         title: 'RBW',
@@ -198,27 +272,81 @@ export default function Page() {
                                     <p className="font-bold pb-1 mt-9 text-[14px] ">
                                         State
                                     </p>
-                                    <input
-                                        className="w-full py-5  px-4 text-[16px] border border-gray-400 outline-none "
-                                        placeholder="Enter State"
-                                        onChange={(e) =>
-                                            setState(e.target.value)
-                                        }
-                                        value={state}
-                                    />
+                                    <ConfigProvider
+                            theme={{
+                                components: {
+                                    Select: {
+                                        optionSelectedFontWeight: 600,
+                                    },
+                                },
+                                // ...customTheme,
+                                token: {
+                                    borderRadius: 7,
+                                    controlHeight: 60,
+                                    colorBgContainer: '#f0f0f0',
+                                    fontSize: 16,
+                                    // optionSelectedFontWeight: 300
+                                },
+                            }}>
+                            <Select
+                                styles={customSelectStyles}
+                                id="state"
+                                placeholder="State"
+                                className={` w-full`}
+                                showSearch
+                                options={loc?.map((location) => ({
+                                    value: location.id,
+                                    label: location.name,
+                                }))}
+                                onChange={(e) =>
+                                    setState(
+                                        
+                                        e 
+                                    )
+                                }
+                                isClearable
+                                classNamePrefix="react-select"
+                            />
+                        </ConfigProvider>
                                 </div>
                                 <div className="mt-10">
                                     <p className="font-bold pb-1 mt-9 text-[14px] ">
                                         city
                                     </p>
-                                    <input
-                                        className="w-full py-5  px-4 text-[16px] border border-gray-400 outline-none "
-                                        placeholder="Enter city"
-                                        onChange={(e) =>
-                                            setCity(e.target.value)
-                                        }
-                                        value={city}
-                                    />
+                                    <ConfigProvider
+                            theme={{
+                                components: {
+                                    Select: {
+                                        optionSelectedFontWeight: 600,
+                                    },
+                                },
+                                // ...customTheme,
+                                token: {
+                                    borderRadius: 7,
+                                    controlHeight: 60,
+                                    colorBgContainer: '#f0f0f0',
+                                    fontSize: 16,
+                                    // optionSelectedFontWeight: 300
+                                },
+                            }}>
+                            <Select
+                                styles={customSelectStyles}
+                                id="city"
+                                placeholder="City"
+                                showSearch
+                                className={` w-full `}
+                                options={cities?.map((city) => ({
+                                    value: city?.id,
+                                    label: city?.city_name,
+                                }))}
+                                onChange={(e) =>
+                                    setCity(e)
+                                }
+                                isClearable
+                                isDisabled={state === ''}
+                                classNamePrefix="react-select"
+                            />
+                        </ConfigProvider>
                                 </div>
                                 <div className="mt-10">
                                     <p className="font-bold pb-1 mt-9 text-[14px] ">

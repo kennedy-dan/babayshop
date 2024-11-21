@@ -38,6 +38,11 @@ export const getcartData = createAsyncThunk(
     }
 );
 
+export const getLoca = createAsyncThunk(`customer/getLoc`, async (data) => {
+    const response = await axios.get('admin/delivery-locations');
+    return response.data;
+});
+
 export const getsizes = createAsyncThunk(
     'customer/getsizes',
     async (data) => {
@@ -187,6 +192,10 @@ export const getPages = createAsyncThunk(`customer/pages`, async () => {
     const response = await axios.get("loyalty-points/coupons");
     return response;
   });
+  export const getstate = createAsyncThunk('customer/getstate', async (data) => {
+    const response = await axios.get(`states`);
+    return response.data;
+});
 
 // export const contributorLogin = createAsyncThunk(
 // 	`contributor/register`,
@@ -230,6 +239,10 @@ const initialState = {
         isLoading: false,
         results: null,
     },
+    loca: {
+        results: null,
+        isLoading: true,
+    },
 
     getcart: {
         isLoading: false,
@@ -243,6 +256,10 @@ const initialState = {
     },
 
     removecart: {
+        isLoading: false,
+        results: null,
+    },
+    statess: {
         isLoading: false,
         results: null,
     },
@@ -320,7 +337,27 @@ export const productSlice = createSlice({
             .addCase(getAllProducts.rejected, (state) => {
                 state.allproducts.isLoading = true;
             });
-
+            builder
+            .addCase(getLoca.pending, (state) => {
+                state.loca.isLoading = true;
+            })
+            .addCase(getLoca.fulfilled, (state, { payload }) => {
+                state.loca.isLoading = false;
+                state.loca.results = payload;
+            })
+            .addCase(getLoca.rejected, (state) => {
+                state.loca.isLoading = true;
+            })
+            .addCase(getstate.pending, (state) => {
+                state.statess.isLoading = true;
+            })
+            .addCase(getstate.fulfilled, (state, { payload }) => {
+                state.statess.isLoading = false;
+                state.statess.results = payload;
+            })
+            .addCase(getstate.rejected, (state) => {
+                state.statess.isLoading = true;
+            });
         //single products
         builder
             .addCase(getSingleProduct.pending, (state) => {
