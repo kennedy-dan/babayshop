@@ -48,13 +48,14 @@ export default function Page() {
     const [country, setCountry] = useState('');
     const [address, setAddress] = useState('');
     const [loc, setLoc] = useState(null);
-    const {statess} = useSelector(state => state.product)
+    const { statess } = useSelector((state) => state.product);
     const [city, setCity] = useState('');
     const [cities, setCities] = useState(null);
     const [state, setState] = useState('');
     const { user } = useSelector((state) => state.auth);
     const [phone, setPhone] = useState('');
     const [txRef, setTxRef] = useState(null);
+    const [deliv, setDelive] = useState(null);
     const [finalamount, setFinalamount] = useState(null);
     const [coupon, setCoupon] = useState('');
     const [deliveryOption, setDeliveryOption] = useState('pickup');
@@ -73,38 +74,36 @@ export default function Page() {
         console.log('checked = ', e.target.checked);
         setChecked(e.target.checked);
     };
-     
-    useEffect(() => {
-        if(statess?.results?.data){
-            setLoc(statess?.results?.data)
-            // const locations = loc.sort(compare);
 
+    useEffect(() => {
+        if (statess?.results?.data) {
+            setLoc(statess?.results?.data);
+            // const locations = loc.sort(compare);
         }
-      }, [statess?.results?.data])
+    }, [statess?.results?.data]);
     useEffect(() => {
         if (token) {
             dispatch(getcartData());
         }
-        const coup = localStorage.getItem('coupon')
-        setCoupon(coup)
-        
+        const coup = localStorage.getItem('coupon');
+        setCoupon(coup);
     }, []);
 
-    console.log(coupon)
-    console.log(loc)
+    console.log(coupon);
+    console.log(loc);
 
     useEffect(() => {
         if (state) {
             // Find the selected state in the data
-            const selectedState = loc?.find(stateid => stateid?.id === state);
-            console.log(loc)
+            const selectedState = loc?.find((stateid) => stateid?.id === state);
+            console.log(loc);
 
-            console.log(selectedState)
-            console.log(state)
-            
+            console.log(selectedState);
+            console.log(state);
+
             // Set cities for the selected state
             if (selectedState) {
-                setCities(selectedState?.cities.map(city => city));
+                setCities(selectedState?.cities.map((city) => city));
             } else {
                 setCities(null);
             }
@@ -165,8 +164,8 @@ export default function Page() {
     }, [data]);
 
     useEffect(() => {
-        dispatch(getstate())
-    }, [])
+        dispatch(getstate());
+    }, []);
 
     const handleCheckout = async () => {
         const data = {
@@ -178,7 +177,7 @@ export default function Page() {
             gateway: 'Paystack',
             city_id: city,
             payment_method: 'Card',
-            coupon_code: coupon
+            coupon_code: coupon,
         };
 
         try {
@@ -187,10 +186,14 @@ export default function Page() {
 
             if (addtocheckout.fulfilled.match(resultAction)) {
                 const tx_ref = resultAction?.payload?.data?.data?.reference;
-                const discountamount = resultAction?.payload?.data?.data?.final_amount;
-                    localStorage.removeItem('coupon')
+                const discountamount =
+                    resultAction?.payload?.data?.data?.final_amount;
+                const deliveryamount =
+                    resultAction?.payload?.data?.data?.delivery_price;
+                localStorage.removeItem('coupon');
                 setTxRef(tx_ref);
-                setFinalamount(discountamount)
+                setDelive(deliveryamount);
+                setFinalamount(discountamount);
                 console.log(resultAction);
             } else {
                 // console.error('Failed to checkout:', resultAction.payload);
@@ -198,7 +201,7 @@ export default function Page() {
         } catch (err) {}
     };
 
-    console.log(cities)
+    console.log(cities);
 
     let customDetails = {
         title: 'RBW',
@@ -233,7 +236,6 @@ export default function Page() {
                             <hr className="my-4" />
 
                             <>
-                         
                                 <div>
                                     <p className="font-bold pb-1 mt-9 text-[14px] ">
                                         First name
@@ -254,86 +256,91 @@ export default function Page() {
                                         value={user?.email}
                                     />
                                 </div>
-                               
+
                                 <div className="mt-10">
                                     <p className="font-bold pb-1 mt-9 text-[14px] ">
                                         State
                                     </p>
                                     <ConfigProvider
-                            theme={{
-                                components: {
-                                    Select: {
-                                        optionSelectedFontWeight: 600,
-                                    },
-                                },
-                                // ...customTheme,
-                                token: {
-                                    borderRadius: 7,
-                                    controlHeight: 60,
-                                    colorBgContainer: '#f0f0f0',
-                                    fontSize: 16,
-                                    // optionSelectedFontWeight: 300
-                                },
-                            }}>
-                            <Select
-                                styles={customSelectStyles}
-                                id="state"
-                                placeholder="State"
-                                className={` w-full`}
-                                showSearch
-                                options={loc?.map((location) => ({
-                                    value: location.id,
-                                    label: location.name,
-                                }))}
-                                onChange={(e) =>
-                                    setState(
-                                        
-                                        e 
-                                    )
-                                }
-                                isClearable
-                                classNamePrefix="react-select"
-                            />
-                        </ConfigProvider>
+                                        theme={{
+                                            components: {
+                                                Select: {
+                                                    optionSelectedFontWeight: 600,
+                                                },
+                                            },
+                                            token: {
+                                                borderRadius: 7,
+                                                controlHeight: 60,
+                                                colorBgContainer: '#f0f0f0',
+                                                fontSize: 16,
+                                            },
+                                        }}>
+                                        <Select
+                                            styles={customSelectStyles}
+                                            id="state"
+                                            placeholder="State"
+                                            className={`w-full`}
+                                            showSearch
+                                            optionFilterProp="children"
+                                            filterOption={(input, option) =>
+                                                option.label
+                                                    .toLowerCase()
+                                                    .includes(
+                                                        input.toLowerCase()
+                                                    )
+                                            }
+                                            options={loc?.map((location) => ({
+                                                value: location.id,
+                                                label: location.name,
+                                            }))}
+                                            onChange={(e) => setState(e)}
+                                            isClearable
+                                            classNamePrefix="react-select"
+                                        />
+                                    </ConfigProvider>
                                 </div>
                                 <div className="mt-10">
                                     <p className="font-bold pb-1 mt-9 text-[14px] ">
                                         city
                                     </p>
                                     <ConfigProvider
-                            theme={{
-                                components: {
-                                    Select: {
-                                        optionSelectedFontWeight: 600,
-                                    },
-                                },
-                                // ...customTheme,
-                                token: {
-                                    borderRadius: 7,
-                                    controlHeight: 60,
-                                    colorBgContainer: '#f0f0f0',
-                                    fontSize: 16,
-                                    // optionSelectedFontWeight: 300
-                                },
-                            }}>
-                            <Select
-                                styles={customSelectStyles}
-                                id="city"
-                                placeholder="City"
-                                showSearch
-                                className={` w-full `}
-                                options={cities?.map((city) => ({
-                                    value: city?.id,
-                                    label: city?.city_name,
-                                }))}
-                                onChange={(e) =>
-                                    setCity(e)
-                                }
-                                isClearable
-                                isDisabled={state === ''}
-                                classNamePrefix="react-select"
-                            />
-                        </ConfigProvider>
+                                        theme={{
+                                            components: {
+                                                Select: {
+                                                    optionSelectedFontWeight: 600,
+                                                },
+                                            },
+                                            token: {
+                                                borderRadius: 7,
+                                                controlHeight: 60,
+                                                colorBgContainer: '#f0f0f0',
+                                                fontSize: 16,
+                                            },
+                                        }}>
+                                        <Select
+                                            styles={customSelectStyles}
+                                            id="city"
+                                            placeholder="City"
+                                            showSearch
+                                            className={`w-full`}
+                                            optionFilterProp="children"
+                                            filterOption={(input, option) =>
+                                                option.label
+                                                    .toLowerCase()
+                                                    .includes(
+                                                        input.toLowerCase()
+                                                    )
+                                            }
+                                            options={cities?.map((city) => ({
+                                                value: city?.id,
+                                                label: city?.city_name,
+                                            }))}
+                                            onChange={(e) => setCity(e)}
+                                            isClearable
+                                            isDisabled={state === ''}
+                                            classNamePrefix="react-select"
+                                        />
+                                    </ConfigProvider>
                                 </div>
                                 <div className="mt-10">
                                     <p className="font-bold pb-1 mt-9 text-[14px] ">
@@ -366,7 +373,9 @@ export default function Page() {
 
                         <div>
                             <div className="shadow-lg md:w-[540px] md:mt-0 mt-10 rounded-xl p-[20px] border-2  font-montserrat ">
-                                <p className="font-bold text-[18px] md:text-[32px]">Summary</p>
+                                <p className="font-bold text-[18px] md:text-[32px]">
+                                    Summary
+                                </p>
                                 {data?.map((items, index) => (
                                     <div key={index} className="w-full">
                                         <div className="flex w-full justify-between  font-montserrat">
@@ -393,21 +402,30 @@ export default function Page() {
                                                     <p className="font-[500] text-black text-[18px] w-[100%] ">
                                                         {items?.product?.name}
                                                     </p>
-                                                    {items?.selected_size?.size_name  && <p>size: {items?.selected_size?.size_name}</p>}
-                                                    
+                                                    {items?.selected_size
+                                                        ?.size_name && (
+                                                        <p>
+                                                            size:{' '}
+                                                            {
+                                                                items
+                                                                    ?.selected_size
+                                                                    ?.size_name
+                                                            }
+                                                        </p>
+                                                    )}
                                                 </div>
                                             </div>
                                             <div className="text-black font-[500]  flex justify-center items-center">
-                                        <div>
-                                            <img
-                                                src="/static/Naira.png"
-                                                alt=""
-                                                className="mr-2"
-                                            />
-                                        </div>
+                                                <div>
+                                                    <img
+                                                        src="/static/Naira.png"
+                                                        alt=""
+                                                        className="mr-2"
+                                                    />
+                                                </div>
 
-                                        <>{Math.floor(items?.price)}</>
-                                    </div>
+                                                <>{Math.floor(items?.price)}</>
+                                            </div>
                                             {/* <div className="">
                   <div className="flex  items-center">
                     <button onClick={() => decreaseQuant(items)}>
@@ -436,15 +454,19 @@ export default function Page() {
                                 ))}
 
                                 <div className="flex justify-between font-[500] mt-7">
-                                    <p className="text-[16px]">total</p>
-                                    <p className="text-[16px]">
-                                        N {total?.toFixed(2)}
-                                    </p>
+                                    <p className="text-[16px]">delivery</p>
+                                    <p className="text-[16px]">N {deliv}</p>
                                 </div>
                                 <div className="flex justify-between font-[500] mt-7">
                                     <p className="text-[16px]">Subtotal</p>
                                     <p className="text-[16px]">
                                         N {total?.toFixed(2)}
+                                    </p>
+                                </div>
+                                <div className="flex justify-between font-[500] mt-7">
+                                    <p className="text-[16px]">Total</p>
+                                    <p className="text-[16px]">
+                                        N {finalamount}
                                     </p>
                                 </div>
                                 {/* <div className="flex justify-between font-[500] py-6">
@@ -468,7 +490,7 @@ export default function Page() {
                                                 />
                                             ) : (
                                                 <p className="text-white">
-                                                    Proceed To Payment N{total}
+                                                    Proceed To Payment
                                                 </p>
                                             )}
                                         </button>
