@@ -176,7 +176,6 @@ export default function Page() {
             state: state,
             address: address,
             gateway: 'Paystack',
-            country: country,
             city_id: city,
             payment_method: 'Card',
             coupon_code: coupon
@@ -255,19 +254,7 @@ export default function Page() {
                                         value={user?.email}
                                     />
                                 </div>
-                                <div className="mt-10">
-                                    <p className="font-bold pb-1 mt-9 text-[14px] ">
-                                        Country
-                                    </p>
-                                    <input
-                                        className="w-full py-5  px-4 text-[16px] border border-gray-400 outline-none "
-                                        placeholder="Enter Country"
-                                        onChange={(e) =>
-                                            setCountry(e.target.value)
-                                        }
-                                        value={country}
-                                    />
-                                </div>
+                               
                                 <div className="mt-10">
                                     <p className="font-bold pb-1 mt-9 text-[14px] ">
                                         State
